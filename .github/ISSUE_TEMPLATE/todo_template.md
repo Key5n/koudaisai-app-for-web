@@ -1,13 +1,13 @@
 ---
-name: ToDo template
+name: To Do template
 about: See .github/ISSUE_TEMPLATE/custom.md
-title: "mm/dd: problem"
-labels: ["ToDo"]
+title: "mm/dd: Problem"
+labels: ["To Do"]
 assignees: 
   - key5n
 ---
 
-## [To Do]
-
 ## ステップ
 - [ ] ステップ1
+
+## 詳細
