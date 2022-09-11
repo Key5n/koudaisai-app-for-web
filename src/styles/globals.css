@@ -1,4 +1,8 @@
 
+html {
+  font-size: 16px;
+}
+
 /* Box sizing rules */
 *,
 *::before,
