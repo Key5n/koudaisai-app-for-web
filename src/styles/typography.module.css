@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&family=Yusei+Magic&display=swap');
+.Yusei-Magic {
+  font-family: 'Yusei Magic', sans-serif;
+  font-weight: 400;
+}
+
+.RocknRoll-One {
+  font-family: 'RocknRoll One', sans-serif;
+  font-weight: 400;
+}
+
+.font-size--small {
+  font-size: 16px;
+}
+
+.font-size--normal {
+  font-size: 20px;
+}
+
+
+.font-size--large {
+  font-size: 32px;
+}
+
+.text-center {
+  text-align: center;
+}

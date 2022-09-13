@@ -2,9 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import Home from "components/organisms/home";
+import styles from "styles/Home.module.css";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-const Home: NextPage = () => {
+const Index: NextPage = () => {
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -16,11 +20,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Link href="posts/tickets">リンク</Link>
+      <main className={styles["centering"]}>
+        <Home />
       </main>
     </div>
   );
 };
 
-export default Home;
+export default Index;

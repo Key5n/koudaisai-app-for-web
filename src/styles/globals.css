@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&family=Yusei+Magic&display=swap');
+
+:root {
+  --red: #ff6b6b;
+  --white: #ffffff;
+  --orange: #ff9a62;
+  --black: #000000;
+}
+
+.Yusei-Magic {
+  font-family: 'Yusei Magic', sans-serif;
+  font-weight: 400;
+}
+
+.RocknRoll-One {
+  font-family: 'RocknRoll One', sans-serif;
+  font-weight: 400;
+}
 
 html {
   font-size: 16px;
@@ -24,9 +42,6 @@ dd {
   margin: 0;
 }
 
-p {
-  line-height: 1.7;
-}
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role="list"],
@@ -65,6 +80,30 @@ textarea,
 select {
   font: inherit;
 }
+
+/* hide default checkbox */
+input[type="checkbox"]{
+  display: none;
+}
+
+/* styling checkbox */
+input[type="checkbox"] + span::before{
+  display: inline-block;
+  content: "";
+  border: 3px solid #ffa800;
+  border-radius: 4px;
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: middle;
+  margin: -.25rem 1rem 0 0;
+}
+
+input[type="checkbox"]:checked + span::before {
+  background: url("/images/checked.svg") center no-repeat;
+}
+
+
+
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {

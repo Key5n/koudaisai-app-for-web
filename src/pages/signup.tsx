@@ -1,17 +1,15 @@
 import { FC } from "react";
 import styles from "styles/reservation.module.css";
-import ReservationOrLogin from "components/organisms/home";
+import KofunmanTalking from "components/molecules/kofunmanTalking";
 import Authentication from "components/organisms/authentication";
-import Checkbox from "components/molecules/checkbox";
 
-const Tickets: FC = () => {
+const Signup: FC = () => {
   return (
     <main>
-      <ReservationOrLogin />
+      <KofunmanTalking />
       <Authentication />
-      <Checkbox />
     </main>
   );
 };
 
-export default Tickets;
+export default Signup;

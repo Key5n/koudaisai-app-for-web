@@ -1,17 +1,17 @@
 import { FC } from "react";
-import styles from "styles/reservation.module.css";
+import styles from "styles/components.module.css";
 import InputItem from "components/molecules/inputItem";
-import Move from "components/molecules/move";
+import MoveButtons from "components/molecules/moveButtons";
 
-const AuthenticationItem: FC = () => {
+const Authentication: FC = () => {
   return (
-    <div className={styles["auth-block"]}>
+    <div className={styles.authentication}>
       <InputItem />
       <InputItem />
       <InputItem />
-      <Move />
+      <MoveButtons />
     </div>
   );
 };
 
-export default AuthenticationItem;
+export default Authentication;
