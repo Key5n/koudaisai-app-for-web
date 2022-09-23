@@ -5,7 +5,7 @@ import Link from "next/link";
 const signupButton: FC = () => {
   return (
     <Link href="/signup">
-      <a className={styles.signupButton}>工大祭新規予約</a>
+      <a className={styles.signupButton}>新規予約</a>
     </Link>
   );
 };

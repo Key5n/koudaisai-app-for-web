@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "styles/components.module.css";
 
-const PTag: FC = () => {
+const Text: FC = () => {
   return (
     <p className={styles.p}>
       テスト<span className={styles.red}>(必須)</span>
@@ -9,4 +9,4 @@ const PTag: FC = () => {
   );
 };
 
-export default PTag;
+export default Text;

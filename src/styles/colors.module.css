@@ -9,3 +9,23 @@
 .white {
   color: #ffffff;
 }
+
+.blue {
+  color: #0185FF;
+}
+
+.background-color--orange {
+  background-color: #ff9a62;
+}
+
+.background-color--blackorange {
+  background-color: #da753d;
+}
+
+.background-color--white {
+  background-color: #ffffff;
+}
+
+.background-color--gray {
+  background-color: #cccccc;
+}

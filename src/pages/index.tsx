@@ -2,15 +2,15 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import Home from "components/organisms/home";
-import styles from "styles/Home.module.css";
-import { useEffect } from "react";
+import Template from "components/templates/template";
+import styles from "styles/components.module.css";
+
 import { useRouter } from "next/router";
 
 const Index: NextPage = () => {
   const router = useRouter();
   return (
-    <div>
+    <>
       <Head>
         <title>名古屋工業大学工大祭アプリ</title>
         <meta
@@ -20,10 +20,10 @@ const Index: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles["centering"]}>
-        <Home />
-      </main>
-    </div>
+      <>
+        <Template />
+      </>
+    </>
   );
 };
 

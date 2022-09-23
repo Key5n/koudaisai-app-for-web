@@ -1,12 +1,12 @@
 import { FC } from "react";
 import styles from "styles/components.module.css";
-import PTag from "components/atoms/ptag";
+import Text from "components/atoms/text";
 import ReservationInput from "components/atoms/input";
 
 const InputItem: FC = () => {
   return (
     <div className={styles.inputItem}>
-      <PTag />
+      <Text />
       <ReservationInput />
     </div>
   );

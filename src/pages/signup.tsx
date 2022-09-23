@@ -1,11 +1,11 @@
 import { FC } from "react";
-import styles from "styles/reservation.module.css";
+import styles from "styles/components.module.css";
 import KofunmanTalking from "components/molecules/kofunmanTalking";
 import Authentication from "components/organisms/authentication";
 
 const Signup: FC = () => {
   return (
-    <main>
+    <main className={styles.centered}>
       <KofunmanTalking />
       <Authentication />
     </main>

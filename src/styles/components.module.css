@@ -2,37 +2,45 @@
   background-color: var(--orange);
   color: var(--white);
   text-decoration: none;
+  text-align: center;
   position: relative;
   top: -1px;
-  composes: no-border padding-landscape border-radius--large drop-shadow from "/src/styles/layout.module.css";
+  composes: no-border padding-landscape border-radius--large drop-shadow width--100percent from "/src/styles/layout.module.css";
   composes: Yusei-Magic font-size--large from '/src/styles/typography.module.css';
 }
 
 .signupButton:hover {
+  background-color: #da753d;
+}
+
+.signupButton:active {
   filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.25));
   top: 2px;
 }
 
 .loginButton {
-  background-color: var(--white);
-  color: var(--black);
   text-decoration: none;
   text-align: center;
   position: relative;
   top: -1px;
-  composes: border-around--orange drop-shadow--shallow border-radius--large padding-landscape drop-shadow from "/src/styles/layout.module.css";
+  composes: background-color--white blue from "/src/styles/colors.module.css";
+  composes: drop-shadow--shallow border-radius--large padding-landscape drop-shadow width--100percent from "/src/styles/layout.module.css";
   composes: font-size--normal RocknRoll-One from "/src/styles/typography.module.css";
 }
 
 .loginButton:hover {
+  background-color: #e8e8e8;
+}
+
+.loginButton:active {
   top: 2px;
   filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.25))
 }
 
 .kofunman {
-  composes: flex horizontal centered gap--small from "/src/styles/layout.module.css";
-  width: 80%;
-  max-width: 400px;
+  composes: flex horizontal align-items-center gap--small from "/src/styles/layout.module.css";
+  width: 100%;
+  /* max-width: 400px; */
 }
 
 .p {
@@ -79,10 +87,21 @@
 
 .authentication {
   composes: flex vertical stretch gap--small from "/src/styles/layout.module.css";
-  width: 80%;
+  width: 80vw;
   max-width: 400px;
 }
 
 .index {
-  composes: flex vertical centered gap--large from "/src/styles/layout.module.css";
+  margin: auto;
+  align-items: flex-start;
+  
+  composes: flex vertical justify-content-center gap--large width--80percent height--100vh from "/src/styles/layout.module.css";
+}
+
+.centered {
+  composes: flex vertical centered from "/src/styles/layout.module.css";
+}
+
+.footer {
+  composes: flex horizontal align-items-center space-between padding-landscape border-top--orange fix-bottom width--100percent from "/src/styles/layout.module.css";
 }

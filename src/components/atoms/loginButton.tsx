@@ -5,11 +5,7 @@ import styles from "styles/components.module.css";
 const LoginButton: FC = () => {
   return (
     <Link href="/signup">
-      <a className={styles.loginButton}>
-        すでに工大祭に
-        <br />
-        予約された方はこちら
-      </a>
+      <a className={styles.loginButton}>ログイン</a>
     </Link>
   );
 };
