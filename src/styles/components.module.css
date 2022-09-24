@@ -21,10 +21,8 @@
 .loginButton {
   text-decoration: none;
   text-align: center;
-  position: relative;
-  top: -1px;
   composes: background-color--white blue from "/src/styles/colors.module.css";
-  composes: drop-shadow--shallow border-radius--large padding-landscape drop-shadow width--100percent from "/src/styles/layout.module.css";
+  composes: drop-shadow--shallow border-radius--large border-around--gray padding-landscape drop-shadow width--100percent from "/src/styles/layout.module.css";
   composes: font-size--normal RocknRoll-One from "/src/styles/typography.module.css";
 }
 
@@ -32,10 +30,6 @@
   background-color: #e8e8e8;
 }
 
-.loginButton:active {
-  top: 2px;
-  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.25))
-}
 
 .kofunman {
   composes: flex horizontal align-items-center gap--small from "/src/styles/layout.module.css";
@@ -94,7 +88,6 @@
 .index {
   margin: auto;
   align-items: flex-start;
-  
   composes: flex vertical justify-content-center gap--large width--80percent height--100vh from "/src/styles/layout.module.css";
 }
 
@@ -102,6 +95,17 @@
   composes: flex vertical centered from "/src/styles/layout.module.css";
 }
 
+.header {
+  composes: flex centered fix--top width--100percent height--60px from "/src/styles/layout.module.css";
+  composes: font-size--normal RocknRoll-One from "/src/styles/typography.module.css";
+  composes: orange from "/src/styles/colors.module.css";
+}
+
 .footer {
   composes: flex horizontal align-items-center space-between padding-landscape border-top--orange fix-bottom width--100percent from "/src/styles/layout.module.css";
+}
+
+.login {
+  composes: Noto-Sans-JP font-size--normal from "/src/styles/typography.module.css";
+  composes: flex vertical align-items-center gap--small width--100percent from "/src/styles/layout.module.css";
 }

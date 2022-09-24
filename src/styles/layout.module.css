@@ -1,3 +1,8 @@
+.fix--top {
+  position: fixed;
+  top: 0;
+}
+
 .fix-bottom {
   position: fixed;
   bottom: 0;
@@ -40,7 +45,6 @@
   justify-content: space-between;
 }
 
-
 .gap--small {
   gap: 10px;
 }
@@ -72,6 +76,10 @@
 
 .border-around--orange {
   border: 3px solid var(--orange);
+}
+
+.border-around--gray {
+  border: 2px solid var(--gray);
 }
 
 .border-top--orange {
@@ -117,4 +125,8 @@
 
 .height--80vh {
   height: 80vh;
+}
+
+.height--60px {
+  height: 60px;
 }
