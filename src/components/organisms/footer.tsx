@@ -8,13 +8,13 @@ import FooterConfigIcon from "components/atoms/footerConfig";
 
 const Footer: FC = () => {
   return (
-    <div className={styles.footer}>
+    <nav className={styles.footer}>
       <FooterKofunmanIcon />
       <FooterEventIcon />
       <FooterMapIcon />
       <FooterTTIcon />
       <FooterConfigIcon />
-    </div>
+    </nav>
   );
 };
 

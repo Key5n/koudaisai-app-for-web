@@ -8,15 +8,6 @@
   --gray: #cccccc;
 }
 
-.Yusei-Magic {
-  font-family: 'Yusei Magic', sans-serif;
-  font-weight: 400;
-}
-
-.RocknRoll-One {
-  font-family: 'RocknRoll One', sans-serif;
-  font-weight: 400;
-}
 
 html {
   font-size: 16px;
@@ -36,6 +27,7 @@ h2,
 h3,
 h4,
 p,
+ul,
 figure,
 blockquote,
 dl,

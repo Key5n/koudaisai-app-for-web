@@ -1,3 +1,11 @@
+.main {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  height: 130vh;
+  composes: width--80percent from "/src/styles/layout.module.css";
+  transform: translate(-50%, 0);
+}
 .signupButton {
   background-color: var(--orange);
   color: var(--white);
@@ -34,11 +42,10 @@
 .kofunman {
   composes: flex horizontal align-items-center gap--small from "/src/styles/layout.module.css";
   width: 100%;
-  /* max-width: 400px; */
 }
 
-.p {
-  composes: Yusei-Magic from "/src/styles/typography.module.css";
+.text {
+  composes: Noto-Sans-JP font-size--small from "/src/styles/typography.module.css";
 }
 
 .red {
@@ -46,7 +53,7 @@
 }
 
 .button {
-  composes: border-radius--large padding-horizontal--small no-border from "/src/styles/layout.module.css";
+  composes: align-self--end border-radius--large padding-horizontal--small no-border from "/src/styles/layout.module.css";
   composes: RocknRoll-One from "/src/styles/typography.module.css";
   text-decoration: none;
   background-color: var(--orange);
@@ -62,13 +69,17 @@
   outline: none;
 }
 
-.checkbox, .line {
-  composes: Yusei-Magic from "/src/styles/typography.module.css";
+.line {
+  composes: RocknRoll-One from "/src/styles/typography.module.css";
+}
+
+.checkbox {
+  composes: Noto-Sans-JP from "/src/styles/typography.module.css";
 }
 
 .input {
   composes: no-border border-bottom--orange from "/src/styles/layout.module.css";
-  composes: Yusei-Magic font-size--normal from "/src/styles/typography.module.css";
+  composes: Noto-Sans-JP font-size--normal from "/src/styles/typography.module.css";
 }
 
 .inputItem {
@@ -82,30 +93,65 @@
 .authentication {
   composes: flex vertical stretch gap--small from "/src/styles/layout.module.css";
   width: 80vw;
-  max-width: 400px;
 }
 
 .index {
-  margin: auto;
-  align-items: flex-start;
-  composes: flex vertical justify-content-center gap--large width--80percent height--100vh from "/src/styles/layout.module.css";
+  composes: flex vertical gap--90px width--80percent from "/src/styles/layout.module.css";
+  composes: main;
 }
 
-.centered {
-  composes: flex vertical centered from "/src/styles/layout.module.css";
-}
 
 .header {
-  composes: flex centered fix--top width--100percent height--60px from "/src/styles/layout.module.css";
+  composes: position--relative flex centered fix--top width--100percent height--60px z-index--1 from "/src/styles/layout.module.css";
   composes: font-size--normal RocknRoll-One from "/src/styles/typography.module.css";
-  composes: orange from "/src/styles/colors.module.css";
+  composes: orange background-color--white from "/src/styles/colors.module.css";
 }
 
 .footer {
-  composes: flex horizontal align-items-center space-between padding-landscape border-top--orange fix-bottom width--100percent from "/src/styles/layout.module.css";
+  composes: flex horizontal align-items-center space-between padding-landscape border-top--orange fix-bottom width--100percent z-index--1 from "/src/styles/layout.module.css";
+  composes: background-color--white from "/src/styles/colors.module.css";
 }
 
 .login {
   composes: Noto-Sans-JP font-size--normal from "/src/styles/typography.module.css";
   composes: flex vertical align-items-center gap--small width--100percent from "/src/styles/layout.module.css";
+}
+
+.signupTemplate {
+  composes: main;
+  composes: flex vertical gap--large from "/src/styles/layout.module.css";
+}
+
+.backButton {
+  composes: orange background-color--transparent from "/src/styles/colors.module.css";
+  composes: RocknRoll-One from "/src/styles/typography.module.css";
+  composes: no-border position--absolute left--3vw padding-left--30px from "/src/styles/layout.module.css";
+}
+
+.backButton::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  margin: 0 0 0 -30px;
+  height: 30px;
+  width: 30px;
+  background: url("/images/less_than.svg") center no-repeat;
+}
+
+.entryDate {
+  composes: flex vertical gap--small from "/src/styles/layout.module.css";
+}
+
+.termsOfServiceText {
+  composes: Noto-Sans-JP font-size--small from "/src/styles/typography.module.css";
+}
+
+.agreementButton {
+  text-decoration: none;
+  composes: orange from "/src/styles/colors.module.css";
+  composes: RocknRoll-One font-size--normal from "/src/styles/typography.module.css";
+}
+
+.agreement {
+  composes: flex space-between fix-bottom width--100percent padding-landscape from "/src/styles/layout.module.css";
 }
