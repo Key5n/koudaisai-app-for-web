@@ -1,21 +1,32 @@
 import { FC } from "react";
 import { useState } from "react";
+import Router from "next/router";
 import styles from "styles/components.module.css";
 import KofunmanTalking from "components/molecules/kofunmanTalking";
 import Authentication from "components/organisms/authentication";
 import Header from "components/organisms/header";
-import Footer from "components/organisms/footer";
 import TermsOfServiceText from "components/atoms/termsOfServiceText";
 import Agreement from "components/molecules/agreement";
+import ModalWindow from "components/organisms/modalWindow";
 
 const SignupTemplate: FC = () => {
   const [isSignup, setIsSignup] = useState<boolean>(true);
   const onClick = (): void => {
+    window.scroll({ top: 0, left: 0, behavior: "auto" });
     setIsSignup(!isSignup);
   };
   return (
     <>
-      <Header />
+      <Header
+        displayBack={true}
+        onClick={() => {
+          if (isSignup) {
+            Router.back();
+          } else {
+            onClick();
+          }
+        }}
+      />
       <main className={styles.signupTemplate}>
         {isSignup ? (
           <>
@@ -29,7 +40,12 @@ const SignupTemplate: FC = () => {
           </>
         )}
       </main>
-      {!isSignup && <Agreement />}
+      {!isSignup && (
+        <>
+          <Agreement />
+          <ModalWindow />)
+        </>
+      )}
     </>
   );
 };

@@ -7,9 +7,9 @@ const AgreementButton: FC<{ param: string; str: string }> = ({
   str,
 }) => {
   return (
-    <Link href={param}>
-      <a className={styles.agreementButton}>{str}</a>
-    </Link>
+    <a className={styles.agreementButton} href={param}>
+      {str}
+    </a>
   );
 };
 

@@ -6,7 +6,7 @@ const Agreement: FC = () => {
   return (
     <div className={styles.agreement}>
       <AgreementButton param="/" str="同意しない" />
-      <AgreementButton param="/" str="同意する" />
+      <AgreementButton param="#modal-agreement" str="同意する" />
     </div>
   );
 };
