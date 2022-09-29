@@ -43,6 +43,10 @@
   width: 100%;
 }
 
+.subtitle {
+  composes: Noto-Sans-JP font-size--24px font-weight--bolder from "/src/styles/typography.module.css";
+}
+
 .text {
   composes: Noto-Sans-JP font-size--small from "/src/styles/typography.module.css";
 }
@@ -52,11 +56,10 @@
 }
 
 .button {
-  composes: border-radius--large padding-horizontal--small no-border from "/src/styles/layout.module.css";
-  composes: RocknRoll-One from "/src/styles/typography.module.css";
+  composes: border-radius--large padding-horizontal--large no-border drop-shadow from "/src/styles/layout.module.css";
+  composes: RocknRoll-One font-size--normal from "/src/styles/typography.module.css";
+  composes: background-color--orange white from "/src/styles/colors.module.css";
   text-decoration: none;
-  background-color: var(--orange);
-  color: var(--white);
 }
 
 .input {
@@ -74,6 +77,23 @@
 
 .checkbox {
   composes: Noto-Sans-JP from "/src/styles/typography.module.css";
+  cursor: pointer;
+}
+
+/* styling checkbox */
+input[type="checkbox"] + .checkbox::before{
+  display: inline-block;
+  content: "";
+  border: 3px solid #ffa800;
+  border-radius: 4px;
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: middle;
+  margin: -.25rem 1rem 0 0;
+}
+
+input[type="checkbox"]:checked + .checkbox::before {
+  background: url("/images/checked.svg") center no-repeat;
 }
 
 .input {
@@ -102,9 +122,10 @@
 
 
 .header {
-  composes: position--relative flex centered fix--top width--100percent height--60px z-index--1 from "/src/styles/layout.module.css";
+  composes: position--relative flex centered fix--top width--100percent height--60px from "/src/styles/layout.module.css";
   composes: font-size--normal RocknRoll-One from "/src/styles/typography.module.css";
   composes: orange background-color--white from "/src/styles/colors.module.css";
+  z-index: 1;
 }
 
 .footer {
@@ -156,14 +177,14 @@
   composes: flex space-between fix-bottom width--100percent padding-landscape from "/src/styles/layout.module.css";
 }
 
-.modalContainer:not(:target){
-  z-index: 100;
-  opacity: 0;
-  visibility: hidden;
+.modalContainer {
+  position: relative;
+  z-index: 2;
 }
 
-.modalContainer:not(:target) .modalWindow {
-  transform: translate(-50%, -50%) scale(1.1);
+.modalContainer:not(:target){
+  opacity: 0;
+  visibility: hidden;
 }
 
 .modalContainer:target {
@@ -171,6 +192,11 @@
   visibility: visible;
   transition: opacity 0.2s, visibility 0.2s;
 }
+
+.modalContainer:not(:target) .modalWindow {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
 
 .modalContainer:target .modalWindow {
   transform: translate(-50%, -50%) scale(1.0);
@@ -215,4 +241,51 @@
   height: 100vh;
   background-color: #000000;
   opacity: 0.3;
+}
+
+
+.keyboardArrow {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  transform-origin: center;
+  transition: transform 0.5s;
+}
+
+input[type="checkbox"]:checked + .keyboardArrow{
+  transition: transform 0.5s;
+  transform: rotate(180deg);
+}
+
+.userName {
+  composes: RocknRoll-One font-size--normal from "/src/styles/typography.module.css";
+}
+
+.userActionIcons {
+  composes: flex horizontal align-items-center gap--small from "/src/styles/layout.module.css";
+}
+
+.userHeader {
+  composes: flex horizontal space-between from "/src/styles/layout.module.css";
+}
+
+.userObject {
+  composes: flex vertical justify-content-center padding--1rem border-around--orange border-radius--portrait  from "/src/styles/layout.module.css";
+}
+
+.KofunmanAndTamago {
+  composes: flex horizontal gap--small from "/src/styles/layout.module.css";
+}
+
+.addCompanion {
+  composes: flex vertical centered gap--small padding-vertical--1rem border-radius--small border-around--orange from "/src/styles/layout.module.css";
+}
+
+.addCompanionText {
+  composes: text;
+  composes: text-center from "/src/styles/typography.module.css";
+}
+
+.userObjectWrapper {
+  composes: flex vertical gap--small from "/src/styles/layout.module.css";
 }

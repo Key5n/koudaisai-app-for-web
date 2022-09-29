@@ -8,6 +8,7 @@ import Header from "components/organisms/header";
 import TermsOfServiceText from "components/atoms/termsOfServiceText";
 import Agreement from "components/molecules/agreement";
 import ModalWindow from "components/organisms/modalWindow";
+import KeyboardArrow from "components/atoms/keyBoardArrow";
 
 const SignupTemplate: FC = () => {
   const [isSignup, setIsSignup] = useState<boolean>(true);

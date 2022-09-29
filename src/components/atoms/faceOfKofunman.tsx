@@ -2,15 +2,15 @@ import Image from "next/image";
 import { FC } from "react";
 import styles from "styles/components.module.css";
 
-const FooterKofunmanIcon: FC = () => {
+const FaceOfKofunman: FC<{ size: string }> = ({ size }) => {
   return (
     <Image
       src="/images/kofunman_face.png"
       alt="kohunmanFace"
-      width={"30px"}
-      height={"30px"}
+      width={size}
+      height={size}
     />
   );
 };
 
-export default FooterKofunmanIcon;
+export default FaceOfKofunman;

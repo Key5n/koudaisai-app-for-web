@@ -61,7 +61,7 @@
 }
 
 .flex-start {
-  align-items:flex-start;
+  align-items: flex-start;
 }
 
 .flex-grow--1 {
@@ -88,17 +88,20 @@
   padding: 0.5rem 1rem;
 }
 
+.padding--1rem {
+  padding: 1rem;
+}
+
 .padding-left--30px {
   padding-left: 30px;
 }
 
 .padding-horizontal--small {
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .padding-horizontal--large {
-  padding: 1rem 0.5rem;
+  padding: 0rem 1rem;
 }
 
 .padding-vertical--05rem {
@@ -148,6 +151,10 @@
 
 .border-radius--large {
   border-radius: 40px;
+}
+
+.border-radius--portrait {
+  border-radius: 10% / 50%;
 }
 
 .drop-shadow{

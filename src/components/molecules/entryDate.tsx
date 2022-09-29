@@ -6,7 +6,7 @@ import Text from "components/atoms/text";
 const EntryDate: FC = () => {
   return (
     <div className={styles.entryDate}>
-      <Text />
+      <Text text="希望入場日" />
       <Checkbox />
       <Checkbox />
     </div>

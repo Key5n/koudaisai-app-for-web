@@ -6,7 +6,7 @@ import ReservationInput from "components/atoms/input";
 const InputItem: FC = () => {
   return (
     <div className={styles.inputItem}>
-      <Text />
+      <Text text="テキスト" />
       <ReservationInput />
     </div>
   );

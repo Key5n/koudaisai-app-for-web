@@ -77,26 +77,8 @@ select {
 /* hide default checkbox */
 input[type="checkbox"]{
   display: none;
+  margin: 0;
 }
-
-/* styling checkbox */
-input[type="checkbox"] + span::before{
-  display: inline-block;
-  content: "";
-  border: 3px solid #ffa800;
-  border-radius: 4px;
-  height: 1.5rem;
-  width: 1.5rem;
-  vertical-align: middle;
-  margin: -.25rem 1rem 0 0;
-}
-
-input[type="checkbox"]:checked + span::before {
-  background: url("/images/checked.svg") center no-repeat;
-}
-
-
-
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { FC } from "react";
 import styles from "styles/components.module.css";
 
-const Button: FC<{ prop: string }> = ({ prop }) => {
+const Button: FC<{ To: string; text: string }> = ({ To, text }) => {
   return (
-    <Link href={`/${prop}`}>
-      <a className={styles.button}>テスト</a>
+    <Link href={`/${To}`}>
+      <a className={styles.button}>{text}</a>
     </Link>
   );
 };
