@@ -59,7 +59,7 @@ cssはcss modulesを用いる。
   width: 50%;
   height: 50%
 }`なら
-import styles from "./styles.module.css"はじめに書き、そのうえでDOMにクラス名を付与(例: <input className={styles.input} /)する。
+import styles from "./styles.module.css"をはじめに書き、そのうえでDOMにクラス名を付与(例: <input className={styles.input} /)する。
 
 # 以下nextjsの自動生成readme.md
 
