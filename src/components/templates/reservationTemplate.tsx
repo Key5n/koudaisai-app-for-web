@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import Link from "next/link";
 import { useState } from "react";
 import styles from "styles/components.module.css";
 import KofunmanTalking from "components/molecules/kofunmanTalking";
@@ -27,6 +28,7 @@ const Template: FC = ({ children }: { children?: ReactNode }) => {
           </div>
         ) : (
           <div className={styles.index}>
+            <Link href={"/privacy"}>プライバシーポリシーへ</Link>
             <KofunmanTalking />
             <SignupButton />
             <Login />
@@ -35,7 +37,7 @@ const Template: FC = ({ children }: { children?: ReactNode }) => {
                 setHasLogin(!hasLogin);
               }}
             >
-              ボタン
+              予約前と予約後の画面を切りかえる
             </button>
           </div>
         )}
