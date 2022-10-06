@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC } from "react";
 import styles from "styles/components.module.css";
 
-const FooterEventIcon: FC = () => {
+export const FooterEventIcon: FC = () => {
   return (
     <Image
       src="/images/event_gray.svg"
@@ -13,4 +13,3 @@ const FooterEventIcon: FC = () => {
   );
 };
 
-export default FooterEventIcon;

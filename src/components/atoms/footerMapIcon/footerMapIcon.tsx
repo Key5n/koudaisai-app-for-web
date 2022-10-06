@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC } from "react";
 import styles from "styles/components.module.css";
 
-const FooterMapIcon: FC = () => {
+export const FooterMapIcon: FC = () => {
   return (
     <Image
       src="/images/map_gray.svg"
@@ -13,4 +13,3 @@ const FooterMapIcon: FC = () => {
   );
 };
 
-export default FooterMapIcon;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 
-const Kofunman: FC = () => {
+export const Kofunman: FC = () => {
   return (
     <Image
       src="/images/kofunman_Hi.svg"
@@ -12,4 +12,3 @@ const Kofunman: FC = () => {
   );
 };
 
-export default Kofunman;

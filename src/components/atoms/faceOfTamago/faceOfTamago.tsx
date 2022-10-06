@@ -1,7 +1,7 @@
 import styles from "styles/components.module.css";
 import Image from "next/image";
 
-const FaceOfTamago: React.FC<{ width: string; height: string }> = ({
+export const FaceOfTamago: React.FC<{ width: string; height: string }> = ({
   width,
   height,
 }) => {
@@ -15,4 +15,3 @@ const FaceOfTamago: React.FC<{ width: string; height: string }> = ({
   );
 };
 
-export default FaceOfTamago;

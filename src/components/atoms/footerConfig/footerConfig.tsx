@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC } from "react";
 import styles from "styles/components.module.css";
 
-const FooterConfigIcon: FC = () => {
+export const FooterConfigIcon: FC = () => {
   return (
     <Image
       src="/images/config_gray.svg"
@@ -13,4 +13,3 @@ const FooterConfigIcon: FC = () => {
   );
 };
 
-export default FooterConfigIcon;

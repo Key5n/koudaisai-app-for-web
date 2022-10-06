@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "/src/styles/components.module.css";
 
-const TermsOfServiceText = () => {
+export const TermsOfServiceText = () => {
   return (
     <div className={styles.termsOfServiceText}>
       <p>参加の条件</p>
@@ -18,4 +18,3 @@ const TermsOfServiceText = () => {
   );
 };
 
-export default TermsOfServiceText;

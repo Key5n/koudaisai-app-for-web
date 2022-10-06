@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "styles/components.module.css";
 import Image from "next/image";
 
-const KeyboardArrow: FC<{ id: "0" | "1" | "2" }> = ({ id }) => {
+export const KeyboardArrow: FC<{ id: "0" | "1" | "2" }> = ({ id }) => {
   return (
     <>
       <input type="checkbox" id={id} />
@@ -18,4 +18,3 @@ const KeyboardArrow: FC<{ id: "0" | "1" | "2" }> = ({ id }) => {
   );
 };
 
-export default KeyboardArrow;

@@ -2,7 +2,7 @@ import { FC } from "react";
 import Link from "next/link";
 import styles from "styles/components.module.css";
 
-const AgreementButton: FC<{ param: string; str: string }> = ({
+export const AgreementButton: FC<{ param: string; str: string }> = ({
   param,
   str,
 }) => {
@@ -12,5 +12,3 @@ const AgreementButton: FC<{ param: string; str: string }> = ({
     </a>
   );
 };
-
-export default AgreementButton;
