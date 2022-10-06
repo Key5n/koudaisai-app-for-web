@@ -6,6 +6,7 @@ const UserObjectWrapper: React.FC = () => {
   return (
     <div className={styles.userObjectWrapper}>
       <UserObject name={"落単古墳マン"} />
+      <UserObject name={"2号館たまごちゃん"} />
       <AddCompanion />
     </div>
   );

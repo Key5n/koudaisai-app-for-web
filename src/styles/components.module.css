@@ -278,7 +278,7 @@ input[type="checkbox"]:checked + .keyboardArrow{
 }
 
 .addCompanion {
-  composes: flex vertical centered gap--small padding-vertical--1rem border-radius--small border-around--orange from "/src/styles/layout.module.css";
+  composes: flex vertical centered gap--small padding-vertical--1rem border-radius--normal border-around--orange from "/src/styles/layout.module.css";
 }
 
 .addCompanionText {
