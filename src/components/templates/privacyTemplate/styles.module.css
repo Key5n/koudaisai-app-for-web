@@ -1,0 +1,26 @@
+.h1 {
+  font-size: 46px;
+}
+
+.backgroundYellow {
+  background-color: yellow;
+}
+/* 
+このファイルにタグのスタイル設定を定義することはできない。これはエラーになる。
+もしpタグのデフォルトのスタイルを変えたいなら/styles/globals.cssってとこに書く必要がある
+p {
+  font-size: 46px
+} 
+*/
+
+/* クラス名の命名はキャメルケースかパスカルケースおすすめ。
+css modulesの開発者がキャメルケース使ってたから俺もそれに合わせてる。
+ハイフン使うとめんどくさくなる。例えば
+className={styles.hoge-fuge}はclassName={styles["hoge-fuga"]}
+と書く必要がある。
+*/
+
+/* 複数のクラスを当てるなら
+className={`${styles.hoge} ${styles.fuga}`}
+と書く
+*/
