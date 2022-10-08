@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import ReservationTemplate from "components/templates/reservationTemplate";
 import { useRouter } from "next/router";
+import { ReservationTemplate } from "components/templates/ReservationTemplate";
 
 const Index: NextPage = () => {
   const router = useRouter();
