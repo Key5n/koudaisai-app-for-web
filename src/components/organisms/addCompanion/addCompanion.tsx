@@ -1,8 +1,8 @@
 import styles from "styles/components.module.css";
+import Link from "next/link";
 import { KofunmanAndTamago } from "components/molecules/KofunmanAndTamago";
 import { Subtitle } from "components/atoms/subtitle";
-import { Text } from "components/atoms/text";
-import { Button } from "components/atoms/button";
+import { AnchorButton } from "components/atoms/AnchorButton";
 
 export const AddCompanion: React.FC = () => {
   return (
@@ -14,8 +14,9 @@ export const AddCompanion: React.FC = () => {
         <br />
         2人まですることができます
       </p>
-      <Button To="" text="追加する" />
+      <Link href={"/signup"}>
+        <AnchorButton>追加する</AnchorButton>
+      </Link>
     </div>
   );
 };
-

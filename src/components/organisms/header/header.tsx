@@ -9,7 +9,7 @@ export const Header: FC<{ displayBack: boolean; onClick: () => void }> = ({
 }) => {
   return (
     <header className={styles.header}>
-      {displayBack && <BackButton onClick={onClick} />}
+      {displayBack && <BackButton onClick={onClick} text={"戻る"} />}
       予約
     </header>
   );
