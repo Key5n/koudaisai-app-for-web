@@ -9,10 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chart.js": "^3.9.1",
+    "clsx": "^1.2.1",
     "firebase": "^9.9.3",
+    "gray-matter": "^4.0.3",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-chartjs-2": "^4.3.1",
+    "react-dom": "18.2.0",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.1"
   },
   "devDependencies": {
     "@types/node": "18.7.14",

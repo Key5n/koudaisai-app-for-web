@@ -1,0 +1,35 @@
+.module {
+  composes: flex vertical gap--small padding-vertical--05rem border-around--orange border-radius--normal  from "/src/styles/layout.module.css";
+  width: 90%;
+}
+.content{
+  width: 60%;
+  height: 60%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  composes: RocknRoll-One font-size--large from "/src/styles/typography.module.css";
+}
+
+.amount {
+  composes: font-size--small from "/src/styles/typography.module.css";
+  composes: red from "/src/styles/colors.module.css";
+}
+
+.title {
+  composes: RocknRoll-One text-center font-size--small from "/src/styles/typography.module.css";
+}
+
+.propertyWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

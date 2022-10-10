@@ -1,0 +1,6 @@
+.module {
+  composes: border-radius--large padding-horizontal--large no-border drop-shadow from "/src/styles/layout.module.css";
+  composes: RocknRoll-One font-size--normal from "/src/styles/typography.module.css";
+  composes: background-color--orange white from "/src/styles/colors.module.css";
+  text-decoration: none;
+}

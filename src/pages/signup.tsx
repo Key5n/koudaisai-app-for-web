@@ -1,8 +1,9 @@
 import { FC } from "react";
 import styles from "styles/components.module.css";
-import SignupTemplate from "components/templates/signupTemplate";
+import { NextPage } from "next";
+import { SignupTemplate } from "components/templates/SignupTemplate";
 
-const Signup: FC = () => {
+const Signup: NextPage = () => {
   return (
     <>
       <SignupTemplate />
