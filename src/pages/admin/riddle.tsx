@@ -20,7 +20,7 @@ const Riddle: React.FC = () => {
 
   return (
     <>
-      <RiddleTemplate draw={draw} />
+      <RiddleTemplate />
     </>
   );
 };
