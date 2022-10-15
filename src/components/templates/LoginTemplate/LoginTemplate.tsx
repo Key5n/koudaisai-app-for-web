@@ -6,7 +6,7 @@ import { Authentication } from "components/organisms/authentication";
 export const LoginTemplate: FC = () => {
   return (
     <>
-      <Header displayBack={true} onClick={() => {}} />
+      <Header displayBack={true} onClick={() => {}} title="ログイン" />
       <Authentication onClick={() => {}} />
       <Footer />
     </>
