@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 export const Input = forwardRef<
   HTMLInputElement,
   ComponentPropsWithoutRef<"input">
->(function TextboxBase({ className, type, ...props }, ref) {
+>(function InputboxBase({ className, type, ...props }, ref) {
   return (
     <input
       type={type}

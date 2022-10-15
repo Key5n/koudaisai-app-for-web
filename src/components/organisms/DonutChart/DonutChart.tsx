@@ -3,28 +3,31 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ["完全クリア人数", "クリア失敗数"],
-  datasets: [
-    {
-      data: [12, 19],
-      backgroundColor: ["rgba(255, 107, 107, 1)", "rgba(160, 160, 160, 1)"],
-      borderWidth: 1,
-      offset: 5,
-      borderRadius: 5,
-    },
-  ],
-};
-const options = {
-  cutout: "75%",
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
+type Props = {
+  value: [number, number];
 };
 
-export const DonutChart = () => {
+export const DonutChart = ({ value }: Props) => {
+  const data = {
+    labels: ["完全クリア人数", "クリア失敗数"],
+    datasets: [
+      {
+        data: value,
+        backgroundColor: ["rgba(255, 107, 107, 1)", "rgba(160, 160, 160, 1)"],
+        borderWidth: 1,
+        offset: 5,
+        borderRadius: 5,
+      },
+    ],
+  };
+  const options = {
+    cutout: "75%",
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
   return (
     <div className={styles.module}>
       <div className={styles.title}>

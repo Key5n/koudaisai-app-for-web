@@ -1,9 +1,9 @@
-import { RiddleTemplate } from "components/templates/RiddleTemplate/RiddleTemplate";
+import { MysteryTemplate } from "components/templates/MysteryTemplate";
 
 const Riddle: React.FC = () => {
   return (
     <>
-      <RiddleTemplate />
+      <MysteryTemplate />
     </>
   );
 };

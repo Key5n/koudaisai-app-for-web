@@ -2,22 +2,23 @@ import styles from "./styles.module.css";
 import { Field } from "../../atoms/Field";
 import { InputWithTitle } from "../InputWithTitle";
 import { Button } from "components/atoms/Button";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useRef, useState } from "react";
 
 type mysteryObj = {
   numOfChallenger: number;
   numOfSolvedPeople: number;
-  numOfNewChallenger: number | null;
-  numOfNewSolvedPeople: number | null;
+  numOfNewChallenger: number;
+  numOfNewSolvedPeople: number;
 };
 
-export const MysteryForm = () => {
-  const [mysteryObj, setMysteryObj] = useState<mysteryObj>({
-    numOfChallenger: 0,
-    numOfSolvedPeople: 0,
-    numOfNewChallenger: 0,
-    numOfNewSolvedPeople: 0,
-  });
+type Props = {
+  mysteryObj: mysteryObj;
+  setMysteryObj: React.Dispatch<React.SetStateAction<mysteryObj>>;
+};
+
+export const MysteryForm = ({ mysteryObj, setMysteryObj }: Props) => {
+  const InputOfNumOfNewChallengerRef = useRef<HTMLInputElement>(null);
+  const InputOfNumOfNewSolvedPeopleRef = useRef<HTMLInputElement>(null);
 
   const onClickButtonIncreasesNewSolvedPeoplebyOne = (
     e: React.MouseEvent<HTMLElement, MouseEvent>
@@ -25,7 +26,7 @@ export const MysteryForm = () => {
     e.preventDefault();
     setMysteryObj((prev) => ({
       ...prev,
-      numOfNewSolvedPeople: (prev.numOfNewSolvedPeople ?? 0) + 1,
+      numOfNewSolvedPeople: prev.numOfNewSolvedPeople + 1,
     }));
   };
 
@@ -35,7 +36,7 @@ export const MysteryForm = () => {
     e.preventDefault();
     setMysteryObj((prev) => ({
       ...prev,
-      numOfNewSolvedPeople: (prev.numOfNewSolvedPeople ?? 0) - 1,
+      numOfNewSolvedPeople: prev.numOfNewSolvedPeople - 1,
     }));
   };
 
@@ -45,7 +46,7 @@ export const MysteryForm = () => {
     e.preventDefault();
     setMysteryObj((prev) => ({
       ...prev,
-      numOfNewChallenger: prev.numOfNewChallenger++,
+      numOfNewChallenger: prev.numOfNewChallenger + 1,
     }));
   };
 
@@ -55,7 +56,7 @@ export const MysteryForm = () => {
     e.preventDefault();
     setMysteryObj((prev) => ({
       ...prev,
-      numOfNewChallenger: prev.numOfNewChallenger--,
+      numOfNewChallenger: prev.numOfNewChallenger - 1,
     }));
   };
 
@@ -74,23 +75,37 @@ export const MysteryForm = () => {
   const handleNewChallengerInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    let input: string = e.target.value;
-    input = input.replace(/[^0-9]/g, "");
-    setMysteryObj((prev) => ({
-      ...prev,
-      numOfNewChallenger: +input,
-    }));
+    if (InputOfNumOfNewChallengerRef.current) {
+      let input: string = InputOfNumOfNewChallengerRef.current.value;
+      input = input.replace(/[^0-9^０-９]/g, "");
+
+      //inputのすべての全角数字を半角に
+      input = input.replace(/[０-９]/g, (s: string) => {
+        return String.fromCharCode(s.charCodeAt(0) - 65248);
+      });
+      setMysteryObj((prev) => ({
+        ...prev,
+        numOfNewChallenger: +input,
+      }));
+    }
   };
 
-  const handleNewSolvedpeopleInputChange = (
+  const handleNewSolvedPeopleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    let input: string = e.target.value;
-    input = input.replace(/[^0-9]/g, "");
-    setMysteryObj((prev) => ({
-      ...prev,
-      numOfNewSolvedPeople: +input,
-    }));
+    if (InputOfNumOfNewSolvedPeopleRef.current) {
+      let input: string = InputOfNumOfNewSolvedPeopleRef.current.value;
+      input = input.replace(/[^0-9^０-９]/g, "");
+
+      //inputのすべての全角数字を半角に
+      input = input.replace(/[０-９]/g, (s: string) => {
+        return String.fromCharCode(s.charCodeAt(0) - 65248);
+      });
+      setMysteryObj((prev) => ({
+        ...prev,
+        numOfNewSolvedPeople: +input,
+      }));
+    }
   };
 
   return (
@@ -104,13 +119,15 @@ export const MysteryForm = () => {
           onMinusClick={onClickButtonDecreasesNewChallengerbyOne}
           onPlusClick={onClickButtonIncreasesNewChallengerbyOne}
           handleInputChange={handleNewChallengerInputChange}
+          ref={InputOfNumOfNewChallengerRef}
         />
         <InputWithTitle
           title={`新たな\n完全クリア人数`}
           value={mysteryObj.numOfNewSolvedPeople}
           onMinusClick={onClickButtonDecreasesNewSolvedPeoplebyOne}
           onPlusClick={onClickButtonIncreasesNewSolvedPeoplebyOne}
-          handleInputChange={handleNewSolvedpeopleInputChange}
+          handleInputChange={handleNewSolvedPeopleInputChange}
+          ref={InputOfNumOfNewSolvedPeopleRef}
         />
         <Button type="submit">決定</Button>
       </form>
