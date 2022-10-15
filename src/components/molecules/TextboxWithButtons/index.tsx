@@ -1,1 +1,1 @@
-export * from "./TextboxWithButtons";
+export * from "./InputWithButtons";
