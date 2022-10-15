@@ -37,7 +37,7 @@ export const DonutChart = ({ value }: Props) => {
       </div>
       <div className={styles.content}>
         <div className={styles.percent}>
-          {value[0] / (value[0] + value[1])}
+          {(value[0] / (value[0] + value[1])).toFixed(2)}%
           <div className={styles.amount}>100/200</div>
         </div>
         <Doughnut data={data} options={options} />
