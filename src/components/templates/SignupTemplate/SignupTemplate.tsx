@@ -26,6 +26,7 @@ export const SignupTemplate: FC = () => {
             onClick();
           }
         }}
+        title="予約"
       />
       <main className={styles.signupTemplate}>
         {isSignup ? (

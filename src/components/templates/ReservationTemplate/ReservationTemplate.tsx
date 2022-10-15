@@ -17,7 +17,7 @@ export const ReservationTemplate: FC = ({
   const [hasLogin, setHasLogin] = useState<boolean>(false);
   return (
     <>
-      <Header displayBack={false} onClick={() => {}} />
+      <Header displayBack={false} onClick={() => {}} title="第60回工大祭" />
       <main>
         {hasLogin ? (
           <div className={styles.main}>

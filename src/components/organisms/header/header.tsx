@@ -3,14 +3,17 @@ import { FC } from "react";
 import styles from "styles/components.module.css";
 import { BackButton } from "components/atoms/backButton";
 
-export const Header: FC<{ displayBack: boolean; onClick: () => void }> = ({
-  displayBack,
-  onClick,
-}) => {
+type Props = {
+  displayBack: boolean;
+  onClick: () => void;
+  title: string;
+};
+
+export const Header = ({ displayBack, onClick, title }: Props) => {
   return (
     <header className={styles.header}>
       {displayBack && <BackButton onClick={onClick} text={"戻る"} />}
-      予約
+      {title}
     </header>
   );
 };

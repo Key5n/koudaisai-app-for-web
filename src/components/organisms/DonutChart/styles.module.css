@@ -1,7 +1,3 @@
-.module {
-  composes: flex vertical gap--small padding-vertical--05rem border-around--orange border-radius--normal  from "/src/styles/layout.module.css";
-  width: 90%;
-}
 .content{
   width: 60%;
   height: 60%;
@@ -24,12 +20,4 @@
 
 .title {
   composes: RocknRoll-One text-center font-size--small from "/src/styles/typography.module.css";
-}
-
-.propertyWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
 }
