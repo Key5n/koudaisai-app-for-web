@@ -1,6 +1,6 @@
 import { MysteryTemplate } from "components/templates/MysteryTemplate";
 
-const Riddle: React.FC = () => {
+const Mystery: React.FC = () => {
   return (
     <>
       <MysteryTemplate />
@@ -8,4 +8,4 @@ const Riddle: React.FC = () => {
   );
 };
 
-export default Riddle;
+export default Mystery;

@@ -33,7 +33,7 @@ export const ReservationTemplate: FC = ({
         ) : (
           <div className={styles.index}>
             <Link href={"/privacy"}>プライバシーポリシーへ</Link>
-            <Link href={"/admin/riddle"}>謎解き画面へ</Link>
+            <Link href={"/admin/mystery"}>謎解き画面へ</Link>
             <KofunmanTalking />
             <SignupButton />
             <Login />
