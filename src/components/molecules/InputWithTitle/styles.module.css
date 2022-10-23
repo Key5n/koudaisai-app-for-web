@@ -36,3 +36,9 @@
   text-align: center;
   text-overflow: hidden;
 }
+
+.title {
+  composes: Noto-Sans-JP font-size--small from "/src/styles/typography.module.css";
+  white-space: pre-wrap;
+  text-align: center;
+}

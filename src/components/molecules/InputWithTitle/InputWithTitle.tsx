@@ -4,12 +4,12 @@ import { Dispatch, SetStateAction } from "react";
 import { Input } from "components/atoms/input";
 import { forwardRef } from "react";
 
-type mysteryObj = {
-  numOfChallenger: number;
-  numOfSolvedPeople: number;
-  numOfNewChallenger: number;
-  numOfNewSolvedPeople: number;
-};
+// type mysteryObj = {
+//   numOfChallenger: number;
+//   numOfSolvedPeople: number;
+//   numOfNewChallenger: number;
+//   numOfNewSolvedPeople: number;
+// };
 
 type Props = {
   title: string;
@@ -27,7 +27,7 @@ export const InputWithTitle = forwardRef<HTMLInputElement, Props>(
   ) {
     return (
       <div className={styles.module}>
-        <Text text={title} />
+        <span className={styles.title}>{title}</span>
         <div className={styles.content}>
           <button
             className={styles.button}

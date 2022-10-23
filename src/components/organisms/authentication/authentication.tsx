@@ -7,12 +7,10 @@ export const Authentication: FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <>
       <div className={styles.authentication}>
-        <InputItem />
-        <InputItem />
-        <InputItem />
-        <InputItem />
+        <InputItem text={"お名前"} />
+        <InputItem text={"メールアドレス"} />
+        <InputItem text={"電話番号"} />
         <EntryDate />
-        <InputItem />
         <button className={styles.button} onClick={onClick}>
           次へ
         </button>
@@ -20,4 +18,3 @@ export const Authentication: FC<{ onClick: () => void }> = ({ onClick }) => {
     </>
   );
 };
-

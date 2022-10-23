@@ -1,1 +1,1 @@
-export * from "./Mystery";
+export * from "./MysteryObj";

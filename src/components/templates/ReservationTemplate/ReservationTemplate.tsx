@@ -9,11 +9,7 @@ import { Header } from "components/organisms/header";
 import { Footer } from "components/organisms/footer";
 import { UserObjectWrapper } from "components/organisms/userObjectWrapper/userObjectWrapper";
 
-export const ReservationTemplate: FC = ({
-  children,
-}: {
-  children?: ReactNode;
-}) => {
+export const ReservationTemplate: FC = () => {
   const [hasLogin, setHasLogin] = useState<boolean>(false);
   return (
     <>
@@ -22,28 +18,12 @@ export const ReservationTemplate: FC = ({
         {hasLogin ? (
           <div className={styles.main}>
             <UserObjectWrapper />
-            <button
-              onClick={() => {
-                setHasLogin(!hasLogin);
-              }}
-            >
-              ボタン
-            </button>
           </div>
         ) : (
           <div className={styles.index}>
-            <Link href={"/privacy"}>プライバシーポリシーへ</Link>
-            <Link href={"/admin/riddle"}>謎解き画面へ</Link>
             <KofunmanTalking />
             <SignupButton />
             <Login />
-            <button
-              onClick={() => {
-                setHasLogin(!hasLogin);
-              }}
-            >
-              予約前と予約後の画面を切りかえる
-            </button>
           </div>
         )}
       </main>
