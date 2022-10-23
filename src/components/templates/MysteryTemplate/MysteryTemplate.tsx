@@ -1,8 +1,14 @@
 import styles from "./styles.module.css";
-import { Mystery } from "components/organisms/Mystery";
+import { MysteryObj } from "components/organisms/Mystery";
 import { Header } from "components/organisms/header";
+import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 
-export const MysteryTemplate = () => {
+type Props = {
+  data: { numOfChallenger: number; numOfSolver: number };
+};
+
+export const MysteryTemplate = ({ data }: Props) => {
+  console.log(data);
   return (
     <>
       <Header
@@ -11,7 +17,7 @@ export const MysteryTemplate = () => {
         title={`謎解き管理者画面`}
       />
       <section className={styles.module}>
-        <Mystery />
+        <MysteryObj data={data} />
       </section>
     </>
   );
