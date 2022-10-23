@@ -1,1 +1,1 @@
-export * from "./MysteryTemplate";
+export * from "./MysteryAdminTemplate";

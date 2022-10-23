@@ -1,6 +1,6 @@
-import admin from "lib/nodeApp";
 import { DonutChart } from "components/organisms/DonutChart";
 import { useState } from "react";
+import { Field } from "components/atoms/Field";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -29,6 +29,10 @@ export const MysteryTemplate = ({ data }: Props) => {
           mysteryData.numOfChallenger - mysteryData.numOfSolver,
         ]}
       />
+      <div className={styles.data}>
+        <Field title={"挑戦人数"} value={mysteryData.numOfChallenger} />
+        <Field title={"完全クリア人数"} value={mysteryData.numOfSolver} />
+      </div>
     </div>
   );
 };

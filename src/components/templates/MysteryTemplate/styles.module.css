@@ -9,3 +9,11 @@
   width: 90%;
   margin: 0 auto;
 }
+
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
