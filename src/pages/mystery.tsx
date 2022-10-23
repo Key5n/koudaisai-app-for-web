@@ -1,7 +1,7 @@
 import admin from "lib/nodeApp";
 import { DonutChart } from "components/organisms/DonutChart";
 import { useState } from "react";
-import styles from "./styles.module.css";
+import { MysteryTemplate } from "components/templates/MysteryTemplate";
 
 type Props = {
   data: { numOfChallenger: number; numOfSolver: number };
@@ -14,7 +14,7 @@ type mysteryData = {
   numOfNewSolver: number;
 };
 
-export const MysteryTemplate = ({ data }: Props) => {
+const Mystery = ({ data }: Props) => {
   const [mysteryData, setMysteryData] = useState<mysteryData>({
     numOfChallenger: data.numOfChallenger,
     numOfSolver: data.numOfSolver,
@@ -22,13 +22,17 @@ export const MysteryTemplate = ({ data }: Props) => {
     numOfNewSolver: 0,
   });
   return (
-    <div className={styles.module}>
-      <DonutChart
-        value={[
-          mysteryData.numOfSolver,
-          mysteryData.numOfChallenger - mysteryData.numOfSolver,
-        ]}
-      />
-    </div>
+    <>
+      <MysteryTemplate data={data} />
+    </>
   );
 };
+
+export async function getServerSideProps() {
+  const db = admin.firestore();
+  const mysteryDoc = await db.collection("admin").doc("mystery").get();
+
+  return { props: { data: mysteryDoc.data() } };
+}
+
+export default Mystery;
