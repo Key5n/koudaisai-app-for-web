@@ -9,6 +9,7 @@ const Index: NextPage = () => {
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       <Link href={"/privacy"}>プライバシーポリシーへ</Link>
       <Link href={"/admin/mystery"}>謎解き画面へ</Link>
+      <Link href={"/mystery"}>アプリ用謎解き画面へ</Link>
       <Link href={"/signup"}>予約画面へ</Link>
       {/* <ReservationTemplate /> */}
     </div>
