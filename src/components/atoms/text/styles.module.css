@@ -1,1 +1,5 @@
 
+.text {
+  composes: Noto-Sans-JP font-size--small from "/src/styles/typography.module.css";
+  white-space: pre-wrap;
+}
