@@ -1,4 +1,4 @@
-import { MysteryTemplate } from "components/templates/MysteryTemplate";
+import { MysteryTemplate } from "components/templates/MysteryAdminTemplate";
 import admin from "lib/nodeApp";
 
 type Props = {
