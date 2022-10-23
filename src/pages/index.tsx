@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { ReservationTemplate } from "components/templates/ReservationTemplate";
 import Link from "next/link";
 
 const Index: NextPage = () => {
