@@ -7,9 +7,9 @@ type Props = {
 
 const Mystery = ({ data }: Props) => {
   return (
-    <div>
+    <>
       <MysteryTemplate data={data} />
-    </div>
+    </>
   );
 };
 

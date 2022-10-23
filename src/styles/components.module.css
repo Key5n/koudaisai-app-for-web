@@ -50,7 +50,6 @@
 .text {
   composes: Noto-Sans-JP font-size--small from "/src/styles/typography.module.css";
   white-space: pre-wrap;
-  text-align: center;
 }
 
 .red {
@@ -103,9 +102,6 @@ input[type="checkbox"]:checked + .checkbox::before {
   composes: Noto-Sans-JP font-size--normal from "/src/styles/typography.module.css";
 }
 
-.inputItem {
-  composes: flex vertical from "/src/styles/layout.module.css";
-}
 
 .moveButtons {
   composes: flex horizontal space-between from "/src/styles/layout.module.css";

@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { Field } from "../../atoms/Field";
 import { InputWithTitle } from "../InputWithTitle";
 import { Button } from "components/atoms/Button";
-import React, { FormEventHandler, useRef, useState } from "react";
+import React, { FormEventHandler, useRef } from "react";
 
 type mysteryData = {
   numOfChallenger: number;
@@ -62,6 +62,10 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    if (mysteryData.numOfNewChallenger < mysteryData.numOfNewSolver) {
+      alert("エラー: 挑戦者よりクリアした人のほうが多いです。");
+      return null;
+    }
     setMysteryData({
       numOfChallenger:
         mysteryData.numOfChallenger + mysteryData.numOfNewChallenger,
@@ -74,7 +78,6 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
       numOfNewChallenger: mysteryData.numOfNewChallenger,
       numOfNewSolver: mysteryData.numOfNewSolver,
     };
-
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/form";
 
@@ -88,7 +91,6 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
     const response = await fetch(endpoint, options);
 
     const result = await response.json();
-    alert(`The number: ${result.data}`);
   };
 
   const handleNewChallengerInputChange = (

@@ -44,7 +44,7 @@ export const SignupTemplate: FC = () => {
       {!isSignup && (
         <>
           <Agreement />
-          <ModalWindow />)
+          <ModalWindow />
         </>
       )}
     </>
