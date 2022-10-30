@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "styles/components.module.css";
-import { KofunmanTalking } from "components/molecules/kofunmanTalking";
+import { KofunmanTalking } from "components/atoms/kofunmanTalking";
 import { SignupButton } from "components/atoms/signupButton";
 import { Login } from "components/molecules/login";
 import { Header } from "components/organisms/header";

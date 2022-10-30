@@ -1,4 +1,0 @@
-.module {
-  composes: RocknRoll-One from "/src/styles/typography.module.css";
-  font-size: 32px;
-}

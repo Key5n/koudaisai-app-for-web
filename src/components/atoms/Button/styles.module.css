@@ -1,7 +1,13 @@
 .module {
-  composes: border-radius--large padding-horizontal--large no-border drop-shadow from "/src/styles/layout.module.css";
-  composes: RocknRoll-One font-size--normal from "/src/styles/typography.module.css";
-  composes: background-color--orange white from "/src/styles/colors.module.css";
   text-decoration: none;
   cursor: pointer;
+  border-radius: 40px;
+  padding: 0rem 1rem;
+  border: 0;
+  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
+  font-family: 'RocknRoll One', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  background-color: var(--orange);
+  color: (--white);
 }

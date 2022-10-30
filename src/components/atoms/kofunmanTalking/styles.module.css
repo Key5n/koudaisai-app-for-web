@@ -1,0 +1,12 @@
+.line {
+  font-family: 'RocknRoll One', sans-serif;
+  font-weight: 400;
+}
+
+.module {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}

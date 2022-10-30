@@ -1,7 +1,9 @@
-.h1 {
-  font-size: 54px;
+.markdown{
+  margin:0 5%;
+  font-size: 12px;
 }
 
-.backgroundYellow {
-  background-color: yellow;
+.title {
+  text-align: center;
+  margin: 0.5rem 0;
 }

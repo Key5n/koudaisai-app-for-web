@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import { Field } from "../../atoms/Field";
 import { InputWithTitle } from "../InputWithTitle";
 import { Button } from "components/atoms/Button";
 import React, { FormEventHandler, useRef } from "react";
@@ -130,28 +129,32 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
   };
 
   return (
-    <>
-      <form className={styles.module} onSubmit={onSubmit}>
-        <Field title={"挑戦人数"} value={mysteryData.numOfChallenger} />
-        <Field title={"完全クリア人数"} value={mysteryData.numOfSolver} />
-        <InputWithTitle
-          title={`新たな\n挑戦人数`}
-          value={mysteryData.numOfNewChallenger}
-          onMinusClick={onClickButtonDecreasesNewChallengerbyOne}
-          onPlusClick={onClickButtonIncreasesNewChallengerbyOne}
-          handleInputChange={handleNewChallengerInputChange}
-          ref={InputOfNumOfNewChallengerRef}
-        />
-        <InputWithTitle
-          title={`新たな\n完全クリア人数`}
-          value={mysteryData.numOfNewSolver}
-          onMinusClick={onClickButtonDecreasesNewSolverbyOne}
-          onPlusClick={onClickButtonIncreasesNewSolverbyOne}
-          handleInputChange={handleNewSolverInputChange}
-          ref={InputOfNumOfNewSolverRef}
-        />
-        <Button type="submit">決定</Button>
-      </form>
-    </>
+    <form className={styles.module} onSubmit={onSubmit}>
+      <div className={styles.module}>
+        <span className={styles.title}>挑戦人数</span>
+        <span className={styles.value}>{mysteryData.numOfChallenger}</span>
+      </div>
+      <div className={styles.module}>
+        <span className={styles.title}>完全クリア人数</span>
+        <span className={styles.value}>{mysteryData.numOfSolver}</span>
+      </div>
+      <InputWithTitle
+        title={`新たな\n挑戦人数`}
+        value={mysteryData.numOfNewChallenger}
+        onMinusClick={onClickButtonDecreasesNewChallengerbyOne}
+        onPlusClick={onClickButtonIncreasesNewChallengerbyOne}
+        handleInputChange={handleNewChallengerInputChange}
+        ref={InputOfNumOfNewChallengerRef}
+      />
+      <InputWithTitle
+        title={`新たな\n完全クリア人数`}
+        value={mysteryData.numOfNewSolver}
+        onMinusClick={onClickButtonDecreasesNewSolverbyOne}
+        onPlusClick={onClickButtonIncreasesNewSolverbyOne}
+        handleInputChange={handleNewSolverInputChange}
+        ref={InputOfNumOfNewSolverRef}
+      />
+      <Button type="submit">決定</Button>
+    </form>
   );
 };

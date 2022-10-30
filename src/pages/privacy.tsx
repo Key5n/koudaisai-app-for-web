@@ -1,36 +1,30 @@
-import type { NextPage } from "next";
-import styles from './styles.module.css';
-import Head from "next/head";
-import { PrivacyTemplate } from "components/templates/PrivacyTemplate";
 import { GetStaticProps } from "next";
 import { getMarkdown } from "lib/posts";
+import { PrivacyTemplate } from "components/templates/PrivacyTemplate";
 
 const Privacy = ({
-  postData
+  postData,
 }: {
   postData: {
-    title: string
-    date: string
-    contentHtml: string
-  }
+    title: string;
+    date: string;
+    contentHtml: string;
+  };
 }) => {
   return (
     <>
-      <div className={styles.markdown}>
-        <h1 className={styles.title}>{postData.title}</h1>
-        <div dangerouslySetInnerHTML={{__html: postData.contentHtml}}></div>
-      </div>
+      <PrivacyTemplate postData={postData} />
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getMarkdown()
+  const postData = await getMarkdown();
   return {
     props: {
-      postData
-    }
-  }
-}
+      postData,
+    },
+  };
+};
 
 export default Privacy;

@@ -1,15 +1,6 @@
 import styles from "./styles.module.css";
-import { Text } from "components/atoms/text";
-import { Dispatch, SetStateAction } from "react";
-import { Input } from "components/atoms/input";
+import { Input } from "components/atoms/Input";
 import { forwardRef } from "react";
-
-// type mysteryObj = {
-//   numOfChallenger: number;
-//   numOfSolvedPeople: number;
-//   numOfNewChallenger: number;
-//   numOfNewSolvedPeople: number;
-// };
 
 type Props = {
   title: string;

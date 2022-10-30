@@ -1,14 +1,12 @@
-import { FC } from "react";
 import { Checkbox } from "../checkbox";
-import styles from "/src/styles/components.module.css";
-import { Text } from "components/atoms/text";
+import styles from "./styles.module.css";
 
-export const EntryDate: FC = () => {
+export const EntryDate = () => {
   return (
     <div className={styles.entryDate}>
-      <Text text="希望入場日" />
-      <Checkbox />
-      <Checkbox />
+      <span className={styles.title}>希望入場日</span>
+      <Checkbox title={"11/19(土)"} />
+      <Checkbox title={"11/20(日)"} />
     </div>
   );
 };

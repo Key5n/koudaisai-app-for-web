@@ -1,4 +1,4 @@
-import styles from "styles/components.module.css";
+import styles from "./styles.module.css";
 import { UserObject } from "../userObject/userObject";
 import { AddCompanion } from "../addCompanion";
 

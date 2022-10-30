@@ -1,13 +1,12 @@
 import { FC } from "react";
 import { useState } from "react";
 import Router from "next/router";
-import styles from "styles/components.module.css";
-import { KofunmanTalking } from "components/molecules/kofunmanTalking";
+import styles from "./styles.module.css";
+import { KofunmanTalking } from "components/atoms/kofunmanTalking";
 import { Authentication } from "components/organisms/authentication";
 import { Header } from "components/organisms/header";
-import { TermsOfServiceText } from "components/atoms/termsOfServiceText";
-import { Agreement } from "components/molecules/agreement";
 import { ModalWindow } from "components/organisms/modalWindow";
+import { AnchorButton } from "components/atoms/AnchorButton";
 
 export const SignupTemplate: FC = () => {
   const [isSignup, setIsSignup] = useState<boolean>(true);
@@ -37,13 +36,22 @@ export const SignupTemplate: FC = () => {
         ) : (
           <>
             <KofunmanTalking />
-            <TermsOfServiceText />
           </>
         )}
       </main>
       {!isSignup && (
         <>
-          <Agreement />
+          <div className={styles.agreement}>
+            <AnchorButton href={"/"} className={styles.AgreementButton}>
+              同意しない
+            </AnchorButton>
+            <AnchorButton
+              href={"#modal-agreement"}
+              className={styles.AgreementButton}
+            >
+              同意する
+            </AnchorButton>
+          </div>
           <ModalWindow />
         </>
       )}

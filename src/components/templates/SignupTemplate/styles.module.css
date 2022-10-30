@@ -1,0 +1,22 @@
+.Agreement {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+}
+
+.signupTemplate {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, 0);
+}
+
+.AgreementButton {
+  text-decoration: none;
+  color: var(--orange);
+  font-family: 'RocknRoll One', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+}

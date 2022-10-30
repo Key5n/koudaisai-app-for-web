@@ -163,7 +163,7 @@ input[type="checkbox"]:checked + .checkbox::before {
 }
 
 .agreementButton {
-  text-decoration: none;
+text-decoration: none;
   composes: orange from "/src/styles/colors.module.css";
   composes: RocknRoll-One font-size--normal from "/src/styles/typography.module.css";
 }
