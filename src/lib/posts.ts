@@ -1,16 +1,50 @@
-import { remark } from "remark";
-import html from 'remark-html';
-import matter from 'gray-matter';
-import fs from 'fs';
+import matter from "gray-matter";
+import fs from "fs";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import remarkToc from "remark-toc";
+import rehypeSlug from "rehype-slug";
 
-export async function getMarkdown(){
-  const fileName = fs.readFileSync('posts/privacy-policy.md', 'utf8');
+// const postsDirectory = path.join(process.cwd(), "");
+
+// export async function getMarkdown(filename: string) {
+//   const fileName = fs.readFileSync(`posts/${filename}.md`, "utf-8");
+//   const matterResult = matter(fileName);
+//   const processedContent = await remark()
+//     .use(html)
+//     .process(matterResult.content);
+//   const contentHtml = processedContent.toString();
+
+//   return {
+//     contentHtml,
+//     ...(matterResult.data as { date: string; title: string }),
+//   };
+// }
+
+// export function getAllPostIds() {
+//   const fileNames: string = fs.readdirSync()
+// }
+
+export async function getContent(filename: string) {
+  const fileName = fs.readFileSync(`posts/${filename}.md`, "utf-8");
   const matterResult = matter(fileName);
-  const processedContent = await remark().use(html).process(matterResult.content);
+
+  const processedContent = await unified()
+    .use(remarkParse)
+    .use(remarkToc, {
+      heading: "目次",
+    })
+    .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeStringify)
+    .process(matterResult.content);
+
   const contentHtml = processedContent.toString();
 
   return {
     contentHtml,
-    ...(matterResult.data as {date: string; title: string})
-  }
+    ...(matterResult.data as { date: string; title: string }),
+  };
 }
