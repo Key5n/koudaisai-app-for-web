@@ -19,7 +19,7 @@ const Privacy = ({
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getMarkdown();
+  const postData = await getMarkdown("privacy-policy");
   return {
     props: {
       postData,
