@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
-import { getMarkdown } from "lib/posts";
 import { PrivacyTemplate } from "components/templates/PrivacyTemplate";
+import { getContent } from "lib/posts";
 
 const Privacy = ({
   postData,
@@ -19,7 +19,7 @@ const Privacy = ({
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getMarkdown("privacy-policy");
+  const postData = await getContent("privacy-policy");
   return {
     props: {
       postData,
