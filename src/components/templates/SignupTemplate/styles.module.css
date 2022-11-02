@@ -1,22 +1,23 @@
-.Agreement {
+.module {
   display: flex;
-  justify-content: space-between;
-  position: fixed;
-  bottom: 0;
-}
-
-.signupTemplate {
-  position: absolute;
-  top: 80px;
-  left: 50%;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
   width: 80%;
-  transform: translate(-50%, 0);
+  margin: 0 auto;
 }
 
-.AgreementButton {
-  text-decoration: none;
-  color: var(--orange);
-  font-family: 'RocknRoll One', sans-serif;
-  font-weight: 400;
-  font-size: 1.25rem;
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 50vh;
+}
+
+.entryDate {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

@@ -1,8 +1,7 @@
-import { FC } from "react";
 import Link from "next/link";
-import styles from "styles/components.module.css";
+import styles from "./styles.module.css";
 
-export const ModalWindow: FC = () => {
+export const ModalWindow = () => {
   return (
     <div className={styles.modalContainer} id="modal-agreement">
       <a className={styles.modalOverlay} href="#!"></a>
@@ -24,4 +23,3 @@ export const ModalWindow: FC = () => {
     </div>
   );
 };
-

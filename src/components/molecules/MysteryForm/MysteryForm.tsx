@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
-import { InputWithTitle } from "../InputWithTitle";
+import { MysteryInputWithTitle } from "../MysteryInputWithTitle";
 import { Button } from "components/atoms/Button";
+import { Field } from "components/atoms/Field";
 import React, { FormEventHandler, useRef } from "react";
 
 type mysteryData = {
@@ -130,15 +131,9 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
 
   return (
     <form className={styles.module} onSubmit={onSubmit}>
-      <div className={styles.module}>
-        <span className={styles.title}>挑戦人数</span>
-        <span className={styles.value}>{mysteryData.numOfChallenger}</span>
-      </div>
-      <div className={styles.module}>
-        <span className={styles.title}>完全クリア人数</span>
-        <span className={styles.value}>{mysteryData.numOfSolver}</span>
-      </div>
-      <InputWithTitle
+      <Field title={"挑戦人数"} value={mysteryData.numOfChallenger} />
+      <Field title={"完全クリア人数"} value={mysteryData.numOfSolver} />
+      <MysteryInputWithTitle
         title={`新たな\n挑戦人数`}
         value={mysteryData.numOfNewChallenger}
         onMinusClick={onClickButtonDecreasesNewChallengerbyOne}
@@ -146,7 +141,7 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
         handleInputChange={handleNewChallengerInputChange}
         ref={InputOfNumOfNewChallengerRef}
       />
-      <InputWithTitle
+      <MysteryInputWithTitle
         title={`新たな\n完全クリア人数`}
         value={mysteryData.numOfNewSolver}
         onMinusClick={onClickButtonDecreasesNewSolverbyOne}

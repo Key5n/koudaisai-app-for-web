@@ -9,5 +9,5 @@
   font-weight: 400;
   font-size: 20px;
   background-color: var(--orange);
-  color: (--white);
+  color: var(--white);
 }

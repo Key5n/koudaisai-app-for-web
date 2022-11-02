@@ -1,9 +1,5 @@
 .module {
-  text-decoration: none;
-  font-family: 'RocknRoll One', sans-serif;
-  font-size: 1.25rem;
   border-radius: 40px;
   padding: 0rem 1rem;
   border: 0;
-  color: black;
 }

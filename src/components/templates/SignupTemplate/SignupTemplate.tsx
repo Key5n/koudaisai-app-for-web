@@ -1,60 +1,44 @@
-import { FC } from "react";
-import { useState } from "react";
-import Router from "next/router";
 import styles from "./styles.module.css";
-import { KofunmanTalking } from "components/atoms/kofunmanTalking";
-import { Authentication } from "components/organisms/authentication";
+import { KofunmanTalking } from "components/atoms/KofunmanTalking";
 import { Header } from "components/organisms/header";
-import { ModalWindow } from "components/organisms/modalWindow";
 import { AnchorButton } from "components/atoms/AnchorButton";
+import { InputWithTitle } from "components/molecules/InputWithTitle/InputWithTitle";
+import { Checkbox } from "components/molecules/checkbox";
+import { Button } from "components/atoms/Button";
 
-export const SignupTemplate: FC = () => {
-  const [isSignup, setIsSignup] = useState<boolean>(true);
-  const onClick = (): void => {
-    window.scroll({ top: 0, left: 0, behavior: "auto" });
-    setIsSignup(!isSignup);
-  };
+type Props = {
+  toggleState: () => void;
+};
+
+export const SignupTemplate = ({ toggleState }: Props) => {
   return (
     <>
-      <Header
-        displayBack={true}
-        onClick={() => {
-          if (isSignup) {
-            Router.back();
-          } else {
-            onClick();
-          }
-        }}
-        title="予約"
-      />
-      <main className={styles.signupTemplate}>
-        {isSignup ? (
-          <>
-            <KofunmanTalking />
-            <Authentication onClick={onClick} />
-          </>
-        ) : (
-          <>
-            <KofunmanTalking />
-          </>
-        )}
-      </main>
-      {!isSignup && (
+      <Header title="新規予約" />
+      <main className={styles.module}>
         <>
-          <div className={styles.agreement}>
-            <AnchorButton href={"/"} className={styles.AgreementButton}>
-              同意しない
-            </AnchorButton>
-            <AnchorButton
-              href={"#modal-agreement"}
-              className={styles.AgreementButton}
-            >
-              同意する
-            </AnchorButton>
+          <KofunmanTalking line="予約のために次のことを教えてね" />
+          <div className={styles.content}>
+            <InputWithTitle title="お名前" placeholder="名工太郎" />
+            <InputWithTitle
+              title="メールアドレス"
+              placeholder="aiu@gmail.com"
+            />
+            <InputWithTitle title="電話番号" placeholder="09012345678" />
+            <div className={styles.entryDate}>
+              <span className={styles.title}>希望入場日</span>
+              <Checkbox title={"11/19(土)"} />
+              <Checkbox title={"11/20(日)"} />
+            </div>
+            <InputWithTitle
+              title="パスワード"
+              description="パスワードは6文字以上で数字または英文字で構成される必要があります。"
+            />
+            <Button className={styles.button} onClick={toggleState}>
+              次へ
+            </Button>
           </div>
-          <ModalWindow />
         </>
-      )}
+      </main>
     </>
   );
 };

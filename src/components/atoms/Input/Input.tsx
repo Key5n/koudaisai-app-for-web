@@ -5,13 +5,8 @@ import styles from "./styles.module.css";
 export const Input = forwardRef<
   HTMLInputElement,
   ComponentPropsWithoutRef<"input">
->(function InputboxBase({ className, type, ...props }, ref) {
+>(function InputboxBase({ className, ...props }, ref) {
   return (
-    <input
-      type={type}
-      {...props}
-      ref={ref}
-      className={clsx(className, styles.module)}
-    />
+    <input {...props} ref={ref} className={clsx(className, styles.module)} />
   );
 });

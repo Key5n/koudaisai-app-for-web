@@ -9,11 +9,7 @@ type Props = {
 export const MysteryTemplate = ({ data }: Props) => {
   return (
     <>
-      <Header
-        displayBack={false}
-        onClick={() => {}}
-        title={`謎解き管理者画面`}
-      />
+      <Header title={`謎解き管理者画面`} />
       <section className={styles.module}>
         <MysteryObj data={data} />
       </section>

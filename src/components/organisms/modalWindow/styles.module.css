@@ -1,0 +1,66 @@
+
+.modalContainer {
+  position: relative;
+  z-index: 2;
+}
+
+.modalContainer:not(:target){
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modalContainer:target {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.modalContainer:not(:target) .modalWindow {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+
+.modalContainer:target .modalWindow {
+  transform: translate(-50%, -50%) scale(1.0);
+  transition: transform 0.2s;
+}
+
+.modalWindow {
+  composes: flex vertical fix--center width--70vw border-radius--small from "/src/styles/layout.module.css";
+  composes: background-color--white from "/src/styles/colors.module.css";
+}
+
+.modalButtonContainer {
+  composes: flex horizontal stretch border-top--gray from "/src/styles/layout.module.css";
+}
+
+.modalButtonContainer :first-child {
+  border-right: 1px solid var(--gray);
+  font-weight: bolder;
+}
+
+.modalButton{
+  composes: orange from "/src/styles/colors.module.css";
+  composes: flex justify-content-center width--50percent padding-vertical--05rem  from "/src/styles/layout.module.css";
+  composes: font-size--small from "/src/styles/typography.module.css";
+  composes: text-decoration--none from "/src/styles/typography.module.css";
+}
+
+.modalHead {
+  composes: padding-vertical--1rem from "/src/styles/layout.module.css";
+  composes: Noto-Sans-JP text-center from "/src/styles/typography.module.css";
+}
+
+.modalTitle {
+  composes: font-size--normal font-weight--bolder from "/src/styles/typography.module.css";
+}
+
+.modalOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  opacity: 0.3;
+}
