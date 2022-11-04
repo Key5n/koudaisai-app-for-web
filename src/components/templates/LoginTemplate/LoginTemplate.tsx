@@ -1,14 +1,16 @@
-import { FC } from "react";
 import { Header } from "components/organisms/header";
-import { Footer } from "components/organisms/footer";
-import { Authentication } from "components/organisms/authentication";
+import { LoginForm } from "components/organisms/LoginForm";
+import styles from "./styles.module.css";
+import { KofunmanTalking } from "components/atoms/KofunmanTalking";
 
-export const LoginTemplate: FC = () => {
+export const LoginTemplate = () => {
   return (
     <>
-      <Header displayBack={true} onClick={() => {}} title="ログイン" />
-      <Authentication onClick={() => {}} />
-      <Footer />
+      <Header title="ログイン" />
+      <main className={styles.module}>
+        <KofunmanTalking line="ログインするよ" />
+        <LoginForm />
+      </main>
     </>
   );
 };

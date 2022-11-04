@@ -1,9 +1,22 @@
-import { FC } from "react";
-import styles from "styles/components.module.css";
 import { LoginTemplate } from "components/templates/LoginTemplate";
+import { useRouter } from "next/router";
+import { useUser } from "context/userContext";
 
 const Login = () => {
-  return <LoginTemplate />;
+  const router = useRouter();
+  const { user } = useUser();
+
+  if (user) {
+    router.push("/");
+  }
+
+  return (
+    !user && (
+      <>
+        <LoginTemplate />
+      </>
+    )
+  );
 };
 
 export default Login;

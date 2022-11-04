@@ -1,9 +1,10 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import initAuth from "lib/initAuth";
+import UserProvider from "context/userContext";
+// import initAuth from "lib/initAuth";
 
-initAuth();
+// initAuth();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,7 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="/favicon-32x32.png"
         />
       </Head>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </>
   );
 }
