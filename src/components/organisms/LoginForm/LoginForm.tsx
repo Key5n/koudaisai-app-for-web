@@ -4,7 +4,6 @@ import { Button } from "components/atoms/Button";
 import { useForm } from "react-hook-form";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
-import { useUser } from "context/userContext";
 
 type Values = {
   email: string;

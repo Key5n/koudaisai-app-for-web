@@ -1,9 +1,9 @@
-import initAuth from "lib/initAuth";
+// import initAuth from "lib/initAuth";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { unsetAuthCookies } from "next-firebase-auth";
 
-initAuth();
+// initAuth();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

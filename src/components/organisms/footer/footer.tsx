@@ -1,20 +1,31 @@
-import { FC } from "react";
-import styles from "styles/components.module.css";
-import { FaceOfKofunman } from "components/atoms/faceOfKofunman";
-import { FooterEventIcon } from "components/atoms/footerEvent";
-import { FooterMapIcon } from "components/atoms/footerMapIcon";
-import { FooterTTIcon } from "components/atoms/footerTTIcon";
-import { FooterConfigIcon } from "components/atoms/footerConfig";
+import Image from "next/image";
+import Link from "next/link";
+import { AnchorButton } from "components/atoms/AnchorButton";
+import styles from "./styles.module.css";
 
-export const Footer: FC = () => {
+export const Footer = () => {
   return (
-    <nav className={styles.footer}>
-      <FaceOfKofunman size="30px" />
-      <FooterEventIcon />
-      <FooterMapIcon />
-      <FooterTTIcon />
-      <FooterConfigIcon />
+    <nav className={styles.module}>
+      <Link href="/">
+        <AnchorButton>
+          <Image
+            src="/images/kofunman_face.png"
+            alt="kofunman_face"
+            width="30px"
+            height="30px"
+          />
+        </AnchorButton>
+      </Link>
+      <Link href="/config">
+        <AnchorButton>
+          <Image
+            src="/images/config_gray.svg"
+            alt="config"
+            width="30px"
+            height="30px"
+          />
+        </AnchorButton>
+      </Link>
     </nav>
   );
 };
-
