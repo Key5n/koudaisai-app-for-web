@@ -5,16 +5,15 @@ import { useState } from "react";
 
 const Signup: NextPage = () => {
   const [isInputAlright, setIsInputAlright] = useState<boolean>(false);
-  const toggleState = (): void => {
+  const onClick = (): void => {
     setIsInputAlright(!isInputAlright);
   };
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <>
       {isInputAlright ? (
-        <AgreementTemplate toggleState={toggleState} />
+        <AgreementTemplate toggleState={onClick} />
       ) : (
-        <SignupTemplate toggleState={toggleState} />
+        <SignupTemplate toggleState={onClick} />
       )}
     </>
   );

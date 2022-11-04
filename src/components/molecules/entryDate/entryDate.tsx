@@ -1,4 +1,4 @@
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "../Checkbox";
 import styles from "./styles.module.css";
 
 export const EntryDate = () => {

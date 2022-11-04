@@ -1,7 +1,9 @@
 import styles from "./styles.module.css";
 import { KofunmanTalking } from "components/atoms/KofunmanTalking";
 import { AnchorButton } from "components/atoms/AnchorButton";
+import { Button } from "components/atoms/Button";
 import { Header } from "components/organisms/header";
+import { useState } from "react";
 import { ModalWindow } from "components/organisms/modalWindow";
 
 type Props = {
@@ -9,6 +11,10 @@ type Props = {
 };
 
 export const AgreementTemplate = ({ toggleState }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const onClick = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <>
       <Header title="同意" />
@@ -25,17 +31,14 @@ export const AgreementTemplate = ({ toggleState }: Props) => {
         </ul>
       </main>
       <div className={styles.AgreementButtonWrapper}>
-        <AnchorButton href={"/"} className={styles.AgreementButton}>
+        <Button className={styles.AgreementButton} onClick={toggleState}>
           同意しない
-        </AnchorButton>
-        <AnchorButton
-          href={"#modal-agreement"}
-          className={styles.AgreementButton}
-        >
+        </Button>
+        <Button className={styles.AgreementButton} onClick={onClick}>
           同意する
-        </AnchorButton>
+        </Button>
       </div>
-      <ModalWindow />
+      {isModalOpen && <ModalWindow hideModal={onClick} />}
     </>
   );
 };
