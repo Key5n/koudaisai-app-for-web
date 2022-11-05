@@ -1,4 +1,4 @@
-import { InputWithTitle } from "components/molecules/InputWithTitle/InputWithTitle";
+import { InputWithTitle } from "components/molecules/InputWithTitle";
 import { Checkbox } from "components/molecules/Checkbox";
 import styles from "./styles.module.css";
 import { useForm } from "react-hook-form";

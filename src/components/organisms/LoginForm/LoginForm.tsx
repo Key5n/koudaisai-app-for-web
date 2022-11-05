@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { InputWithTitle } from "components/molecules/InputWithTitle/InputWithTitle";
+import { InputWithTitle } from "components/molecules/InputWithTitle";
 import { Button } from "components/atoms/Button";
 import { useForm } from "react-hook-form";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
