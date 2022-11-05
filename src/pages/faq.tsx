@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { FAQTemplate } from "components/templates/FAQTemplate/FAQTemplate";
+import { FAQTemplate } from "components/templates/FAQTemplate";
 import { getContent } from "lib/posts";
 
 const FAQ = ({
