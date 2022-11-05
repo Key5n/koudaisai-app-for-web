@@ -1,12 +1,17 @@
 import styles from "./styles.module.css";
 import { UserObject } from "../userObject/userObject";
 import { AddCompanion } from "../addCompanion";
+import { User } from "types/types";
 
-export const UserObjectWrapper: React.FC = () => {
+type Props = {
+  user1: User;
+  user2?: User;
+};
+
+export const UserObjectWrapper = ({ user1, user2 }: Props) => {
   return (
     <div className={styles.userObjectWrapper}>
-      <UserObject name={"落単古墳マン"} />
-      <UserObject name={"2号館たまごちゃん"} />
+      <UserObject user={user1} />
       <AddCompanion />
     </div>
   );

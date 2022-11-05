@@ -1,13 +1,25 @@
-import styles from "styles/components.module.css";
+import styles from "./styles.module.css";
 import Image from "next/image";
 import { KeyboardArrow } from "components/atoms/KeyBoardArrow";
+import { User } from "types/types";
+import { useState } from "react";
 
-export const UserObject: React.FC<{ name: string }> = ({ name }) => {
+type Props = {
+  user: User;
+};
+
+export const UserObject = ({ user }: Props) => {
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <div className={styles.module}>
-      <span className={styles.userName}>{name}</span>
+      <span className={styles.userName}>{user?.email}</span>
       <span className={styles.userActionIcons}>
-        <KeyboardArrow id="0" />
+        <KeyboardArrow
+          isChecked={isChecked}
+          toggle={() => {
+            setIsChecked(!isChecked);
+          }}
+        />
         <Image
           src="/images/qr_icon.svg"
           alt="QRCode"
@@ -15,6 +27,7 @@ export const UserObject: React.FC<{ name: string }> = ({ name }) => {
           height="24px"
         />
       </span>
+      <div className={styles.property}></div>
     </div>
   );
 };

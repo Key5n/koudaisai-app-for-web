@@ -10,3 +10,11 @@
   width: 100%;
   padding: 10px 0;
 }
+
+.active path {
+  fill: var(--orange)
+}
+
+.inactive {
+  filter: grayscale(80%);
+}

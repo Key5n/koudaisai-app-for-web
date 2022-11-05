@@ -19,9 +19,13 @@ export const LoginForm = () => {
   const router = useRouter();
   const onValid = async (data: Values) => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, data.email, data.password);
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      router.push("/");
+    } catch (err) {
+      console.log("ログイン失敗");
+    }
     console.log(data);
-    router.push("/");
   };
   const {
     register,

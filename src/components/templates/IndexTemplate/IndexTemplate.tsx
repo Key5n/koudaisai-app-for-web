@@ -11,7 +11,7 @@ export const IndexTemplate = () => {
     <>
       <Header title="第60回工大祭" />
       <main className={styles.module}>
-        {user?.uid ? <div>{/* <UserObjectWrapper /> */}</div> : <div></div>}
+        {user?.uid ? <UserObjectWrapper user1={user} /> : <div>未ログイン</div>}
       </main>
       <Footer />
     </>
