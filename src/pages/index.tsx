@@ -1,17 +1,19 @@
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { IndexTemplate } from "components/templates/IndexTemplate";
+import { useUser } from "context/userContext";
 
 const Index: NextPage = () => {
-  const router = useRouter();
+  // const { user, loadingUser } = useUser();
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <Link href={"/privacy"}>プライバシーポリシーへ</Link>
-      <Link href={"/admin/mystery"}>謎解き画面へ</Link>
-      <Link href={"/mystery"}>アプリ用謎解き画面へ</Link>
-      <Link href={"/signup"}>予約画面へ</Link>
-      {/* <ReservationTemplate /> */}
-    </div>
+    // <>
+    //   {loadingUser ? (
+    //     <p>loading</p>
+    //   ) : (
+    //     // <IndexTemplate />
+    //     <p>a</p>
+    //   )}
+    // </>
+    <p>now developing this page</p>
   );
 };
 

@@ -1,0 +1,44 @@
+.module {
+  line-height: 2rem;
+}
+
+.markdown {
+  display: flex;
+  margin: 0 5% 50vh;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.title {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.title::before {
+
+}
+
+.markdown h2{
+  position: relative;
+}
+
+.markdown h2::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--orange);
+}
+
+.markdown h3::before {
+  content: '';
+  background-image: url("/images/kofunman_face.png");
+  background-size:contain;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}

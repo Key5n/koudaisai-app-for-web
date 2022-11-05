@@ -1,5 +1,4 @@
 import admin from "lib/nodeApp";
-import { DonutChart } from "components/organisms/DonutChart";
 import { useState } from "react";
 import { MysteryTemplate } from "components/templates/MysteryTemplate";
 
@@ -23,7 +22,10 @@ const Mystery = ({ data }: Props) => {
   });
   return (
     <>
-      <MysteryTemplate data={data} />
+      <MysteryTemplate
+        numOfChallenger={mysteryData.numOfChallenger}
+        numOfSolver={mysteryData.numOfSolver}
+      />
     </>
   );
 };

@@ -1,4 +1,4 @@
-.main {
+/* .main {
   position: absolute;
   top: 80px;
   left: 50%;
@@ -78,7 +78,6 @@
   cursor: pointer;
 }
 
-/* styling checkbox */
 input[type="checkbox"] + .checkbox::before{
   display: inline-block;
   content: "";
@@ -283,4 +282,4 @@ input[type="checkbox"]:checked + .keyboardArrow{
 
 .userObjectWrapper {
   composes: flex vertical gap--small from "/src/styles/layout.module.css";
-}
+} */

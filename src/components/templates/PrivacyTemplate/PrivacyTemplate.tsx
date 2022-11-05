@@ -1,11 +1,18 @@
 import styles from "./styles.module.css";
 
-export const PrivacyTemplate = () => {
+type Props = {
+  postData: {
+    title: string;
+    date: string;
+    contentHtml: string;
+  };
+};
+
+export const PrivacyTemplate = ({ postData }: Props) => {
   return (
-    <>
-      <h1>プライバシーポリシー</h1>
-      <h1 className={styles.h1}>スタイルの当て方</h1>
-      <p className={styles.backgroundYellow}>例) 背景色をあてる</p>
-    </>
+    <div className={styles.markdown}>
+      <h1 className={styles.title}>{postData.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}></div>
+    </div>
   );
 };

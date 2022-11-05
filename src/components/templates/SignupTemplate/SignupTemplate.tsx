@@ -1,52 +1,22 @@
-import { FC } from "react";
-import { useState } from "react";
-import Router from "next/router";
-import styles from "styles/components.module.css";
-import { KofunmanTalking } from "components/molecules/kofunmanTalking";
-import { Authentication } from "components/organisms/authentication";
+import styles from "./styles.module.css";
+import { KofunmanTalking } from "components/atoms/KofunmanTalking";
 import { Header } from "components/organisms/header";
-import { TermsOfServiceText } from "components/atoms/termsOfServiceText";
-import { Agreement } from "components/molecules/agreement";
-import { ModalWindow } from "components/organisms/modalWindow";
+import { SignupForm } from "components/organisms/SignupForm";
 
-export const SignupTemplate: FC = () => {
-  const [isSignup, setIsSignup] = useState<boolean>(true);
-  const onClick = (): void => {
-    window.scroll({ top: 0, left: 0, behavior: "auto" });
-    setIsSignup(!isSignup);
-  };
+type Props = {
+  toggleState: () => void;
+};
+
+export const SignupTemplate = ({ toggleState }: Props) => {
   return (
     <>
-      <Header
-        displayBack={true}
-        onClick={() => {
-          if (isSignup) {
-            Router.back();
-          } else {
-            onClick();
-          }
-        }}
-        title="予約"
-      />
-      <main className={styles.signupTemplate}>
-        {isSignup ? (
-          <>
-            <KofunmanTalking />
-            <Authentication onClick={onClick} />
-          </>
-        ) : (
-          <>
-            <KofunmanTalking />
-            <TermsOfServiceText />
-          </>
-        )}
-      </main>
-      {!isSignup && (
+      <Header title="新規予約" />
+      <main className={styles.module}>
         <>
-          <Agreement />
-          <ModalWindow />
+          <KofunmanTalking line="予約のために次のことを教えてね" />
+          <SignupForm toggleState={toggleState} />
         </>
-      )}
+      </main>
     </>
   );
 };

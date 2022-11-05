@@ -1,9 +1,11 @@
 import styles from "./styles.module.css";
 
-export const Field: React.FC<{ title: string; value: string | number }> = ({
-  title,
-  value,
-}) => {
+type Props = {
+  title: string;
+  value: number;
+};
+
+export const Field = ({ title, value }: Props) => {
   return (
     <div className={styles.module}>
       <span className={styles.title}>{title}</span>

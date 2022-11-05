@@ -1,55 +1,36 @@
 import styles from "./styles.module.css";
-import { Text } from "components/atoms/text";
-import { Dispatch, SetStateAction } from "react";
-import { Input } from "components/atoms/input";
-import { forwardRef } from "react";
-
-// type mysteryObj = {
-//   numOfChallenger: number;
-//   numOfSolvedPeople: number;
-//   numOfNewChallenger: number;
-//   numOfNewSolvedPeople: number;
-// };
+import { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
+import { Input } from "components/atoms/Input";
+import clsx from "clsx";
 
 type Props = {
-  title: string;
-  value: number;
-  onMinusClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  onPlusClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  ref: React.RefObject<HTMLInputElement>;
+  className?: string;
+  labelProps: Omit<ComponentPropsWithoutRef<"label">, "htmlFor" | "className">;
+  inputProps: Omit<ComponentPropsWithRef<"input">, "id">;
+  description?: string;
+  error?: string;
 };
 
-export const InputWithTitle = forwardRef<HTMLInputElement, Props>(
-  function InputWithTitleBase(
-    { title, onMinusClick, value, onPlusClick, handleInputChange },
-    ref
-  ) {
-    return (
-      <div className={styles.module}>
-        <span className={styles.title}>{title}</span>
-        <div className={styles.content}>
-          <button
-            className={styles.button}
-            onClick={onMinusClick}
-            type="button"
-          >
-            -1
-          </button>
-          <Input
-            type="text"
-            className={styles.value}
-            value={value}
-            max={999}
-            min={-999}
-            onChange={handleInputChange}
-            ref={ref}
-          />
-          <button className={styles.button} onClick={onPlusClick} type="button">
-            +1
-          </button>
-        </div>
+export const InputWithTitle = ({
+  className,
+  labelProps: { children, ...labelProps },
+  inputProps,
+  description,
+  error,
+}: Props) => {
+  return (
+    <div className={clsx(className, styles.module)}>
+      <label {...labelProps}>
+        <span className={styles.title}>{children}</span>
+        <Input
+          className={clsx(inputProps?.className, styles.input)}
+          {...inputProps}
+        />
+      </label>
+      <div className={styles.bottom}>
+        {description && <p className={styles.description}>{description}</p>}
+        {error && <p className={styles.error}>{error}</p>}
       </div>
-    );
-  }
-);
+    </div>
+  );
+};
