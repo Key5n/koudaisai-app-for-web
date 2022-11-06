@@ -23,8 +23,8 @@ export const InputWithTitle = ({
       <label {...labelProps}>
         <span className={styles.title}>{children}</span>
         <Input
-          className={clsx(inputProps?.className, styles.input)}
           {...inputProps}
+          className={clsx(inputProps?.className, styles.input)}
         />
       </label>
       <div className={styles.bottom}>

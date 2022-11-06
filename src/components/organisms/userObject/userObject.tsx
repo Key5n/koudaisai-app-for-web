@@ -32,15 +32,23 @@ export const UserObject = ({ user }: Props) => {
       </div>
       {isChecked && (
         <div className={styles.property}>
-          {Object.entries(user!).map(([key, value], index) => {
-            return (
-              <InputWithTitle
-                key={index}
-                labelProps={{ children: key }}
-                inputProps={{ disabled: true, value: `${value}` ?? "null" }}
-              />
-            );
-          })}
+          <div>
+            <p>お名前</p>
+            <p>{user?.name}</p>
+          </div>
+          <div>
+            <p>メールアドレス</p>
+            <p>{user?.email}</p>
+          </div>
+          <div>
+            <p>電話番号</p>
+            <p>{user?.phoneNumber}</p>
+          </div>
+          <div>
+            <span>希望入場日</span>
+            {user?.dayOneSelected && <p>・11/19(土)</p>}
+            {user?.dayTwoSelected && <p>・11/20(日)</p>}
+          </div>
         </div>
       )}
     </div>
