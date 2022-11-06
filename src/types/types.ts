@@ -1,6 +1,14 @@
 export type User = {
   uid: string;
-  email: string | null;
+  email: string;
+  phoneNumber: string;
+  name: string;
+  dayOneSelected: boolean;
+  dayTwoSelected: boolean;
+  dayOneVisited: boolean;
+  dayTwoVisited: boolean;
+  parentId: string | null;
+  subUserIdList: [string] | [string, string] | null;
 } | null;
 
 export type UserContextType = {

@@ -9,8 +9,9 @@ type Props = {
 };
 
 export const UserObjectWrapper = ({ user1, user2 }: Props) => {
+  console.log(user1);
   return (
-    <div className={styles.userObjectWrapper}>
+    <div className={styles.module}>
       <UserObject user={user1} />
       <AddCompanion />
     </div>

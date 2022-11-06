@@ -8,4 +8,7 @@
   font-family: 'RocknRoll One', sans-serif;
   color: var(--orange);
   background-color: var(--white);
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }

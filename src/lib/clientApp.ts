@@ -1,4 +1,5 @@
 import { initializeApp, getApps } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 export const createFirebaseApp = () => {
   const clientCredentials = {

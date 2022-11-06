@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
@@ -6,6 +6,7 @@ import { createFirebaseApp } from "lib/clientApp";
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { User, UserContextType } from "types/types";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 export const UserContext = createContext<UserContextType | undefined>(
   undefined
@@ -25,8 +26,14 @@ export default function UserContextComp({
     const unsubscriber = onAuthStateChanged(auth, async (user) => {
       try {
         if (user) {
-          const { uid, email } = user;
-          setUser({ uid, email });
+          const { uid } = user;
+          const docRef = doc(getFirestore(), "KoudaisaiUser", uid);
+          const docSnap = await getDoc(docRef);
+          if (!docSnap.exists()) {
+            return;
+          }
+          setUser({ uid, ...docSnap.data() } as User);
+          console.log("userをセットしました");
         } else {
           setUser(null);
         }

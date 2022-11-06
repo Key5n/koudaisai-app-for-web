@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>名古屋工業大学工大祭アプリ</title>
         <meta
           name="description"
-          content="第60回名古屋工業大学工大祭の予約管理とアプリのです。スマホ版の使用を強くおすすめします。"
+          content="第60回名古屋工業大学工大祭のスマホアプリのweb版です。パソコンから予約したい方のために作っております(現在調整中)。スマホアプリのご使用をお勧めします。"
         />
         <link
           rel="icon"
