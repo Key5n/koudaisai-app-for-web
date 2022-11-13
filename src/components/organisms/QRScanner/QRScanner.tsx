@@ -4,9 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
 
-const videoWidth: number = 500;
+const videoWidth: number =
+  typeof window !== "undefined" && window.innerWidth > 0
+    ? window.innerWidth
+    : screen.width;
 const videoHeight: number = 500;
 const videoFrameRate: number = 5;
+
+console.log("QRScannerを読み込み");
 
 const constraints: MediaStreamConstraints = {
   audio: false,
@@ -14,7 +19,7 @@ const constraints: MediaStreamConstraints = {
     width: videoWidth,
     height: videoHeight,
     frameRate: {
-      max: videoHeight,
+      max: videoFrameRate,
     },
     facingMode: {
       exact: "environment",
@@ -85,22 +90,6 @@ export const QRScanner = () => {
 
   const toggleCameraOpen = () => {
     setIsCameraOpen(!isCameraOpen);
-    const openCamera = async () => {
-      const video = videoRef.current;
-      console.log(video ?? "なし");
-      if (video) {
-        console.log("enable camera");
-        const stream = await navigator.mediaDevices
-          .getUserMedia(constraints)
-          .catch((error) => {
-            console.log("メディア取得中のエラー", error);
-            throw error;
-          });
-        video.srcObject = stream;
-      }
-    };
-    openCamera();
-    console.log(videoRef.current);
   };
 
   return (
@@ -110,7 +99,7 @@ export const QRScanner = () => {
       </Video>
       <div>
         <p>{QRCodeData.join("\n")}</p>
-        <p>読み込んだ数: {QRCodeData.length == 0 ? "なし" : QRCodeData}</p>
+        <p>読み込んだ数: {QRCodeData.length}</p>
       </div>
       <Button onClick={toggleCameraOpen}>
         {isCameraOpen ? "ストップ" : "スタート"}
