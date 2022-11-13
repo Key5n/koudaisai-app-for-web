@@ -28,6 +28,7 @@ export const ConfigTemplate = () => {
         <Link href={"/admin/signup"}>予約画面へ(未実装)</Link>
         <Link href={"/admin/login"}>ログイン画面へ</Link>
         <Button onClick={signout}>ログアウト</Button>
+        <Button>予約削除</Button>
       </main>
       <Footer />
     </>
