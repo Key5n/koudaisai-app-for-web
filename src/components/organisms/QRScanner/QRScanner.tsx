@@ -24,6 +24,7 @@ const constraints: MediaStreamConstraints = {
 
 export const QRScanner = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [localstream, setLocalStream] = useState<MediaStream>();
   const intervalRef = useRef<number>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -31,19 +32,23 @@ export const QRScanner = () => {
 
   useEffect(() => {
     const openCamera = async () => {
-      const video = videoRef.current;
-      if (video) {
-        const stream = await navigator.mediaDevices
-          .getUserMedia(constraints)
-          .catch((error) => {
-            console.log("エラー");
-            throw error;
-          });
-        video.srcObject = stream;
-      }
+      const stream = await navigator.mediaDevices
+        .getUserMedia(constraints)
+        .catch((error) => {
+          console.log("メディア取得中のエラー", error);
+          throw error;
+        });
+      setLocalStream(stream);
     };
     openCamera();
   }, []);
+
+  useEffect(() => {
+    if (!localstream || !videoRef.current) {
+      return;
+    }
+    videoRef.current.srcObject = localstream;
+  }, [localstream]);
 
   useEffect(() => {
     if (!isCameraOpen) {
@@ -80,6 +85,22 @@ export const QRScanner = () => {
 
   const toggleCameraOpen = () => {
     setIsCameraOpen(!isCameraOpen);
+    const openCamera = async () => {
+      const video = videoRef.current;
+      console.log(video ?? "なし");
+      if (video) {
+        console.log("enable camera");
+        const stream = await navigator.mediaDevices
+          .getUserMedia(constraints)
+          .catch((error) => {
+            console.log("メディア取得中のエラー", error);
+            throw error;
+          });
+        video.srcObject = stream;
+      }
+    };
+    openCamera();
+    console.log(videoRef.current);
   };
 
   return (
