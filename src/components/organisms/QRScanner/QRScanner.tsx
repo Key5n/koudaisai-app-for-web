@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import jsQR from "jsqr";
 import { useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
+import { Button } from "components/atoms/Button";
 
 const videoWidth: number = 500;
 const videoHeight: number = 500;
@@ -77,6 +78,10 @@ export const QRScanner = () => {
     };
   }, [isCameraOpen, QRCodeData]);
 
+  const toggleCameraOpen = () => {
+    setIsCameraOpen(!isCameraOpen);
+  };
+
   return (
     <div>
       <Video autoPlay playsInline={true} ref={videoRef}>
@@ -86,6 +91,9 @@ export const QRScanner = () => {
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length == 0 ? "なし" : QRCodeData}</p>
       </div>
+      <Button onClick={toggleCameraOpen}>
+        {isCameraOpen ? "ストップ" : "スタート"}
+      </Button>
     </div>
   );
 };
