@@ -4,14 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
 
-const videoWidth: number =
-  typeof window !== "undefined" && window.innerWidth > 0
-    ? window.innerWidth
-    : screen.width;
+const videoWidth: number = 500;
 const videoHeight: number = 500;
 const videoFrameRate: number = 5;
-
-console.log("QRScannerを読み込み");
 
 const constraints: MediaStreamConstraints = {
   audio: false,
@@ -19,7 +14,7 @@ const constraints: MediaStreamConstraints = {
     width: videoWidth,
     height: videoHeight,
     frameRate: {
-      max: videoFrameRate,
+      max: videoHeight,
     },
     facingMode: {
       exact: "environment",
@@ -94,7 +89,12 @@ export const QRScanner = () => {
 
   return (
     <div>
-      <Video autoPlay playsInline={true} ref={videoRef}>
+      <Video
+        autoPlay
+        playsInline={true}
+        ref={videoRef}
+        className={styles.video}
+      >
         <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
       </Video>
       <div>
