@@ -75,9 +75,7 @@ export const QRScanner = () => {
       }
       setQRCodedata([...QRCodeData, decodedValue]);
     }, 1_000 / videoFrameRate);
-    if (typeof window !== "undefined") {
-      intervalRef.current = intervalId;
-    }
+    intervalRef.current = intervalId;
     return () => {
       clearInterval(intervalRef.current);
     };
@@ -88,22 +86,24 @@ export const QRScanner = () => {
   };
 
   return (
-    <div>
-      <Video
-        autoPlay
-        playsInline={true}
-        ref={videoRef}
-        className={styles.video}
-      >
-        <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
-      </Video>
-      <div>
+    <div className={styles.module}>
+      {isCameraOpen && (
+        <Video
+          autoPlay
+          playsInline={true}
+          ref={videoRef}
+          className={styles.video}
+        >
+          <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
+        </Video>
+      )}
+      <div className={styles.content}>
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length}</p>
+        <Button onClick={toggleCameraOpen}>
+          {isCameraOpen ? "ストップ" : "スタート"}
+        </Button>
       </div>
-      <Button onClick={toggleCameraOpen}>
-        {isCameraOpen ? "ストップ" : "スタート"}
-      </Button>
     </div>
   );
 };
