@@ -48,7 +48,7 @@ export const QRScanner = () => {
       return;
     }
     videoRef.current.srcObject = localstream;
-  }, [localstream]);
+  }, [localstream, isCameraOpen]);
 
   useEffect(() => {
     if (!isCameraOpen) {
@@ -56,7 +56,9 @@ export const QRScanner = () => {
     }
 
     const decodeQRCode = () => {
-      const context = canvasRef.current?.getContext("2d");
+      const context = canvasRef.current?.getContext("2d", {
+        willReadFrequently: true,
+      });
       const video = videoRef.current;
       if (!context || !video) {
         return;
@@ -89,14 +91,16 @@ export const QRScanner = () => {
 
   return (
     <div>
-      <Video
-        autoPlay
-        playsInline={true}
-        ref={videoRef}
-        className={styles.video}
-      >
-        <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
-      </Video>
+      {isCameraOpen && (
+        <Video
+          autoPlay
+          playsInline={true}
+          ref={videoRef}
+          className={styles.video}
+        >
+          <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
+        </Video>
+      )}
       <div>
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length}</p>
