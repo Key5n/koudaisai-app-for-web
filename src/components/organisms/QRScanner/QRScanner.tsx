@@ -16,10 +16,10 @@ const constraints: MediaStreamConstraints = {
     frameRate: {
       max: videoFrameRate,
     },
-    facingMode: {
-      exact: "environment",
-    },
-    // facingMode: "user",
+    // facingMode: {
+    //   exact: "environment",
+    // },
+    facingMode: "user",
   },
 };
 
@@ -38,7 +38,6 @@ export const QRScanner = () => {
       }
       videoRef.current = element;
       videoRef.current.srcObject = localstream;
-      element.srcObject = localstream;
     },
     [localstream]
   );
@@ -76,24 +75,24 @@ export const QRScanner = () => {
       return code?.data;
     };
 
-    const intervalId = window.setInterval(() => {
+    const intervalId = window.setInterval(async () => {
       const decodedValue = decodeQRCode();
       if (!decodedValue || QRCodeData.includes(decodedValue)) {
         return;
       }
-      // const JSONdata = JSON.stringify(decodeQRCode);
-      // const endpoint = "/api/entry";
-      // const options = {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSONdata,
-      // };
-      // const response = await fetch(endpoint, options);
-      // const result = await response.json();
-
       setQRCodedata([...QRCodeData, decodedValue]);
+      const JSONdata = JSON.stringify({ "uid": decodedValue });
+      const endpoint = "/api/entry";
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONdata,
+      };
+      const response = await fetch(endpoint, options);
+      const result = await response.json();
+
     }, 1_000 / videoFrameRate);
     intervalRef.current = intervalId;
     return () => {
