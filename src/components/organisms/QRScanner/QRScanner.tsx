@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import jsQR from "jsqr";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
 
@@ -19,7 +19,7 @@ const constraints: MediaStreamConstraints = {
     // facingMode: {
     //   exact: "environment",
     // },
-    facingMode: 'user'
+    facingMode: "user",
   },
 };
 
@@ -30,6 +30,16 @@ export const QRScanner = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
+
+  const setVideoRef = useCallback(
+    (element: HTMLVideoElement) => {
+      if (!element || !localstream) {
+        return;
+      }
+      element.srcObject = localstream;
+    },
+    [localstream]
+  );
 
   useEffect(() => {
     const openCamera = async () => {
@@ -46,11 +56,10 @@ export const QRScanner = () => {
 
   useEffect(() => {
     if (!localstream || !videoRef.current || !isCameraOpen) {
-      console.log("何もせず返されました", localstream, videoRef.current, isCameraOpen)
       return;
     }
     videoRef.current.srcObject = localstream;
-  }, [isCameraOpen, videoRef.current, localstream]);
+  }, [isCameraOpen, localstream]);
 
   useEffect(() => {
     if (!isCameraOpen) {
@@ -97,7 +106,7 @@ export const QRScanner = () => {
         <Video
           autoPlay
           playsInline={true}
-          ref={videoRef}
+          ref={setVideoRef}
           className={styles.video}
         >
           <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
