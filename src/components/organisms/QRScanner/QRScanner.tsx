@@ -55,13 +55,6 @@ export const QRScanner = () => {
   }, []);
 
   useEffect(() => {
-    if (!localstream || !videoRef.current || !isCameraOpen) {
-      return;
-    }
-    videoRef.current.srcObject = localstream;
-  }, [isCameraOpen, localstream]);
-
-  useEffect(() => {
     if (!isCameraOpen) {
       return;
     }
@@ -81,16 +74,26 @@ export const QRScanner = () => {
       return code?.data;
     };
 
-    const intervalId = window.setInterval(() => {
+    const intervalId = window.setInterval(async () => {
       const decodedValue = decodeQRCode();
       if (!decodedValue || QRCodeData.includes(decodedValue)) {
         return;
       }
+      const JSONdata = JSON.stringify(decodeQRCode);
+      const endpoint = "/api/entry";
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONdata,
+      };
+      const response = await fetch(endpoint, options);
+      const result = await response.json();
+
       setQRCodedata([...QRCodeData, decodedValue]);
     }, 1_000 / videoFrameRate);
-    if (typeof window !== "undefined") {
-      intervalRef.current = intervalId;
-    }
+    intervalRef.current = intervalId;
     return () => {
       clearInterval(intervalRef.current);
     };
@@ -112,7 +115,6 @@ export const QRScanner = () => {
           <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
         </Video>
       )}
-
       <div>
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length}</p>
