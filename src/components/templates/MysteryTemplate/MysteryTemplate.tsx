@@ -7,13 +7,6 @@ type Props = {
   numOfSolver: number;
 };
 
-type mysteryData = {
-  numOfChallenger: number;
-  numOfSolver: number;
-  numOfNewChallenger: number;
-  numOfNewSolver: number;
-};
-
 export const MysteryTemplate = ({ numOfChallenger, numOfSolver }: Props) => {
   return (
     <div className={styles.module}>

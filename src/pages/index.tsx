@@ -4,7 +4,7 @@ import { useUser } from "context/userContext";
 
 const Index: NextPage = () => {
   const { user, loadingUser } = useUser();
-  return <>{loadingUser ? <p>loading</p> : <IndexTemplate />}</>;
+  return <>{loadingUser ? <p>loading</p> : ""}</>;
 };
 
 export default Index;
