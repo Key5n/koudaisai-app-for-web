@@ -4,31 +4,32 @@ import { useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
 
-const videoWidth: number = 500;
-const videoHeight: number = 500;
+const videoWidth: number = 640;
+const videoHeight: number = 480;
 const videoFrameRate: number = 5;
 
 const constraints: MediaStreamConstraints = {
   audio: false,
   video: {
-    width: videoWidth,
-    height: videoHeight,
+    width: { min: videoWidth },
+    height: { min: videoHeight },
     frameRate: {
-      max: videoHeight,
+      max: videoFrameRate,
     },
-    facingMode: {
-      exact: "environment",
-    },
+    // facingMode: {
+    //   exact: "environment",
+    // },
+    facingMode: 'user'
   },
 };
 
 export const QRScanner = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [localstream, setLocalStream] = useState<MediaStream>();
-  const intervalRef = useRef<number>();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [QRCodeData, setQRCodedata] = useState<string[]>([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const intervalRef = useRef<number>();
 
   useEffect(() => {
     const openCamera = async () => {
@@ -45,10 +46,11 @@ export const QRScanner = () => {
 
   useEffect(() => {
     if (!localstream || !videoRef.current || !isCameraOpen) {
+      console.log("何もせず返されました", localstream, videoRef.current, isCameraOpen)
       return;
     }
     videoRef.current.srcObject = localstream;
-  }, [localstream, isCameraOpen]);
+  }, [isCameraOpen, videoRef.current, localstream]);
 
   useEffect(() => {
     if (!isCameraOpen) {
@@ -101,6 +103,7 @@ export const QRScanner = () => {
           <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
         </Video>
       )}
+
       <div>
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length}</p>
