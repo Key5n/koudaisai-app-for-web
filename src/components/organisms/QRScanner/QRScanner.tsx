@@ -6,7 +6,7 @@ import { Button } from "components/atoms/Button";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
-const videoFrameRate: number = 5;
+const videoFrameRate: number = 30;
 
 const constraints: MediaStreamConstraints = {
   audio: false,
