@@ -74,7 +74,7 @@ export const QRScanner = () => {
       return code?.data;
     };
 
-    const intervalId = window.setInterval(async () => {
+    const intervalId = window.setInterval(() => {
       const decodedValue = decodeQRCode();
       if (!decodedValue || QRCodeData.includes(decodedValue)) {
         return;
