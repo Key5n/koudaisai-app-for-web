@@ -5,7 +5,7 @@ export const TriathlonTemplate = () => {
   return (
     <div className={styles.module}>
       <div className={styles.title}>
-        MEIKO TRIATHLON
+        MEIKOU TRIATHLON
         <br />
         RANKING
       </div>
@@ -17,9 +17,9 @@ export const TriathlonTemplate = () => {
         </div>
         <User rank={1} name="落単古墳マン" score={300} />
         <User rank={2} name="2号館たまごちゃん" score={300} />
-        <User rank={3} name="ハニワ君" score={300} />
-        <User rank={4} name="プレイヤー4" score={300} />
-        <User rank={5} name="プレイヤー5" score={300} />
+        <User rank={3} name="ハニワ君" score={0} />
+        <User rank={4} name="プレイヤー4" score={0} />
+        <User rank={5} name="プレイヤー5" score={0} />
       </div>
     </div>
   );
