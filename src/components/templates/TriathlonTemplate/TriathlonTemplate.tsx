@@ -5,9 +5,9 @@ export const TriathlonTemplate = () => {
   return (
     <div className={styles.module}>
       <div className={styles.title}>
-        MEIKOU TRIATHLON
+        名工トライアスロン
         <br />
-        RANKING
+        ランキング
       </div>
       <div className={styles.content}>
         <div className={clsx(styles.captions, styles.row)}>
