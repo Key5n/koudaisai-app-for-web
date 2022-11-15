@@ -27,7 +27,7 @@ export const QRScanner = () => {
   const [localstream, setLocalStream] = useState<MediaStream>();
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [QRCodeData, setQRCodedata] = useState<string[]>([]);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
 
@@ -36,6 +36,8 @@ export const QRScanner = () => {
       if (!element || !localstream) {
         return;
       }
+      videoRef.current = element;
+      videoRef.current.srcObject = localstream;
       element.srcObject = localstream;
     },
     [localstream]
