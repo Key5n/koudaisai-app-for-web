@@ -79,17 +79,17 @@ export const QRScanner = () => {
       if (!decodedValue || QRCodeData.includes(decodedValue)) {
         return;
       }
-      const JSONdata = JSON.stringify(decodeQRCode);
-      const endpoint = "/api/entry";
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSONdata,
-      };
-      const response = await fetch(endpoint, options);
-      const result = await response.json();
+      // const JSONdata = JSON.stringify(decodeQRCode);
+      // const endpoint = "/api/entry";
+      // const options = {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSONdata,
+      // };
+      // const response = await fetch(endpoint, options);
+      // const result = await response.json();
 
       setQRCodedata([...QRCodeData, decodedValue]);
     }, 1_000 / videoFrameRate);
