@@ -44,7 +44,7 @@ export const QRScanner = () => {
   }, []);
 
   useEffect(() => {
-    if (!localstream || !videoRef.current) {
+    if (!localstream || !videoRef.current || !isCameraOpen) {
       return;
     }
     videoRef.current.srcObject = localstream;
