@@ -13,12 +13,6 @@ export default async function updateDB(
 
   console.log("body: ", body);
 
-  if (numOfNewChallenger < numOfNewSolver) {
-    // Sends a HTTP bad request error code
-    return res.status(400).json({
-      data: "エラー: 挑戦者よりクリアした人のほうが多いです。",
-    });
-  }
   const db = admin.firestore();
   const mysteryDocRef = db.collection("admin").doc("mystery");
   await mysteryDocRef.update({
