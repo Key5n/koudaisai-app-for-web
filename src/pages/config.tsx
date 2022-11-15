@@ -1,5 +1,4 @@
 import { ConfigTemplate } from "components/templates/ConfigTemplate";
-import Link from "next/link";
 
 const config = () => {
   return (

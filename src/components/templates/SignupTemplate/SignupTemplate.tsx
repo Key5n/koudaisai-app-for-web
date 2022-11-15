@@ -13,7 +13,9 @@ export const SignupTemplate = ({ toggleState }: Props) => {
       <Header title="新規予約" />
       <main className={styles.module}>
         <>
-          <KofunmanTalking line="予約のために次のことを教えてね" />
+          <KofunmanTalking
+            line={{ children: "予約のために次のことを教えてね" }}
+          />
           <SignupForm toggleState={toggleState} />
         </>
       </main>

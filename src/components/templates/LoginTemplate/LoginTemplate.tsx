@@ -8,7 +8,7 @@ export const LoginTemplate = () => {
     <>
       <Header title="ログイン" />
       <main className={styles.module}>
-        <KofunmanTalking line="ログインするよ" />
+        <KofunmanTalking line={{ children: "ログインするよ" }} />
         <LoginForm />
       </main>
     </>

@@ -22,5 +22,7 @@
 }
 
 .title {
-  composes: RocknRoll-One text-center font-size--small from "/src/styles/typography.module.css";
+  font-family: 'RocknRoll One', sans-serif;
+  text-align: center;
+  font-size: 1rem;
 }

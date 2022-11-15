@@ -1,11 +1,12 @@
 import styles from "./styles.module.css";
+import { ComponentPropsWithoutRef } from "react";
 import Image from "next/image";
 
 type Props = {
-  line: string;
+  line: ComponentPropsWithoutRef<"span">;
 };
 
-export const KofunmanTalking = ({ line }: Props) => {
+export const KofunmanTalking = ({ line: { children } }: Props) => {
   return (
     <div className={styles.module}>
       <Image
@@ -14,7 +15,7 @@ export const KofunmanTalking = ({ line }: Props) => {
         width="50"
         height="102"
       />
-      <span className={styles.line}>{line}</span>
+      <span className={styles.line}>{children}</span>
     </div>
   );
 };

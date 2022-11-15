@@ -3,6 +3,7 @@
   font-weight: 400;
   font-size: 1.25rem;
   width: 80%;
+  white-space: pre-wrap;
 }
 
 .module {

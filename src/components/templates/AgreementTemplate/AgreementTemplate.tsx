@@ -19,7 +19,7 @@ export const AgreementTemplate = ({ toggleState }: Props) => {
     <>
       <Header title="同意" />
       <main className={styles.module}>
-        <KofunmanTalking line="以下のことをご了承願います" />
+        <KofunmanTalking line={{ children: "以下のことをご了承願います" }} />
         <ul>
           <li>マスクを着用すること</li>
           <li>アルコール消毒に協力すること</li>

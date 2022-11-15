@@ -3,6 +3,7 @@ import { Checkbox } from "components/molecules/Checkbox";
 import styles from "./styles.module.css";
 import { useForm } from "react-hook-form";
 import { Button } from "components/atoms/Button";
+import { useSignup } from "components/hooks/useSignup";
 
 type Props = {
   toggleState: () => void;
@@ -11,7 +12,7 @@ type Props = {
 type Values = {
   name: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   dayOneSelected: boolean;
   dayTwoSelected: boolean;
   password: string;
@@ -20,17 +21,14 @@ type Values = {
 const defaultValues: Values = {
   name: "",
   email: "",
-  phone: "",
+  phoneNumber: "",
   dayOneSelected: false,
   dayTwoSelected: false,
   password: "",
 };
 
 export const SignupForm = ({ toggleState }: Props) => {
-  const onSubmit = (data: any) => {
-    toggleState();
-    console.log(data);
-  };
+  const { onSubmit } = useSignup(toggleState);
   const {
     register,
     handleSubmit,
@@ -74,19 +72,32 @@ export const SignupForm = ({ toggleState }: Props) => {
         labelProps={{ children: "電話番号" }}
         inputProps={{
           placeholder: "例: 09012345678",
-          ...register("phone", {
+          ...register("phoneNumber", {
             required: {
               value: true,
               message: "入力が必須の項目です。",
             },
           }),
         }}
-        error={errors.phone?.message}
+        error={errors.phoneNumber?.message}
       />
       <div className={styles.entryDate}>
         <span className={styles.title}>希望入場日</span>
         <Checkbox
-          inputProps={{ type: "checkbox", ...register("dayOneSelected") }}
+          inputProps={{
+            type: "checkbox",
+            ...register("dayOneSelected", {
+              validate: {
+                hoge: (value) => {
+                  return (
+                    value === true ||
+                    getValues("dayTwoSelected") === true ||
+                    "どちらかの日付を選択して下さい。"
+                  );
+                },
+              },
+            }),
+          }}
           labelProps={{ children: "11/19(土)" }}
         />
         <Checkbox
