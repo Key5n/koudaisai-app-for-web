@@ -71,12 +71,12 @@ export const ManageAdmission = ({
             onClick={() => {
               setModalConfig({
                 title: "入場確認",
-                text: admittedMembers
+                text: `${admittedMembers
                   .map((user) => {
-                    return user.uid;
+                    return user.name + "様 ";
                   })
-                  .join("様, "),
-                isOpen: true,
+                  }を入場させます。`,
+                isOpen: false,
               });
             }}
           >
