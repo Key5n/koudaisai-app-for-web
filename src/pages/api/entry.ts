@@ -3,19 +3,19 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   const {
-    body: { QRCodeData, password },
-  }: { body: { QRCodeData: string[]; password: string } } = req;
+    body: { uids, password },
+  }: { body: { uids: string[]; password: string } } = req;
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
     return res.status(400).json({ error: { message: "セキュリティエラー" } });
   }
-  console.log("QRCodeData: ", QRCodeData);
+  console.log("uids: ", uids);
 
   const makeEntry = async (): Promise<void> => {
     const db = admin.firestore();
-    QRCodeData.forEach(async (uid: string) => {
+    uids.forEach(async (uid: string) => {
       const firstDate: 16 = 16;
-      const secondDate: 17 = 17;
+      const secondDate: number = firstDate + 1;
 
       const dayXVisited =
         new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoSelected";
@@ -27,7 +27,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       const koudaisaiUserDocRef = db.collection("KoudaisaiUser").doc(uid);
       const documentSnapShot = await koudaisaiUserDocRef.get();
 
-      const hasEnteredToday = documentSnapShot.get(dayXVisited);
+      const hasEnteredToday: boolean = documentSnapShot.get(dayXVisited);
 
       console.log("Retrieved data: ", documentSnapShot.data(), hasEnteredToday);
 
@@ -60,11 +60,11 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
           console.log(error);
           return res
             .status(500)
-            .json({ message: "書き込み中にエラーが発生しました。" });
+            .json({ message: error });
         });
+      console.log("入場");
+      return res.status(200).json({ message: "入場させました。" });
     });
   };
   await makeEntry();
-  console.log("入場");
-  return res.status(200).json("入場させました。");
 }

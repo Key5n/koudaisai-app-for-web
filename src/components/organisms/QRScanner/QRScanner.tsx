@@ -83,6 +83,9 @@ export const QRScanner = () => {
       if (!decodedValue || QRCodeData.includes(decodedValue)) {
         return;
       }
+      if (decodedValue.length !== 20 && decodedValue.length !== 28) {
+        console.log("uidではありません");
+      }
       setQRCodedata([...QRCodeData, decodedValue]);
     }, 1_000 / videoFrameRate);
     intervalRef.current = intervalId;
@@ -91,8 +94,11 @@ export const QRScanner = () => {
     };
   }, [isCameraOpen, QRCodeData]);
 
-  const toggleCameraOpen = async () => {
+  const toggleCameraOpen = () => {
     setIsCameraOpen(!isCameraOpen);
+  }
+
+  const handleButtonClick = async () => {
     const JSONdata = JSON.stringify({
       uids: QRCodeData,
       password: process.env.NEXT_PUBLIC_PASS,
@@ -128,10 +134,11 @@ export const QRScanner = () => {
       </div>
       <Button
         onClick={toggleCameraOpen}
-        className={clsx(styles.button)}
-        disabled={isSending}
       >
         {isCameraOpen ? "ストップ" : "スタート"}
+      </Button>
+      <Button onClick={handleButtonClick} disabled={isSending}>
+        まとめて入場
       </Button>
     </div>
   );
