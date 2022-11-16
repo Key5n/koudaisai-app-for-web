@@ -9,6 +9,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
 .modalButtonContainer {
@@ -18,11 +19,11 @@
   border-top: 1px solid var(--gray);
 }
 
-.modalButton:nth-child(1){
+.modalButton:nth-child(1) {
   border-right: 1px solid var(--gray);
 }
 
-.modalButton:nth-child(2){
+.modalButton:nth-child(2) {
   border-left: 1px solid var(--gray);
 }
 
@@ -54,8 +55,9 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 150vh;
   background-color: #000000;
   opacity: 0.3;
   border: 0;
+  z-index: 3;
 }

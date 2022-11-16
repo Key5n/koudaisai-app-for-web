@@ -30,6 +30,7 @@ export const QRScanner = () => {
           }
           title={title}
           text={text}
+          onOK={handleButtonClick}
         />
       )}
       <div className={styles.module}>
@@ -78,7 +79,11 @@ export const QRScanner = () => {
         <ManageAdmission
           users={users}
           isLoading={isLoading}
-          handleButtonClick={handleButtonClick}
+          handleButtonClick={() => {
+            setModalConfig((modalConfig) => {
+              return { ...modalConfig, isOpen: true }
+            })
+          }}
           error={error}
         />
       </div>

@@ -6,7 +6,7 @@ import { Button } from "components/atoms/Button";
 type Props = {
   users: User[];
   isLoading: boolean;
-  handleButtonClick: () => Promise<void>;
+  handleButtonClick: () => void;
   error: string;
 };
 

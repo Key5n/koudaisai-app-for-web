@@ -5,9 +5,10 @@ type Props = {
   hideModal: () => void;
   title: string;
   text: string;
+  onOK: () => void;
 };
 
-export const ModalWindow = ({ hideModal, title, text }: Props) => {
+export const ModalWindow = ({ hideModal, title, text, onOK }: Props) => {
   return (
     <div>
       <Button className={styles.modalOverlay} onClick={hideModal}></Button>
@@ -21,7 +22,7 @@ export const ModalWindow = ({ hideModal, title, text }: Props) => {
           <Button className={styles.modalButton} onClick={hideModal}>
             キャンセル
           </Button>
-          <Button className={styles.modalButton}>OK</Button>
+          <Button className={styles.modalButton} onClick={onOK}>OK</Button>
         </div>
       </div>
     </div>
