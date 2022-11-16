@@ -20,14 +20,12 @@ export const UserObject = ({ user }: Props) => {
     >
       <div className={styles.userHead}>
         <span className={styles.userName}>{user?.name}</span>
-        <span className={styles.keyBoardArrow}>
-          <KeyboardArrow
-            isChecked={isChecked}
-            toggle={() => {
-              setIsChecked(!isChecked);
-            }}
-          />
-        </span>
+        <KeyboardArrow
+          isChecked={isChecked}
+          toggle={() => {
+            setIsChecked(!isChecked);
+          }}
+        />
       </div>
       {isChecked && (
         <div className={styles.property}>
