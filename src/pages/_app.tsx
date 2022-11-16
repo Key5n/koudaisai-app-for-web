@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="第60回名古屋工業大学工大祭のスマホアプリの補助のためのweb版です。スマホアプリのご使用をお勧めします。"
         />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link
           rel="icon"
           type="image/png"
