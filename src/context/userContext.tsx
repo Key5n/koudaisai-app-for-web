@@ -17,7 +17,7 @@ export default function UserContextComp({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
