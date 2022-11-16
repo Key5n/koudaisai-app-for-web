@@ -34,7 +34,7 @@ export const UserObject = ({ user }: Props) => {
           </div>
           <div>
             <p>お名前</p>
-            <p>{user.name}</p>
+            <p>{user.name}様</p>
           </div>
           <div>
             <p>メールアドレス</p>

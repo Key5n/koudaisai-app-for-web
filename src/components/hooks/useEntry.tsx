@@ -125,7 +125,7 @@ export const useEntry = () => {
     }
     setIsLoading(true);
     const JSONdata = JSON.stringify({
-      uses: users,
+      users: users,
       password: process.env.NEXT_PUBLIC_PASS,
     });
     const endpoint = "/api/entry";
