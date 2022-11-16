@@ -20,7 +20,7 @@ export const UserObject = ({ user }: Props) => {
     >
       <div className={styles.userHead}>
         <span className={styles.userName}>{user?.name}</span>
-        <span className={styles.KeyBoardArrow}>
+        <span className={styles.keyBoardArrow}>
           <KeyboardArrow
             isChecked={isChecked}
             toggle={() => {
