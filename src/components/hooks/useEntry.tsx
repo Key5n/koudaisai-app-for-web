@@ -1,5 +1,7 @@
 import jsQR from "jsqr";
+import { title } from "process";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { text } from "stream/consumers";
 import { User } from "types/types";
 
 const videoWidth: number = 640;
@@ -30,6 +32,11 @@ export const useEntry = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
+  const [ModalConfig, setModalConfig] = useState({
+    title: "",
+    text: "",
+    isOpen: false,
+  });
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -147,11 +154,20 @@ export const useEntry = () => {
     const uidsOfAdmitted = admittedMembers.map((user) => {
       return user.uid;
     });
+    const namesOfAdmitted = admittedMembers.map((user) => {
+      return user.name;
+    });
     setUsers((users) => {
       return users.filter((user) => {
         return uidsOfAdmitted.indexOf(user.uid) === -1;
       });
     });
+    setModalConfig({
+      title: "入場確認",
+      text: `${namesOfAdmitted.join(",")}を入場させます。`,
+      isOpen: true,
+    });
+
     setIsLoading(false);
   };
 
@@ -194,5 +210,7 @@ export const useEntry = () => {
     toggleCameraOpen,
     handleButtonClick,
     error,
+    ModalConfig,
+    setModalConfig,
   };
 };
