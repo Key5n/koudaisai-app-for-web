@@ -3,6 +3,8 @@ import jsQR from "jsqr";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
+import clsx from "clsx";
+import { async } from "@firebase/util";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
@@ -30,6 +32,7 @@ export const QRScanner = () => {
   const videoRef = useRef<HTMLVideoElement>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -81,19 +84,6 @@ export const QRScanner = () => {
         return;
       }
       setQRCodedata([...QRCodeData, decodedValue]);
-      const JSONdata = JSON.stringify({ "uid": decodedValue, "password": process.env.NEXT_PUBLIC_PASS });
-      const endpoint = "/api/entry";
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSONdata,
-      };
-      const response = await fetch(endpoint, options);
-      const result = await response.json();
-      console.log(result);
-
     }, 1_000 / videoFrameRate);
     intervalRef.current = intervalId;
     return () => {
@@ -101,8 +91,23 @@ export const QRScanner = () => {
     };
   }, [isCameraOpen, QRCodeData]);
 
-  const toggleCameraOpen = () => {
+  const toggleCameraOpen = async () => {
     setIsCameraOpen(!isCameraOpen);
+    const JSONdata = JSON.stringify({
+      uids: QRCodeData,
+      password: process.env.NEXT_PUBLIC_PASS,
+    });
+    const endpoint = "/api/entry";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
+    const response = await fetch(endpoint, options);
+    const result = await response.json();
+    console.log(result);
   };
 
   return (
@@ -121,7 +126,11 @@ export const QRScanner = () => {
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length}</p>
       </div>
-      <Button onClick={toggleCameraOpen}>
+      <Button
+        onClick={toggleCameraOpen}
+        className={clsx(styles.button)}
+        disabled={isSending}
+      >
         {isCameraOpen ? "ストップ" : "スタート"}
       </Button>
     </div>
