@@ -162,6 +162,11 @@ export const useEntry = () => {
         return uidsOfAdmitted.indexOf(user.uid) === -1;
       });
     });
+    setModalConfig({
+      title: "入場確認",
+      text: `${namesOfAdmitted.join(",")}を入場させます。`,
+      isOpen: true,
+    });
 
     setIsLoading(false);
   };

@@ -79,11 +79,7 @@ export const QRScanner = () => {
         <ManageAdmission
           users={users}
           isLoading={isLoading}
-          handleButtonClick={() => {
-            setModalConfig((modalConfig) => {
-              return { ...modalConfig, isOpen: true }
-            })
-          }}
+          setModalConfig={setModalConfig}
           error={error}
         />
       </div>

@@ -6,7 +6,9 @@ import { Button } from "components/atoms/Button";
 type Props = {
   users: User[];
   isLoading: boolean;
-  handleButtonClick: () => void;
+  setModalConfig: React.Dispatch<
+    React.SetStateAction<{ title: string; text: string; isOpen: boolean }>
+  >;
   error: string;
 };
 
@@ -15,7 +17,7 @@ type withStatusUser = User & { status: 0 | 1 | 2 };
 export const ManageAdmission = ({
   users,
   isLoading,
-  handleButtonClick,
+  setModalConfig,
   error,
 }: Props) => {
   // 0 => able to enter
@@ -66,7 +68,17 @@ export const ManageAdmission = ({
           <Button
             className={styles.button}
             disabled={isLoading}
-            onClick={handleButtonClick}
+            onClick={() => {
+              setModalConfig({
+                title: "入場確認",
+                text: admittedMembers
+                  .map((user) => {
+                    return user.uid;
+                  })
+                  .join("様, "),
+                isOpen: true,
+              });
+            }}
           >
             まとめて入場
           </Button>
