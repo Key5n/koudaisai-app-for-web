@@ -1,16 +1,18 @@
-import { async } from "@firebase/util";
 import admin from "lib/nodeApp";
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "types/types";
 
 export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   const {
     body: { uid, password },
   }: { body: { uid: string; password: string } } = req;
+
+  if (password !== process.env.NEXT_PUBLIC_PASS) {
+    return res.status(400).json({ error: { message: "セキュリティエラー" } });
+  }
   console.log("uid: ", uid);
   if (uid.length !== 20 && uid.length !== 28) {
     console.log("読み込んだのはuidじゃないよ");
-    res
+    return res
       .status(400)
       .json({ error: { message: "読み込んだのはユーザーIDではありません。" } });
   }
@@ -19,29 +21,30 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
     const db = admin.firestore();
     const koudaisaiUserDocRef = db.collection("KoudaisaiUser").doc(uid);
     const documentSnapShot = await koudaisaiUserDocRef.get();
+    const firstDate: 16 = 16;
+    const secondDate: 17 = 17;
 
-    const selectFieldAccordingToTheDate = () => {
-      const date = new Date().getDate();
-      const firstDate = 16;
-      const res = date === firstDate ? "dayOneVisited" : "dayTwoVisited";
-      return res;
-    };
-
-    const dayXVisited = selectFieldAccordingToTheDate();
-
+    const dayXVisited = new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoSelected";
+    const dayXSelected = new Date().getDate() === firstDate ? "dayOneSelected" : "dayTwoSelected";
     const hasEnteredToday = documentSnapShot.get(
-      selectFieldAccordingToTheDate()
+      dayXVisited
     );
 
     console.log("Retrieved data: ", documentSnapShot.data(), hasEnteredToday);
 
     if (!documentSnapShot.exists) {
-      res
+      console.log("undefined doc error")
+      return res
         .status(400)
-        .json({ error: { message: "データが存在していません。" } });
+        .json({ error: { message: "データが存在していません。QRコード内の形式が不整合です。" } });
     }
     if (hasEnteredToday) {
-      res.status(200).json({ message: `${dayXVisited}はtrueです。` });
+      console.log("already entry error")
+      return res.status(400).json({ message: `${dayXVisited}はtrueです。既に入場しています。` });
+    }
+    if (!dayXSelected) {
+      console.log("no reserve error")
+      return res.status(400).json({ message: `${dayXSelected}はfalseです。この日は予約されていません。` })
     }
 
     await koudaisaiUserDocRef
@@ -50,9 +53,10 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       })
       .catch((error) => {
         console.log(error);
-        res.status(500).json({ message: "書き込み中にエラーが発生しました。" });
+        return res.status(500).json({ message: "書き込み中にエラーが発生しました。" });
       });
   };
+  await makeEntry();
   console.log("入場");
-  res.status(200).json("入場させました。");
+  return res.status(200).json("入場させました。");
 }

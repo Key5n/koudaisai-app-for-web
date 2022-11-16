@@ -81,7 +81,7 @@ export const QRScanner = () => {
         return;
       }
       setQRCodedata([...QRCodeData, decodedValue]);
-      const JSONdata = JSON.stringify({ "uid": decodedValue });
+      const JSONdata = JSON.stringify({ "uid": decodedValue, "password": process.env.NEXT_PUBLIC_PASS });
       const endpoint = "/api/entry";
       const options = {
         method: "POST",
