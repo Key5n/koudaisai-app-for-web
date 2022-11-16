@@ -92,6 +92,7 @@ export const QRScanner = () => {
       };
       const response = await fetch(endpoint, options);
       const result = await response.json();
+      console.log(result);
 
     }, 1_000 / videoFrameRate);
     intervalRef.current = intervalId;
