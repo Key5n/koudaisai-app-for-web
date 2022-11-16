@@ -112,13 +112,13 @@ export const useEntry = () => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [isCameraOpen, users]);
+  }, [isCameraOpen]);
 
   const toggleCameraOpen = useCallback(() => {
     setIsCameraOpen(!isCameraOpen);
   }, [isCameraOpen]);
 
-  const handleButtonClick = useCallback(async () => {
+  const handleButtonClick = async () => {
     if (users.length === 0) {
       setError("読み込んだQRコードの数が0なので何も発火しません。");
       return;
@@ -140,7 +140,7 @@ export const useEntry = () => {
     const result = await response.json();
     console.log(result);
     setIsLoading(false);
-  }, [users]);
+  };
 
   return {
     isCameraOpen,

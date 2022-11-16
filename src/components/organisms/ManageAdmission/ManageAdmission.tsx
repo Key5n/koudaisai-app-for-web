@@ -2,16 +2,17 @@ import styles from "./styles.module.css";
 import { UserObject } from "../userObject";
 import { User } from "types/types";
 import { Button } from "components/atoms/Button";
-import { useEntry } from "components/hooks/useEntry";
 
 type Props = {
   users: User[];
+  isLoading: boolean;
+  handleButtonClick: () => Promise<void>;
+  error: string
 };
 
 type withStatusUser = User & { status: 0 | 1 | 2 };
 
-export const ManageAdmission = ({ users }: Props) => {
-  const { isLoading, handleButtonClick, error } = useEntry();
+export const ManageAdmission = ({ users, isLoading, handleButtonClick, error }: Props) => {
   // 0 => able to enter
   // 1 => already entered
   // 2 => no reserved

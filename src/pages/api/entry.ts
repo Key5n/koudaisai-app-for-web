@@ -20,7 +20,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       const secondDate: number = firstDate + 1;
 
       const dayXVisited =
-        new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoSelected";
+        new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoVisited";
       const dayXSelected =
         new Date().getDate() === firstDate
           ? "dayOneSelected"

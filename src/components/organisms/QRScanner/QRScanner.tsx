@@ -8,7 +8,16 @@ const videoWidth: number = 640;
 const videoHeight: number = 480;
 
 export const QRScanner = () => {
-  const { isCameraOpen, setVideoRef, canvasRef, users, toggleCameraOpen } =
+  const {
+    isCameraOpen,
+    isLoading,
+    setVideoRef,
+    canvasRef,
+    users,
+    toggleCameraOpen,
+    handleButtonClick,
+    error,
+  } =
     useEntry();
   return (
     <div className={styles.module}>
@@ -54,7 +63,7 @@ export const QRScanner = () => {
         </Video>
       )}
       <div className={styles.annotation}>読み込んだ数: {users.length}</div>
-      <ManageAdmission users={users} />
+      <ManageAdmission users={users} isLoading={isLoading} handleButtonClick={handleButtonClick} error={error} />
     </div>
   );
 };
