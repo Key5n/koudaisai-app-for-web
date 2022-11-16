@@ -38,7 +38,6 @@ export const QRScanner = () => {
       }
       videoRef.current = element;
       videoRef.current.srcObject = localstream;
-      element.srcObject = localstream;
     },
     [localstream]
   );
