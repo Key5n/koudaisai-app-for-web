@@ -3,13 +3,12 @@ import jsQR from "jsqr";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
-import clsx from "clsx";
 import { ManageAdmission } from "../ManageAdmission";
 import { User } from "types/types";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
-const videoFrameRate: number = 30;
+const videoFrameRate: number = 10;
 
 const constraints: MediaStreamConstraints = {
   audio: false,
@@ -29,12 +28,11 @@ const constraints: MediaStreamConstraints = {
 export const QRScanner = () => {
   const [localstream, setLocalStream] = useState<MediaStream>();
   const [isCameraOpen, setIsCameraOpen] = useState(false);
-  const [QRCodeData, setQRCodedata] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [users, SetUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -82,42 +80,41 @@ export const QRScanner = () => {
 
     const intervalId = window.setInterval(async () => {
       const decodedValue = decodeQRCode();
-      if (!decodedValue || QRCodeData.includes(decodedValue)) {
+      if (
+        !decodedValue ||
+        users.find((user) => {
+          return user.uid === decodedValue;
+        })
+      ) {
         return;
       }
-      if (decodedValue.length !== 20 && decodedValue.length !== 28) {
-        console.log("uidではありません");
-        return;
-      }
-      setQRCodedata([...QRCodeData, decodedValue]);
-    }, 1_000 / videoFrameRate);
 
-    const getUsers = async () => {
       const data = {
-        uids: QRCodeData,
+        uid: decodedValue,
         password: process.env.NEXT_PUBLIC_PASS,
       };
       const JSONData = JSON.stringify(data);
       const endpoint = "api/getUser";
       const options = {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSONData,
       };
+      setIsLoading(true);
       const response = await fetch(endpoint, options);
-      const { users }: { users: User[] } = await response.json();
-      SetUsers(users);
-    };
+      const { user }: { user: User } = await response.json();
+      setIsLoading(false);
+      setUsers([...users, user]);
+    }, 1_000 / videoFrameRate);
 
     intervalRef.current = intervalId;
-    getUsers();
 
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [isCameraOpen, QRCodeData]);
+  }, [isCameraOpen, users]);
 
   const toggleCameraOpen = () => {
     setIsCameraOpen(!isCameraOpen);
@@ -126,7 +123,7 @@ export const QRScanner = () => {
   const handleButtonClick = async () => {
     setIsLoading(true);
     const JSONdata = JSON.stringify({
-      uids: QRCodeData,
+      uses: users,
       password: process.env.NEXT_PUBLIC_PASS,
     });
     const endpoint = "/api/entry";
@@ -143,6 +140,10 @@ export const QRScanner = () => {
     setIsLoading(false);
   };
 
+  if (isLoading) {
+    <p>ローディング中</p>;
+  }
+
   return (
     <div>
       {isCameraOpen && (
@@ -156,8 +157,8 @@ export const QRScanner = () => {
         </Video>
       )}
       <div>
-        <p>{QRCodeData.join("\n")}</p>
-        <p>読み込んだ数: {QRCodeData.length}</p>
+        <p>{users.join("\n")}</p>
+        <p>読み込んだ数: {users.length}</p>
       </div>
       <Button onClick={toggleCameraOpen}>
         {isCameraOpen ? "ストップ" : "スタート"}

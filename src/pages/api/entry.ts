@@ -1,19 +1,21 @@
 import admin from "lib/nodeApp";
 import { NextApiRequest, NextApiResponse } from "next";
+import { User } from "types/types";
 
 export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   const {
-    body: { uids, password },
-  }: { body: { uids: string[]; password: string } } = req;
+    body: { users, password },
+  }: { body: { users: User[]; password: string } } = req;
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
     return res.status(401).json({ error: { message: "セキュリティエラー" } });
   }
-  console.log("uids: ", uids);
+  console.log("users: ", users);
 
   const makeEntry = async (): Promise<void> => {
     const db = admin.firestore();
-    uids.forEach(async (uid: string) => {
+    users.forEach(async (user) => {
+      const uid = user.uid;
       const firstDate: 16 = 16;
       const secondDate: number = firstDate + 1;
 
