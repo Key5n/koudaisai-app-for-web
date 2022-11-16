@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-self: stretch;
   gap: 20px;
   border-radius: 30px;
   padding: 15px 20px;
@@ -20,6 +21,7 @@
 .userHead {
   display: flex;
   flex-direction: row;
+  margin-right: 0;
 }
 
 .userName {
@@ -33,13 +35,7 @@
   flex-grow: 1;
 }
 
-.userActionIcons {
-  display: flex;
-  flex-direction: row;
-  width: 60px;
-  min-width: 60px;
-  align-items: center;
-  gap: 10px;
+.keyBoardArrow {
 }
 
 .property {

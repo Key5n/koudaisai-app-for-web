@@ -1,10 +1,6 @@
 import styles from "./styles.module.css";
-import jsQR from "jsqr";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
-import { Button } from "components/atoms/Button";
 import { ManageAdmission } from "../ManageAdmission";
-import { User } from "types/types";
 import { useEntry } from "components/hooks/useEntry";
 import clsx from "clsx";
 
