@@ -163,10 +163,7 @@ export const QRScanner = () => {
       <Button onClick={toggleCameraOpen}>
         {isCameraOpen ? "ストップ" : "スタート"}
       </Button>
-      <Button onClick={handleButtonClick} disabled={isLoading}>
-        まとめて入場
-      </Button>
-      <ManageAdmission users={users} />
+      <ManageAdmission users={users} onClick={handleButtonClick} />
     </div>
   );
 };

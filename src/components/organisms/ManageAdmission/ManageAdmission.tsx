@@ -5,6 +5,7 @@ import { Button } from "components/atoms/Button";
 
 type Props = {
   users: User[];
+  onClick: () => Promise<void>;
 };
 
 type withStatusUser = User & { status: 0 | 1 | 2 };
