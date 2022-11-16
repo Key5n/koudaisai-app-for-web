@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
 import clsx from "clsx";
+import { ManageAdmission } from "../ManageAdmission";
+import { User } from "types/types";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
@@ -31,7 +33,8 @@ export const QRScanner = () => {
   const videoRef = useRef<HTMLVideoElement>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
-  const [isSending, setIsSending] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [users, SetUsers] = useState<User[]>([]);
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -84,10 +87,33 @@ export const QRScanner = () => {
       }
       if (decodedValue.length !== 20 && decodedValue.length !== 28) {
         console.log("uidではありません");
+        return;
       }
       setQRCodedata([...QRCodeData, decodedValue]);
     }, 1_000 / videoFrameRate);
+
+    const getUsers = async () => {
+      const data = {
+        uids: QRCodeData,
+        password: process.env.NEXT_PUBLIC_PASS,
+      };
+      const JSONData = JSON.stringify(data);
+      const endpoint = "api/getUser";
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONData,
+      };
+      const response = await fetch(endpoint, options);
+      const { users }: { users: User[] } = await response.json();
+      SetUsers(users);
+    };
+
     intervalRef.current = intervalId;
+    getUsers();
+
     return () => {
       clearInterval(intervalRef.current);
     };
@@ -98,7 +124,7 @@ export const QRScanner = () => {
   };
 
   const handleButtonClick = async () => {
-    setIsSending(true);
+    setIsLoading(true);
     const JSONdata = JSON.stringify({
       uids: QRCodeData,
       password: process.env.NEXT_PUBLIC_PASS,
@@ -114,7 +140,7 @@ export const QRScanner = () => {
     const response = await fetch(endpoint, options);
     const result = await response.json();
     console.log(result);
-    setIsSending(false);
+    setIsLoading(false);
   };
 
   return (
@@ -136,9 +162,10 @@ export const QRScanner = () => {
       <Button onClick={toggleCameraOpen}>
         {isCameraOpen ? "ストップ" : "スタート"}
       </Button>
-      <Button onClick={handleButtonClick} disabled={isSending}>
+      <Button onClick={handleButtonClick} disabled={isLoading}>
         まとめて入場
       </Button>
+      <ManageAdmission users={users} />
     </div>
   );
 };

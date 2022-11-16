@@ -88,9 +88,7 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
       },
       body: JSONdata,
     };
-    const response = await fetch(endpoint, options);
-
-    const result = await response.json();
+    await fetch(endpoint, options);
   };
 
   const handleNewChallengerInputChange = (
