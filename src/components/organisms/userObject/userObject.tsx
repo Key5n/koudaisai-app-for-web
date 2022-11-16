@@ -2,9 +2,7 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { KeyboardArrow } from "components/atoms/KeyBoardArrow";
 import { User } from "types/types";
-import { InputWithTitle } from "components/molecules/InputWithTitle";
 import { useState } from "react";
-import { Button } from "components/atoms/Button";
 import clsx from "clsx";
 
 type Props = {
@@ -13,7 +11,6 @@ type Props = {
 
 export const UserObject = ({ user }: Props) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [isEditting, setIsEditting] = useState(true);
   return (
     <div
       className={clsx(
@@ -30,39 +27,18 @@ export const UserObject = ({ user }: Props) => {
               setIsChecked(!isChecked);
             }}
           />
-          <Image
-            src="/images/qr_icon.svg"
-            alt="QRCode"
-            width="24px"
-            height="24px"
-          />
         </span>
       </div>
       {isChecked && (
         <div className={styles.property}>
-          <div>
-            <p>お名前</p>
-            <p>{user?.name}</p>
-          </div>
-          <div>
-            <p>メールアドレス</p>
-            <p>{user?.email}</p>
-          </div>
-          <div>
-            <p>電話番号</p>
-            <p>{user?.phoneNumber}</p>
-          </div>
-          <div>
-            <span>希望入場日</span>
-            {user?.dayOneSelected && <p>・11/19(土)</p>}
-            {user?.dayTwoSelected && <p>・11/20(日)</p>}
-          </div>
-          {isEditting && (
-            <div className={styles.edit}>
-              {user.parentId && <Button className={styles.delete}>削除</Button>}
-              <Button className={styles.store}>保存</Button>
-            </div>
-          )}
+          {Object.entries(user).map(([key, value]) => {
+            return (
+              <div key={key}>
+                <p>{key}</p>
+                <p>{value}</p>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

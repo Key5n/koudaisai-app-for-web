@@ -4,7 +4,7 @@ import { useUser } from "context/userContext";
 import Link from "next/link";
 
 const Index: NextPage = () => {
-  const { user, loadingUser } = useUser();
+  const { loadingUser } = useUser();
   return (
     <>
       {loadingUser ? (

@@ -2,15 +2,16 @@ import styles from "./styles.module.css";
 import { UserObject } from "../userObject";
 import { User } from "types/types";
 import { Button } from "components/atoms/Button";
+import { useEntry } from "components/hooks/useEntry";
 
 type Props = {
   users: User[];
-  onClick: () => Promise<void>;
 };
 
 type withStatusUser = User & { status: 0 | 1 | 2 };
 
 export const ManageAdmission = ({ users }: Props) => {
+  const { isLoading, handleButtonClick, error } = useEntry();
   // 0 => able to enter
   // 1 => already entered
   // 2 => no reserved
@@ -55,19 +56,40 @@ export const ManageAdmission = ({ users }: Props) => {
         {admittedMembers.map((user) => {
           return <UserObject user={user} key={user.uid} />;
         })}
-        <Button>まとめて入場</Button>
+        <Button
+          className={styles.button}
+          disabled={isLoading}
+          onClick={handleButtonClick}
+        >
+          まとめて入場
+        </Button>
+        <p className={styles.error}>{error}</p>
       </div>
       <div className={styles.alreadyEntered}>
-        <span className={styles.error}>入場処理済みのアカウントです。</span>
-        {alreadyEnteredMembers.map((user) => {
-          return <UserObject user={user} key={user.uid} />;
-        })}
+        <span>入場処理済み</span>
+        {alreadyEnteredMembers.length !== 0 ? (
+          <>
+            <span className={styles.error}>入場処理済みのアカウントです。</span>
+            {alreadyEnteredMembers.map((user) => {
+              return <UserObject user={user} key={user.uid} />;
+            })}
+          </>
+        ) : (
+          <p>なし</p>
+        )}
       </div>
       <div className={styles.noReserved}>
-        <span className={styles.error}>本日の予約をされていません。</span>
-        {noReservedMembers.map((user) => {
-          return <UserObject user={user} key={user.uid} />;
-        })}
+        <span>予約なし</span>
+        {noReservedMembers.length !== 0 ? (
+          <>
+            <span className={styles.error}>本日の予約をされていません。</span>
+            {noReservedMembers.map((user) => {
+              return <UserObject user={user} key={user.uid} />;
+            })}
+          </>
+        ) : (
+          <p>なし</p>
+        )}
       </div>
     </div>
   );
