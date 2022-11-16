@@ -14,14 +14,16 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
 
   const db = admin.firestore();
   const koudaisaiUserDocRef = db.collection("KoudaisaiUser").doc(uid);
+  console.log((await koudaisaiUserDocRef.get()).data);
   await koudaisaiUserDocRef
-    .update(koudaisaiUserDocRef, {
+    .update({
       dayOneVisited: true,
     })
     .catch((error) => {
       console.log(error);
       throw new error();
     });
+  console.log((await koudaisaiUserDocRef.get()).data);
 
   return res.status(200).json("入場させました。");
 }
