@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import Image from "next/image";
 import { KeyboardArrow } from "components/atoms/KeyBoardArrow";
 import { User } from "types/types";
 import { useState } from "react";
@@ -29,14 +28,32 @@ export const UserObject = ({ user }: Props) => {
       </div>
       {isChecked && (
         <div className={styles.property}>
-          {Object.entries(user).map(([key, value]) => {
-            return (
-              <div key={key}>
-                <p>{key}</p>
-                <p>{value}</p>
-              </div>
-            );
-          })}
+          <div>
+            <p>ユーザーID</p>
+            <p>{user.uid}</p>
+          </div>
+          <div>
+            <p>お名前</p>
+            <p>{user.name}</p>
+          </div>
+          <div>
+            <p>メールアドレス</p>
+            <p>{user.email}</p>
+          </div>
+          <div>
+            <p>電話番号</p>
+            <p>{user.phoneNumber ?? "登録なし"}</p>
+          </div>
+          <div>
+            <p>予約日</p>
+            <p>11/19(土): {user.dayOneSelected ? "予約あり" : "予約なし"}</p>
+            <p>11/20(日): {user.dayTwoSelected ? "予約あり" : "予約なし"}</p>
+          </div>
+          <div>
+            <p>入場した日</p>
+            <p>11/19(土): {user.dayOneVisited ? "入場済み" : "未入場"}</p>
+            <p>11/20(日): {user.dayTwoVisited ? "入場済み" : "未入場"}</p>
+          </div>
         </div>
       )}
     </div>
