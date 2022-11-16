@@ -48,7 +48,7 @@ export const useEntry = () => {
         .getUserMedia(constraints)
         .catch((error) => {
           console.log("メディア取得中のエラー", error);
-          setError("カメラをセットできません。");
+          setError("エラー: カメラをセットできません。");
           throw error;
         });
       setLocalStream(stream);
@@ -112,7 +112,7 @@ export const useEntry = () => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [isCameraOpen]);
+  }, [isCameraOpen, users]);
 
   const toggleCameraOpen = useCallback(() => {
     setIsCameraOpen(!isCameraOpen);
@@ -120,12 +120,17 @@ export const useEntry = () => {
 
   const handleButtonClick = async () => {
     if (users.length === 0) {
-      setError("読み込んだQRコードの数が0なので何も発火しません。");
+      setError("読み込んだQRコードがありません。");
       return;
     }
+
+    const admittedMembers = withStatusUsers.filter((user) => {
+      return user.status === 0;
+    });
+
     setIsLoading(true);
     const JSONdata = JSON.stringify({
-      users: users,
+      users: admittedMembers,
       password: process.env.NEXT_PUBLIC_PASS,
     });
     const endpoint = "/api/entry";
@@ -139,8 +144,46 @@ export const useEntry = () => {
     const response = await fetch(endpoint, options);
     const result = await response.json();
     console.log(result);
+    const uidsOfAdmitted = admittedMembers.map((user) => {
+      return user.uid;
+    });
+    setUsers((users) => {
+      return users.filter((user) => {
+        return uidsOfAdmitted.indexOf(user.uid) === -1;
+      });
+    });
     setIsLoading(false);
   };
+
+  // 0 => able to enter
+  // 1 => already entered
+  // 2 => no reserved
+  const statusAssigner = (user: User): 0 | 1 | 2 => {
+    const firstDate: 16 = 16;
+    const secondDate: number = firstDate + 1;
+
+    const dayXVisited =
+      new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoVisited";
+    const dayXSelected =
+      new Date().getDate() === firstDate ? "dayOneSelected" : "dayTwoSelected";
+
+    const hasEnteredToday: boolean = user[dayXVisited];
+
+    if (hasEnteredToday) {
+      console.log("already entry error");
+      return 1;
+    }
+    if (!dayXSelected) {
+      console.log("no reserve error");
+      return 2;
+    }
+    return 0;
+  };
+  type withStatusUser = User & { status: 0 | 1 | 2 };
+
+  const withStatusUsers: withStatusUser[] = users.map((user) => {
+    return { ...user, status: statusAssigner(user) };
+  });
 
   return {
     isCameraOpen,

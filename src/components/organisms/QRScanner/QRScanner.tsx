@@ -17,8 +17,7 @@ export const QRScanner = () => {
     toggleCameraOpen,
     handleButtonClick,
     error,
-  } =
-    useEntry();
+  } = useEntry();
   return (
     <div className={styles.module}>
       <button
@@ -63,7 +62,12 @@ export const QRScanner = () => {
         </Video>
       )}
       <div className={styles.annotation}>読み込んだ数: {users.length}</div>
-      <ManageAdmission users={users} isLoading={isLoading} handleButtonClick={handleButtonClick} error={error} />
+      <ManageAdmission
+        users={users}
+        isLoading={isLoading}
+        handleButtonClick={handleButtonClick}
+        error={error}
+      />
     </div>
   );
 };

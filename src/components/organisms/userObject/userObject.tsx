@@ -18,7 +18,7 @@ export const UserObject = ({ user }: Props) => {
       )}
     >
       <div className={styles.userHead}>
-        <span className={styles.userName}>{user?.name}</span>
+        <span className={styles.userName}>{user?.name}様</span>
         <KeyboardArrow
           isChecked={isChecked}
           toggle={() => {
@@ -34,7 +34,7 @@ export const UserObject = ({ user }: Props) => {
           </div>
           <div>
             <p>お名前</p>
-            <p>{user.name}様</p>
+            <p>{user.name}</p>
           </div>
           <div>
             <p>メールアドレス</p>

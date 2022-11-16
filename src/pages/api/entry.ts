@@ -65,7 +65,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       console.log("入場");
     });
     console.log("全員入場処理が完了しました。");
-    return res.status(200).json({ message: "入場させました。" });
+    return res.status(200).json({ message: "全員入場処理が完了しました。" });
   };
   await makeEntry();
 }
