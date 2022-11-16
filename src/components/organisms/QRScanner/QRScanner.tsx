@@ -94,7 +94,7 @@ export const QRScanner = () => {
         password: process.env.NEXT_PUBLIC_PASS,
       };
       const JSONData = JSON.stringify(data);
-      const endpoint = "api/getUser";
+      const endpoint = "/api/getUser";
       const options = {
         method: "POST",
         headers: {
@@ -104,7 +104,7 @@ export const QRScanner = () => {
       };
       setIsLoading(true);
       const response = await fetch(endpoint, options);
-      const { user }: { user: User } = await response.json();
+      const user: User = await response.json();
       setIsLoading(false);
       setUsers([...users, user]);
     }, 1_000 / videoFrameRate);
@@ -157,7 +157,6 @@ export const QRScanner = () => {
         </Video>
       )}
       <div>
-        <p>{users.join("\n")}</p>
         <p>読み込んだ数: {users.length}</p>
       </div>
       <Button onClick={toggleCameraOpen}>

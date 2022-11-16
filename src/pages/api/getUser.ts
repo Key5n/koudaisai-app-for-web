@@ -22,5 +22,5 @@ export default async function getUser(
       .status(400)
       .json({ error: { message: "Document doesn't exist" } });
   }
-  return res.status(200).json({ user: documentSnapShot.data() });
+  return res.status(200).json({ ...documentSnapShot.data(), uid: uid });
 }
