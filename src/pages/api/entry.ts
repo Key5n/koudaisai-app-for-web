@@ -7,7 +7,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   }: { body: { uids: string[]; password: string } } = req;
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
-    return res.status(400).json({ error: { message: "セキュリティエラー" } });
+    return res.status(401).json({ error: { message: "セキュリティエラー" } });
   }
   console.log("uids: ", uids);
 
@@ -58,13 +58,12 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
         })
         .catch((error) => {
           console.log(error);
-          return res
-            .status(500)
-            .json({ message: error });
+          return res.status(500).json({ message: error });
         });
       console.log("入場");
-      return res.status(200).json({ message: "入場させました。" });
     });
+    console.log("全員入場処理が完了しました。");
+    return res.status(200).json({ message: "入場させました。" });
   };
   await makeEntry();
 }

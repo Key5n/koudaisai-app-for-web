@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Video } from "components/atoms/Video";
 import { Button } from "components/atoms/Button";
 import clsx from "clsx";
-import { async } from "@firebase/util";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
@@ -96,9 +95,10 @@ export const QRScanner = () => {
 
   const toggleCameraOpen = () => {
     setIsCameraOpen(!isCameraOpen);
-  }
+  };
 
   const handleButtonClick = async () => {
+    setIsSending(true);
     const JSONdata = JSON.stringify({
       uids: QRCodeData,
       password: process.env.NEXT_PUBLIC_PASS,
@@ -114,6 +114,7 @@ export const QRScanner = () => {
     const response = await fetch(endpoint, options);
     const result = await response.json();
     console.log(result);
+    setIsSending(false);
   };
 
   return (
@@ -132,9 +133,7 @@ export const QRScanner = () => {
         <p>{QRCodeData.join("\n")}</p>
         <p>読み込んだ数: {QRCodeData.length}</p>
       </div>
-      <Button
-        onClick={toggleCameraOpen}
-      >
+      <Button onClick={toggleCameraOpen}>
         {isCameraOpen ? "ストップ" : "スタート"}
       </Button>
       <Button onClick={handleButtonClick} disabled={isSending}>

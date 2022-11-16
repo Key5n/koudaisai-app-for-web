@@ -9,17 +9,16 @@ import clsx from "clsx";
 
 type Props = {
   user: User;
-  isParent: boolean;
 };
 
-export const UserObject = ({ user, isParent }: Props) => {
+export const UserObject = ({ user }: Props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isEditting, setIsEditting] = useState(true);
   return (
     <div
       className={clsx(
         styles.module,
-        isParent ? styles.borderOrange : styles.borderBlue
+        user.parentId === null ? styles.borderOrange : styles.borderBlue
       )}
     >
       <div className={styles.userHead}>
@@ -60,7 +59,7 @@ export const UserObject = ({ user, isParent }: Props) => {
           </div>
           {isEditting && (
             <div className={styles.edit}>
-              {isParent && <Button className={styles.delete}>削除</Button>}
+              {user.parentId && <Button className={styles.delete}>削除</Button>}
               <Button className={styles.store}>保存</Button>
             </div>
           )}
