@@ -67,9 +67,14 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
         });
     }
     console.log("全員入場処理が完了しました。");
-    return res
-      .status(200)
-      .json({ error: false, message: "全員入場処理が完了しました。" });
+    return res.status(200).json({
+      error: false,
+      message: `${users
+        .map((user) => {
+          return user.name;
+        })
+        .join("様, ")}様の入場処理が完了しました。`,
+    });
   };
   await makeEntry();
 }

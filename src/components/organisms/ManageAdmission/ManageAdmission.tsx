@@ -25,7 +25,7 @@ export const ManageAdmission = ({
   // 1 => already entered
   // 2 => no reserved
   const statusAssigner = (user: User): 0 | 1 | 2 => {
-    const firstDate: 16 = 16;
+    const firstDate: 17 = 17;
     const secondDate: number = firstDate + 1;
 
     const dayXVisited =
