@@ -6,18 +6,26 @@ export default async function getUser(
   res: NextApiResponse
 ) {
   const {
-    body: { uid, password },
-  }: { body: { uid: string; password: string } } = req;
+    body: { content, password },
+  }: { body: { content: string; password: string } } = req;
+
+  const uid = content.replace('koudaisai/', '');
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
     return res.status(401).json({ error: true, message: "セキュリティエラー" });
   }
 
   const db = admin.firestore();
-  const userDocRef = db.collection("KoudaisaiUser").doc(uid);
-  const documentSnapShot = await userDocRef.get();
+  let userDocRef;
+  let documentSnapShot;
+  try {
+    userDocRef = db.collection("KoudaisaiUser").doc(uid);
+    documentSnapShot = await userDocRef.get();
+  } catch (error) {
+    return res.status(400).json({ error: true, message: `QRコードに不具合があります。\n読み込んだもの: ${content}\n` + error })
+  }
 
-  if (!documentSnapShot.exists) {
+  if (!documentSnapShot?.exists) {
     return res
       .status(400)
       .json({ error: true, message: `${uid}はデータベース内にありません。` });

@@ -15,10 +15,10 @@ const constraints: MediaStreamConstraints = {
     frameRate: {
       max: videoFrameRate,
     },
-    facingMode: {
-      exact: "environment",
-    },
-    // facingMode: "user",
+    // facingMode: {
+    //   exact: "environment",
+    // },
+    facingMode: "user",
   },
 };
 
@@ -29,6 +29,7 @@ export const useEntry = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [QRCodeData, setQRCodeData] = useState<string[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [status, setStatus] = useState<{ error: boolean; message: string }>({
     error: false,
@@ -88,15 +89,13 @@ export const useEntry = () => {
       const decodedValue = decodeQRCode();
       if (
         !decodedValue ||
-        users.find((user) => {
-          return user.uid === decodedValue;
-        })
-      ) {
+        QRCodeData.includes(decodedValue) || isLoading) {
         return;
       }
+      setQRCodeData([...QRCodeData, decodedValue])
 
       const data = {
-        uid: decodedValue,
+        content: decodedValue,
         password: process.env.NEXT_PUBLIC_PASS,
       };
       const JSONData = JSON.stringify(data);
@@ -129,7 +128,7 @@ export const useEntry = () => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [isCameraOpen, users]);
+  }, [isCameraOpen, users, QRCodeData]);
 
   const toggleCameraOpen = useCallback(() => {
     setIsCameraOpen(!isCameraOpen);
