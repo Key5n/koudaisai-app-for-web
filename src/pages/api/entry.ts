@@ -12,9 +12,9 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   }
   const makeEntry = async (): Promise<void> => {
     const db = admin.firestore();
-    for(let user of users) {
+    for (let user of users) {
       const uid = user.uid;
-      const firstDate: 16 = 16;
+      const firstDate: 17 = 17;
       const secondDate: number = firstDate + 1;
 
       const dayXVisited =
@@ -65,7 +65,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
               "firebaseの処理がうまくいきませんでした。もう一度お試し下さい。",
           });
         });
-    });
+    }
     console.log("全員入場処理が完了しました。");
     return res
       .status(200)

@@ -22,7 +22,7 @@ const constraints: MediaStreamConstraints = {
 };
 
 export const useEntry = () => {
-  const [localstream, setLocalStream] = useState<MediaStream>();
+  const [localstream, setLocalStream] = useState<MediaStream | null>();
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -42,6 +42,16 @@ export const useEntry = () => {
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
+      const openCamera = async () => {
+        const stream = await navigator.mediaDevices
+          .getUserMedia(constraints)
+          .catch((error) => {
+            setStatus({ message: "カメラをセットできません。", error: true });
+            throw error;
+          });
+        setLocalStream(stream);
+      };
+      openCamera();
       if (!element || !localstream) {
         return;
       }
@@ -50,19 +60,6 @@ export const useEntry = () => {
     },
     [localstream]
   );
-
-  useEffect(() => {
-    const openCamera = async () => {
-      const stream = await navigator.mediaDevices
-        .getUserMedia(constraints)
-        .catch((error) => {
-          setStatus({ message: "カメラをセットできません。", error: true });
-          throw error;
-        });
-      setLocalStream(stream);
-    };
-    openCamera();
-  }, []);
 
   useEffect(() => {
     if (!isCameraOpen) {
@@ -129,6 +126,9 @@ export const useEntry = () => {
 
   const toggleCameraOpen = useCallback(() => {
     setIsCameraOpen(!isCameraOpen);
+    if (isCameraOpen) {
+      setLocalStream(null);
+    }
   }, [isCameraOpen]);
 
   const MakeAllEnter = async () => {
