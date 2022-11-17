@@ -1,5 +1,5 @@
 .module {
-
+  font-size: 1rem;
 }
 
 .video {
@@ -8,7 +8,6 @@
 }
 
 .annotation {
-  width: auto;
   margin: 10px 10px 0 auto;
   text-align: end;
 }

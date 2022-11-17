@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import { UserObject } from "../userObject";
 import { User } from "types/types";
 import { Button } from "components/atoms/Button";
+import clsx from "clsx";
 
 type Props = {
   users: User[];
@@ -9,7 +10,7 @@ type Props = {
   setModalConfig: React.Dispatch<
     React.SetStateAction<{ title: string; text: string; isOpen: boolean }>
   >;
-  error: string;
+  status: { error: boolean; message: string };
 };
 
 type withStatusUser = User & { status: 0 | 1 | 2 };
@@ -18,7 +19,7 @@ export const ManageAdmission = ({
   users,
   isLoading,
   setModalConfig,
-  error,
+  status,
 }: Props) => {
   // 0 => able to enter
   // 1 => already entered
@@ -35,11 +36,9 @@ export const ManageAdmission = ({
     const hasEnteredToday: boolean = user[dayXVisited];
 
     if (hasEnteredToday) {
-      console.log("already entry error");
       return 1;
     }
     if (!dayXSelected) {
-      console.log("no reserve error");
       return 2;
     }
     return 0;
@@ -60,57 +59,51 @@ export const ManageAdmission = ({
   return (
     <div className={styles.module}>
       <div className={styles.admitted}>
-        <span>入場可能</span>
-        {admittedMembers.map((user) => {
-          return <UserObject user={user} key={user.uid} />;
-        })}
-        {admittedMembers.length !== 0 ? (
-          <Button
-            className={styles.button}
-            disabled={isLoading}
-            onClick={() => {
-              setModalConfig({
-                title: "入場確認",
-                text: `${admittedMembers
-                  .map((user) => {
+        <p className={clsx(status.error && styles.error)}>{status.message}</p>
+        {admittedMembers.length !== 0 && (
+          <>
+            <span>入場可能</span>
+            {admittedMembers.map((user) => {
+              return <UserObject user={user} key={user.uid} />;
+            })}
+            <Button
+              className={styles.button}
+              disabled={isLoading}
+              onClick={() => {
+                setModalConfig({
+                  title: "入場確認",
+                  text: `${admittedMembers.map((user) => {
                     return user.name + "様 ";
-                  })
-                  }を入場させます。`,
-                isOpen: false,
-              });
-            }}
-          >
-            まとめて入場
-          </Button>
-        ) : (
-          <p>なし</p>
+                  })}\nを入場させます。`,
+                  isOpen: false,
+                });
+              }}
+            >
+              まとめて入場
+            </Button>
+          </>
         )}
-        <p className={styles.error}>{error}</p>
       </div>
       <div className={styles.alreadyEntered}>
-        <span>入場処理済み</span>
-        {alreadyEnteredMembers.length !== 0 ? (
+        {alreadyEnteredMembers.length !== 0 && (
           <>
+            <span>入場処理済み</span>
             <span className={styles.error}>入場処理済みのアカウントです。</span>
             {alreadyEnteredMembers.map((user) => {
               return <UserObject user={user} key={user.uid} />;
             })}
           </>
-        ) : (
-          <p>なし</p>
         )}
       </div>
       <div className={styles.noReserved}>
-        <span>予約なし</span>
-        {noReservedMembers.length !== 0 ? (
+        {noReservedMembers.length !== 0 && (
           <>
+            <span>予約なし</span>
             <span className={styles.error}>本日の予約をされていません。</span>
             {noReservedMembers.map((user) => {
               return <UserObject user={user} key={user.uid} />;
             })}
           </>
-        ) : (
-          <p>なし</p>
         )}
       </div>
     </div>

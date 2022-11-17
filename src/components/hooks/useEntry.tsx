@@ -1,7 +1,6 @@
 import jsQR from "jsqr";
-import { title } from "process";
+import { stringify } from "querystring";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { text } from "stream/consumers";
 import { User } from "types/types";
 
 const videoWidth: number = 640;
@@ -31,7 +30,10 @@ export const useEntry = () => {
   const intervalRef = useRef<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
-  const [error, setError] = useState("");
+  const [status, setStatus] = useState<{ error: boolean; message: string }>({
+    error: false,
+    message: "",
+  });
   const [ModalConfig, setModalConfig] = useState({
     title: "",
     text: "",
@@ -54,8 +56,7 @@ export const useEntry = () => {
       const stream = await navigator.mediaDevices
         .getUserMedia(constraints)
         .catch((error) => {
-          console.log("メディア取得中のエラー", error);
-          setError("エラー: カメラをセットできません。");
+          setStatus({ message: "カメラをセットできません。", error: true });
           throw error;
         });
       setLocalStream(stream);
@@ -109,9 +110,18 @@ export const useEntry = () => {
       };
       setIsLoading(true);
       const response = await fetch(endpoint, options);
-      const user: User = await response.json();
+      const responseJSON = await response.json();
+      if (response.status !== 200) {
+        setStatus(responseJSON);
+      } else {
+        const user: User = responseJSON;
+        setUsers([...users, user]);
+        setStatus({
+          error: false,
+          message: `ユーザー${user.name}をセットしました。`,
+        });
+      }
       setIsLoading(false);
-      setUsers([...users, user]);
     }, 1_000 / videoFrameRate);
 
     intervalRef.current = intervalId;
@@ -125,9 +135,9 @@ export const useEntry = () => {
     setIsCameraOpen(!isCameraOpen);
   }, [isCameraOpen]);
 
-  const handleButtonClick = async () => {
+  const MakeAllEnter = async () => {
     if (users.length === 0) {
-      setError("読み込んだQRコードがありません。");
+      setStatus({ error: true, message: "読み込んだQRコードがありません。" });
       return;
     }
 
@@ -150,7 +160,7 @@ export const useEntry = () => {
     };
     const response = await fetch(endpoint, options);
     const result = await response.json();
-    console.log(result);
+    setStatus(result);
     const uidsOfAdmitted = admittedMembers.map((user) => {
       return user.uid;
     });
@@ -164,7 +174,7 @@ export const useEntry = () => {
     });
     setModalConfig({
       title: "入場確認",
-      text: `${namesOfAdmitted.join(",")}を入場させます。`,
+      text: `${namesOfAdmitted.join("様,")}様\nを入場させます。`,
       isOpen: true,
     });
 
@@ -208,8 +218,8 @@ export const useEntry = () => {
     canvasRef,
     users,
     toggleCameraOpen,
-    handleButtonClick,
-    error,
+    MakeAllEnter,
+    status,
     ModalConfig,
     setModalConfig,
   };

@@ -16,8 +16,8 @@ export const QRScanner = () => {
     canvasRef,
     users,
     toggleCameraOpen,
-    handleButtonClick,
-    error,
+    MakeAllEnter,
+    status,
     ModalConfig: { title, text, isOpen },
     setModalConfig,
   } = useEntry();
@@ -30,7 +30,7 @@ export const QRScanner = () => {
           }
           title={title}
           text={text}
-          onOK={handleButtonClick}
+          onOK={MakeAllEnter}
         />
       )}
       <div className={styles.module}>
@@ -80,7 +80,7 @@ export const QRScanner = () => {
           users={users}
           isLoading={isLoading}
           setModalConfig={setModalConfig}
-          error={error}
+          status={status}
         />
       </div>
     </>
