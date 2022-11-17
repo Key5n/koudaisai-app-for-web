@@ -34,11 +34,12 @@ export const ManageAdmission = ({
       new Date().getDate() === firstDate ? "dayOneSelected" : "dayTwoSelected";
 
     const hasEnteredToday: boolean = user[dayXVisited];
+    const reservedToday: boolean = user[dayXSelected];
 
     if (hasEnteredToday) {
       return 1;
     }
-    if (!dayXSelected) {
+    if (!reservedToday) {
       return 2;
     }
     return 0;

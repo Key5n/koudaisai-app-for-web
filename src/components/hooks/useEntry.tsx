@@ -42,7 +42,6 @@ export const useEntry = () => {
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
-
       if (!element || !localstream) {
         return;
       }
@@ -129,9 +128,9 @@ export const useEntry = () => {
     if (!localstream) {
       openCamera();
     } else {
-      setLocalStream(null)
+      setLocalStream(null);
     }
-  }, [isCameraOpen]);
+  }, [isCameraOpen, localstream]);
 
   const MakeAllEnter = async () => {
     if (users.length === 0) {
