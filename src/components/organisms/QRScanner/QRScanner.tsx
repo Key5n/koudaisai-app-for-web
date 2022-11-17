@@ -22,6 +22,7 @@ export const QRScanner = () => {
     ModalConfig: { title, text, isOpen },
     setModalConfig,
     setQRCodeData,
+    setUsers,
   } = useEntry();
   return (
     <>
@@ -69,7 +70,10 @@ export const QRScanner = () => {
         </button>
         <button
           className={clsx(styles.leftUpperIcon)}
-          onClick={() => setQRCodeData([])}
+          onClick={() => {
+            setQRCodeData([]);
+            setUsers([]);
+          }}
         >
           リセット
         </button>
