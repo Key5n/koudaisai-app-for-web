@@ -1,5 +1,5 @@
 .module {
-  display: inline-block;
+  display: flex;
   width: 24px;
   height: 24px;
   transform-origin: center;

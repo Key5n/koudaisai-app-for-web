@@ -1,6 +1,10 @@
 .module {
   text-decoration: none;
   cursor: pointer;
-  font-family: 'RocknRoll One', sans-serif;
-  font-weight: 400;
+}
+
+.module[disabled] {
+  pointer-events: none;
+  background-color: var(--gray);
+  border: 0;
 }

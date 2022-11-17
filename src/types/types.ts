@@ -8,11 +8,13 @@ export type User = {
   dayOneVisited: boolean;
   dayTwoVisited: boolean;
   parentId: string | null;
-  subUserIdList: [string] | [string, string] | null;
-} | null;
+  subUserIdList: [] | [string] | [string, string];
+};
 
 export type UserContextType = {
-  user: User;
+  user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   loadingUser: boolean;
 };
+
+export type withStatusUser = User & { status: 0 | 1 | 2 };
