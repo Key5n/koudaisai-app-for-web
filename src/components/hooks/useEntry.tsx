@@ -15,10 +15,10 @@ const constraints: MediaStreamConstraints = {
     frameRate: {
       max: videoFrameRate,
     },
-    // facingMode: {
-    //   exact: "environment",
-    // },
-    facingMode: "user",
+    facingMode: {
+      exact: "environment",
+    },
+    // facingMode: "user",
   },
 };
 
@@ -87,12 +87,10 @@ export const useEntry = () => {
 
     const intervalId = window.setInterval(async () => {
       const decodedValue = decodeQRCode();
-      if (
-        !decodedValue ||
-        QRCodeData.includes(decodedValue) || isLoading) {
+      if (!decodedValue || QRCodeData.includes(decodedValue) || isLoading) {
         return;
       }
-      setQRCodeData([...QRCodeData, decodedValue])
+      setQRCodeData([...QRCodeData, decodedValue]);
 
       const data = {
         content: decodedValue,
