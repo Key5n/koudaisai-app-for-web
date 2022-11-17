@@ -14,10 +14,10 @@ const constraints: MediaStreamConstraints = {
     frameRate: {
       max: videoFrameRate,
     },
-    facingMode: {
-      exact: "environment",
-    },
-    // facingMode: "user",
+    // facingMode: {
+    //   exact: "environment",
+    // },
+    facingMode: "user",
   },
 };
 
@@ -42,16 +42,7 @@ export const useEntry = () => {
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
-      const openCamera = async () => {
-        const stream = await navigator.mediaDevices
-          .getUserMedia(constraints)
-          .catch((error) => {
-            setStatus({ message: "カメラをセットできません。", error: true });
-            throw error;
-          });
-        setLocalStream(stream);
-      };
-      openCamera();
+
       if (!element || !localstream) {
         return;
       }
@@ -126,8 +117,19 @@ export const useEntry = () => {
 
   const toggleCameraOpen = useCallback(() => {
     setIsCameraOpen(!isCameraOpen);
-    if (isCameraOpen) {
-      setLocalStream(null);
+    const openCamera = async () => {
+      const stream = await navigator.mediaDevices
+        .getUserMedia(constraints)
+        .catch((error) => {
+          setStatus({ message: "カメラをセットできません。", error: true });
+          throw error;
+        });
+      setLocalStream(stream);
+    };
+    if (!localstream) {
+      openCamera();
+    } else {
+      setLocalStream(null)
     }
   }, [isCameraOpen]);
 
