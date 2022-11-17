@@ -28,6 +28,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       const documentSnapShot = await koudaisaiUserDocRef.get();
 
       const hasEnteredToday: boolean = documentSnapShot.get(dayXVisited);
+      const reservedToday: boolean = documentSnapShot.get(dayXSelected);
       console.log("Retrieved data: ", documentSnapShot.data(), hasEnteredToday);
 
       if (!documentSnapShot.exists) {
@@ -41,14 +42,14 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
         console.log("already entry error");
         return res.status(400).json({
           error: true,
-          message: `${dayXVisited}はtrueです。既に入場しています。`,
+          message: `${user.name}の${dayXVisited}はtrueです。既に入場しています。`,
         });
       }
-      if (!dayXSelected) {
+      if (!reservedToday) {
         console.log("no reserve error");
         return res.status(400).json({
           error: true,
-          message: `${dayXSelected}はfalseです。この日は予約されていません。`,
+          message: `${user.name}の${dayXSelected}はfalseです。この日は予約されていません。`,
         });
       }
 

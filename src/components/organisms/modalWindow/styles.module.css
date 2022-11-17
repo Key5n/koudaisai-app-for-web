@@ -41,6 +41,8 @@
 
 .modalHead {
   padding: 1rem 0;
+  width: 90%;
+  margin: 0 auto;
   font-family: 'Noto Sans JP', sans-serif;
   text-align: center;
   white-space: pre-wrap;
