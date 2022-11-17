@@ -169,8 +169,7 @@ export const useEntry = () => {
       });
     });
     setModalConfig({
-      title: "入場確認",
-      text: `${namesOfAdmitted.join("様,")}様\nを入場させます。`,
+      ...ModalConfig,
       isOpen: false,
     });
 
