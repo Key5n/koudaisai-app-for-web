@@ -21,6 +21,7 @@ export const QRScanner = () => {
     status,
     ModalConfig: { title, text, isOpen },
     setModalConfig,
+    setQRCodeData,
   } = useEntry();
   return (
     <>
@@ -65,6 +66,12 @@ export const QRScanner = () => {
               />
             )}
           </svg>
+        </button>
+        <button
+          className={clsx(styles.leftUpperIcon)}
+          onClick={() => setQRCodeData([])}
+        >
+          リセット
         </button>
         {isCameraOpen && (
           <Video

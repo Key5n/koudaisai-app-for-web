@@ -21,3 +21,14 @@
   border: 0;
   display: flex;
 } 
+
+.leftUpperIcon {
+  position: fixed;
+  top: 12.5px;
+  left: 15px;
+  z-index: 2;
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  color: var(--orange)
+}

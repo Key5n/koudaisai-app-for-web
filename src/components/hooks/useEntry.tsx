@@ -195,5 +195,6 @@ export const useEntry = () => {
     status,
     ModalConfig,
     setModalConfig,
+    setQRCodeData,
   };
 };
