@@ -12,8 +12,8 @@ export const UserObjectWrapper = ({ user1, user2 }: Props) => {
   console.log(user1);
   return (
     <div className={styles.module}>
-      <UserObject user={user1} isParent={true} />
-      <UserObject user={user1} isParent={false} />
+      <UserObject user={user1} />
+      <UserObject user={user1} />
       <AddCompanion />
     </div>
   );
