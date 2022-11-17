@@ -1,8 +1,9 @@
 import styles from "./styles.module.css";
 import { UserObject } from "../userObject";
-import { User } from "types/types";
+import { User, withStatusUser } from "types/types";
 import { Button } from "components/atoms/Button";
 import clsx from "clsx";
+import { statusAssigner } from "lib/statusAssigner";
 
 type Props = {
   users: User[];
@@ -13,38 +14,12 @@ type Props = {
   status: { error: boolean; message: string };
 };
 
-type withStatusUser = User & { status: 0 | 1 | 2 };
-
 export const ManageAdmission = ({
   users,
   isLoading,
   setModalConfig,
   status,
 }: Props) => {
-  // 0 => able to enter
-  // 1 => already entered
-  // 2 => no reserved
-  const statusAssigner = (user: User): 0 | 1 | 2 => {
-    const firstDate: 17 = 17;
-    const secondDate: number = firstDate + 1;
-
-    const dayXVisited =
-      new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoVisited";
-    const dayXSelected =
-      new Date().getDate() === firstDate ? "dayOneSelected" : "dayTwoSelected";
-
-    const hasEnteredToday: boolean = user[dayXVisited];
-    const reservedToday: boolean = user[dayXSelected];
-
-    if (hasEnteredToday) {
-      return 1;
-    }
-    if (!reservedToday) {
-      return 2;
-    }
-    return 0;
-  };
-
   const withStatusUsers: withStatusUser[] = users.map((user) => {
     return { ...user, status: statusAssigner(user) };
   });

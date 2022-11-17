@@ -1,3 +1,4 @@
+import { dayXSelected, dayXVisited } from "lib/dateManagement";
 import admin from "lib/nodeApp";
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "types/types";
@@ -14,22 +15,12 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
     const db = admin.firestore();
     for (let user of users) {
       const uid = user.uid;
-      const firstDate: 17 = 17;
-      const secondDate: number = firstDate + 1;
-
-      const dayXVisited =
-        new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoVisited";
-      const dayXSelected =
-        new Date().getDate() === firstDate
-          ? "dayOneSelected"
-          : "dayTwoSelected";
 
       const koudaisaiUserDocRef = db.collection("KoudaisaiUser").doc(uid);
       const documentSnapShot = await koudaisaiUserDocRef.get();
 
       const hasEnteredToday: boolean = documentSnapShot.get(dayXVisited);
       const reservedToday: boolean = documentSnapShot.get(dayXSelected);
-      console.log("Retrieved data: ", documentSnapShot.data(), hasEnteredToday);
 
       if (!documentSnapShot.exists) {
         console.log("undefined doc error");

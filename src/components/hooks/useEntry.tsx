@@ -1,6 +1,7 @@
 import jsQR from "jsqr";
+import { statusAssigner } from "lib/statusAssigner";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { User } from "types/types";
+import { User, withStatusUser } from "types/types";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
@@ -178,32 +179,6 @@ export const useEntry = () => {
 
     setIsLoading(false);
   };
-
-  // 0 => able to enter
-  // 1 => already entered
-  // 2 => no reserved
-  const statusAssigner = (user: User): 0 | 1 | 2 => {
-    const firstDate: 17 = 17;
-    const secondDate: number = firstDate + 1;
-
-    const dayXVisited =
-      new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoVisited";
-    const dayXSelected =
-      new Date().getDate() === firstDate ? "dayOneSelected" : "dayTwoSelected";
-
-    const hasEnteredToday: boolean = user[dayXVisited];
-
-    if (hasEnteredToday) {
-      console.log("already entry error");
-      return 1;
-    }
-    if (!dayXSelected) {
-      console.log("no reserve error");
-      return 2;
-    }
-    return 0;
-  };
-  type withStatusUser = User & { status: 0 | 1 | 2 };
 
   const withStatusUsers: withStatusUser[] = users.map((user) => {
     return { ...user, status: statusAssigner(user) };

@@ -4,6 +4,7 @@ import { ManageAdmission } from "../ManageAdmission";
 import { ModalWindow } from "../modalWindow";
 import { useEntry } from "components/hooks/useEntry";
 import clsx from "clsx";
+import { firstDate } from "lib/dateManagement";
 
 const videoWidth: number = 640;
 const videoHeight: number = 480;
@@ -76,6 +77,7 @@ export const QRScanner = () => {
           </Video>
         )}
         <div className={styles.annotation}>読み込んだ数: {users.length}</div>
+        <div className={styles.annotation}>first date: {firstDate}</div>
         <ManageAdmission
           users={users}
           isLoading={isLoading}
