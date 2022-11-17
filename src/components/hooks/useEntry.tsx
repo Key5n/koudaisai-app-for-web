@@ -128,6 +128,11 @@ export const useEntry = () => {
     if (!localstream) {
       openCamera();
     } else {
+      (videoRef.current?.srcObject as MediaStream)
+        .getTracks()
+        .forEach((track) => {
+          track.stop();
+        });
       setLocalStream(null);
     }
   }, [isCameraOpen, localstream]);
