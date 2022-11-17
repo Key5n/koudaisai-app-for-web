@@ -1,5 +1,4 @@
 import jsQR from "jsqr";
-import { stringify } from "querystring";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { User } from "types/types";
 
@@ -87,7 +86,7 @@ export const useEntry = () => {
 
     const intervalId = window.setInterval(async () => {
       const decodedValue = decodeQRCode();
-      if (!decodedValue || QRCodeData.includes(decodedValue) || isLoading) {
+      if (!decodedValue || QRCodeData.includes(decodedValue)) {
         return;
       }
       setQRCodeData([...QRCodeData, decodedValue]);
@@ -172,7 +171,7 @@ export const useEntry = () => {
     setModalConfig({
       title: "入場確認",
       text: `${namesOfAdmitted.join("様,")}様\nを入場させます。`,
-      isOpen: true,
+      isOpen: false,
     });
 
     setIsLoading(false);

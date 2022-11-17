@@ -43,6 +43,7 @@
   padding: 1rem 0;
   font-family: 'Noto Sans JP', sans-serif;
   text-align: center;
+  white-space: pre-wrap;
 }
 
 .modalTitle {
