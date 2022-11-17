@@ -12,7 +12,7 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   }
   const makeEntry = async (): Promise<void> => {
     const db = admin.firestore();
-    users.forEach(async (user) => {
+    for(let user of users) {
       const uid = user.uid;
       const firstDate: 16 = 16;
       const secondDate: number = firstDate + 1;
