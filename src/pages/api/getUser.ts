@@ -10,7 +10,7 @@ export default async function getUser(
   }: { body: { uid: string; password: string } } = req;
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
-    return res.status(401).json({ error: { message: "セキュリティエラー" } });
+    return res.status(401).json({ error: true, message: "セキュリティエラー" });
   }
 
   const db = admin.firestore();
@@ -20,7 +20,7 @@ export default async function getUser(
   if (!documentSnapShot.exists) {
     return res
       .status(400)
-      .json({ error: { message: "Document doesn't exist" } });
+      .json({ error: true, message: `${uid}はデータベース内にありません。` });
   }
   return res.status(200).json({ ...documentSnapShot.data(), uid: uid });
 }

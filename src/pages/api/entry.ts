@@ -8,10 +8,8 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   }: { body: { users: User[]; password: string } } = req;
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
-    return res.status(401).json({ error: { message: "セキュリティエラー" } });
+    return res.status(401).json({ error: true, message: "セキュリティエラー" });
   }
-  console.log("users: ", users);
-
   const makeEntry = async (): Promise<void> => {
     const db = admin.firestore();
     users.forEach(async (user) => {
@@ -30,26 +28,26 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       const documentSnapShot = await koudaisaiUserDocRef.get();
 
       const hasEnteredToday: boolean = documentSnapShot.get(dayXVisited);
-
       console.log("Retrieved data: ", documentSnapShot.data(), hasEnteredToday);
 
       if (!documentSnapShot.exists) {
         console.log("undefined doc error");
         return res.status(400).json({
-          error: {
-            message: "データが存在していません。QRコード内の形式が不整合です。",
-          },
+          error: true,
+          message: "データが存在していません。QRコード内の形式が不整合です。",
         });
       }
       if (hasEnteredToday) {
         console.log("already entry error");
-        return res
-          .status(400)
-          .json({ message: `${dayXVisited}はtrueです。既に入場しています。` });
+        return res.status(400).json({
+          error: true,
+          message: `${dayXVisited}はtrueです。既に入場しています。`,
+        });
       }
       if (!dayXSelected) {
         console.log("no reserve error");
         return res.status(400).json({
+          error: true,
           message: `${dayXSelected}はfalseです。この日は予約されていません。`,
         });
       }
@@ -60,12 +58,17 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
         })
         .catch((error) => {
           console.log(error);
-          return res.status(500).json({ message: error });
+          return res.status(500).json({
+            error: true,
+            message:
+              "firebaseの処理がうまくいきませんでした。もう一度お試し下さい。",
+          });
         });
-      console.log("入場");
     });
     console.log("全員入場処理が完了しました。");
-    return res.status(200).json({ message: "全員入場処理が完了しました。" });
+    return res
+      .status(200)
+      .json({ error: false, message: "全員入場処理が完了しました。" });
   };
   await makeEntry();
 }
