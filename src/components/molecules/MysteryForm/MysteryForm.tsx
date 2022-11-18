@@ -60,6 +60,24 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
     }));
   };
 
+  const onNumOfNewChallengerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMysteryData((prev) => {
+      return {
+        ...prev,
+        numOfNewChallenger: +(e.target.value),
+      }
+    })
+  }
+
+  const onNumOfNewSolverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMysteryData((prev) => {
+      return {
+        ...prev,
+        numOfNewSolver: +(e.target.value),
+      }
+    })
+  }
+
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setMysteryData({
@@ -96,16 +114,18 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
         value={mysteryData.numOfNewChallenger}
         onMinusClick={onClickButtonDecreasesNewChallengerbyOne}
         onPlusClick={onClickButtonIncreasesNewChallengerbyOne}
+        onChange={onNumOfNewChallengerChange}
         ref={InputOfNumOfNewChallengerRef}
       />
       <MysteryInputWithTitle
         title={`新たな\n完全クリア人数`}
         value={mysteryData.numOfNewSolver}
+        onChange={onNumOfNewSolverChange}
         onMinusClick={onClickButtonDecreasesNewSolverbyOne}
         onPlusClick={onClickButtonIncreasesNewSolverbyOne}
         ref={InputOfNumOfNewSolverRef}
       />
-      <Button type="submit">決定</Button>
+      <Button type="submit" className={styles.button}>決定</Button>
     </form>
   );
 };
