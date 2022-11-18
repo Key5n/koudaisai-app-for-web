@@ -2,8 +2,9 @@ import styles from "./styles.module.css";
 import { UserObject } from "../userObject";
 import { User, withStatusUser } from "types/types";
 import { Button } from "components/atoms/Button";
-import clsx from "clsx";
 import { statusAssigner } from "lib/statusAssigner";
+import React from "react";
+import { FadeNotification } from "components/atoms/FadeNotification";
 
 type Props = {
   users: User[];
@@ -35,7 +36,7 @@ export const ManageAdmission = ({
   return (
     <div className={styles.module}>
       <div className={styles.admitted}>
-        <p className={clsx(status.error && styles.error)}>{status.message}</p>
+        <FadeNotification message={status.message} />
         {admittedMembers.length !== 0 && (
           <>
             <span>入場可能</span>

@@ -122,6 +122,7 @@ export const useEntry = () => {
         .getUserMedia(constraints)
         .catch((error) => {
           setStatus({ message: "カメラをセットできません。", error: true });
+          alert(error);
           throw error;
         });
       setLocalStream(stream);
@@ -193,6 +194,7 @@ export const useEntry = () => {
     toggleCameraOpen,
     MakeAllEnter,
     status,
+    setStatus,
     ModalConfig,
     setModalConfig,
     setQRCodeData,

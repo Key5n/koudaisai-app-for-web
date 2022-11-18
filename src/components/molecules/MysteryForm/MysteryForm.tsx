@@ -62,10 +62,6 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    if (mysteryData.numOfNewChallenger < mysteryData.numOfNewSolver) {
-      alert("エラー: 挑戦者よりクリアした人のほうが多いです。");
-      return null;
-    }
     setMysteryData({
       numOfChallenger:
         mysteryData.numOfChallenger + mysteryData.numOfNewChallenger,
@@ -91,42 +87,6 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
     await fetch(endpoint, options);
   };
 
-  const handleNewChallengerInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (InputOfNumOfNewChallengerRef.current) {
-      let input: string = InputOfNumOfNewChallengerRef.current.value;
-      input = input.replace(/[^0-9^０-９]/g, "");
-
-      //inputのすべての全角数字を半角に
-      input = input.replace(/[０-９]/g, (s: string) => {
-        return String.fromCharCode(s.charCodeAt(0) - 65248);
-      });
-      setMysteryData((prev) => ({
-        ...prev,
-        numOfNewChallenger: +input,
-      }));
-    }
-  };
-
-  const handleNewSolverInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (InputOfNumOfNewSolverRef.current) {
-      let input: string = InputOfNumOfNewSolverRef.current.value;
-      input = input.replace(/[^0-9^０-９]/g, "");
-
-      //inputのすべての全角数字を半角に
-      input = input.replace(/[０-９]/g, (s: string) => {
-        return String.fromCharCode(s.charCodeAt(0) - 65248);
-      });
-      setMysteryData((prev) => ({
-        ...prev,
-        numOfNewSolver: +input,
-      }));
-    }
-  };
-
   return (
     <form className={styles.module} onSubmit={onSubmit}>
       <Field title={"挑戦人数"} value={mysteryData.numOfChallenger} />
@@ -136,7 +96,6 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
         value={mysteryData.numOfNewChallenger}
         onMinusClick={onClickButtonDecreasesNewChallengerbyOne}
         onPlusClick={onClickButtonIncreasesNewChallengerbyOne}
-        handleInputChange={handleNewChallengerInputChange}
         ref={InputOfNumOfNewChallengerRef}
       />
       <MysteryInputWithTitle
@@ -144,7 +103,6 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
         value={mysteryData.numOfNewSolver}
         onMinusClick={onClickButtonDecreasesNewSolverbyOne}
         onPlusClick={onClickButtonIncreasesNewSolverbyOne}
-        handleInputChange={handleNewSolverInputChange}
         ref={InputOfNumOfNewSolverRef}
       />
       <Button type="submit">決定</Button>
