@@ -2,7 +2,6 @@ import styles from "./styles.module.css";
 import { UserObject } from "../userObject";
 import { User, withStatusUser } from "types/types";
 import { Button } from "components/atoms/Button";
-import clsx from "clsx";
 import { statusAssigner } from "lib/statusAssigner";
 import React from "react";
 import { FadeNotification } from "components/atoms/FadeNotification";

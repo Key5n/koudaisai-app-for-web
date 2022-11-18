@@ -1,6 +1,6 @@
 import { User } from "types/types";
 
-export const firstDate: 17 = 17;
+export const firstDate: 19 = 19;
 
 export const dayXVisited =
   new Date().getDate() === firstDate ? "dayOneVisited" : "dayTwoVisited";
