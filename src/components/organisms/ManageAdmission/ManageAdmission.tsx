@@ -35,7 +35,7 @@ export const ManageAdmission = ({
   return (
     <div className={styles.module}>
       <div className={styles.admitted}>
-        <p className={clsx(status.error && styles.error)}>{status.message}</p>
+        {status.message && <p className={clsx(styles.status)}>{status.message}</p>}
         {admittedMembers.length !== 0 && (
           <>
             <span>入場可能</span>
