@@ -6,6 +6,9 @@ import { useEntry } from "components/hooks/useEntry";
 import clsx from "clsx";
 import { firstDate } from "lib/dateManagement";
 
+const videoWidth: number = 640;
+const videoHeight: number = 480;
+
 export const QRScanner = () => {
   const {
     isCameraOpen,
@@ -70,7 +73,7 @@ export const QRScanner = () => {
             ref={setVideoRef}
             className={styles.video}
           >
-            <canvas ref={canvasRef} />
+            <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
           </Video>
         )}
         <div className={styles.annotation}>読み込んだ数: {users.length}</div>
