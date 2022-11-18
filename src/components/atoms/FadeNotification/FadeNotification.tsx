@@ -7,11 +7,12 @@ type Props = {
 }
 
 export const FadeNotification = ({ message }: Props) => {
-  const [isAnimating, setIsAnimating] = useState<boolean>(true);
+  const [isShowing, setIsShowing] = useState<boolean>(true);
   useEffect(() => {
+    setIsShowing(true);
     setTimeout(() => {
-      setIsAnimating(false);
+      setIsShowing(false);
     }, 3_000)
   }, [message])
-  return message ? <p className={clsx(isAnimating && styles.animate, styles.status)}>{message}</p> : <></>;
+  return message ? <p className={clsx(isShowing ? styles.showing : styles.hiding, styles.status)}>{message}</p> : <></>;
 }

@@ -7,15 +7,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--white);
+}
+
+.showing {
+  transition: opacity 0.9s;
+  opacity: 1;
+}
+
+.hiding {
+  transition: opacity 0.3s;
   opacity: 0;
 }
-
-.animate {
-  animation-name: status;
-  animation-duration: 3s;
-  animation-iteration-count: 1;
-}
-
 
 @keyframes status {
   0% {

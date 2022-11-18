@@ -15,10 +15,10 @@ const constraints: MediaStreamConstraints = {
     frameRate: {
       max: videoFrameRate,
     },
-    facingMode: {
-      exact: "environment",
-    },
-    // facingMode: "user",
+    // facingMode: {
+    //   exact: "environment",
+    // },
+    facingMode: "user",
   },
 };
 
