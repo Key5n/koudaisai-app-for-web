@@ -5,6 +5,7 @@ import { forwardRef } from "react";
 type Props = {
   title: string;
   value: number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onMinusClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onPlusClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   ref: React.RefObject<HTMLInputElement>;
@@ -12,7 +13,7 @@ type Props = {
 
 export const MysteryInputWithTitle = forwardRef<HTMLInputElement, Props>(
   function InputWithTitleBase(
-    { title, onMinusClick, value, onPlusClick, },
+    { title, onMinusClick, value, onPlusClick,onChange },
     ref
   ) {
     return (
@@ -30,6 +31,7 @@ export const MysteryInputWithTitle = forwardRef<HTMLInputElement, Props>(
             type="number"
             className={styles.value}
             value={value}
+            onChange={onChange}
             max={999}
             min={-999}
             ref={ref}
