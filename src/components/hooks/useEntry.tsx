@@ -35,11 +35,13 @@ export const useEntry = () => {
     error: false,
     message: "",
   });
+  const [oldStatus, setOldStatus] = useState<{ error: boolean; message: string }>(status);
   const [ModalConfig, setModalConfig] = useState({
     title: "",
     text: "",
     isOpen: false,
   });
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -198,5 +200,7 @@ export const useEntry = () => {
     setModalConfig,
     setQRCodeData,
     setUsers,
+    isAnimating,
+    setIsAnimating
   };
 };
