@@ -15,10 +15,10 @@ const constraints: MediaStreamConstraints = {
     frameRate: {
       max: videoFrameRate,
     },
-    // facingMode: {
-    //   exact: "environment",
-    // },
-    facingMode: "user",
+    facingMode: {
+      exact: "environment",
+    },
+    // facingMode: "user",
   },
 };
 
@@ -195,5 +195,7 @@ export const useEntry = () => {
     status,
     ModalConfig,
     setModalConfig,
+    setQRCodeData,
+    setUsers,
   };
 };

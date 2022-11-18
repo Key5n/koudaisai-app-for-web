@@ -1,4 +1,9 @@
-import { dayXSelected, dayXVisited } from "lib/dateManagement";
+import {
+  dayXSelected,
+  dayXVisited,
+  hasEnteredToday,
+  reservedToday,
+} from "lib/dateManagement";
 import admin from "lib/nodeApp";
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "types/types";
@@ -19,9 +24,6 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
       const koudaisaiUserDocRef = db.collection("KoudaisaiUser").doc(uid);
       const documentSnapShot = await koudaisaiUserDocRef.get();
 
-      const hasEnteredToday: boolean = documentSnapShot.get(dayXVisited);
-      const reservedToday: boolean = documentSnapShot.get(dayXSelected);
-
       if (!documentSnapShot.exists) {
         console.log("undefined doc error");
         return res.status(400).json({
@@ -29,14 +31,14 @@ export default async function entry(req: NextApiRequest, res: NextApiResponse) {
           message: "データが存在していません。QRコード内の形式が不整合です。",
         });
       }
-      if (hasEnteredToday) {
+      if (hasEnteredToday(user)) {
         console.log("already entry error");
         return res.status(400).json({
           error: true,
           message: `${user.name}の${dayXVisited}はtrueです。既に入場しています。`,
         });
       }
-      if (!reservedToday) {
+      if (!reservedToday(user)) {
         console.log("no reserve error");
         return res.status(400).json({
           error: true,
