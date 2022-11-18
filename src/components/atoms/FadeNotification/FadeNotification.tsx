@@ -2,9 +2,9 @@ import clsx from "clsx";
 import styles from "./styles.module.css"
 
 type Props = {
-  status: { error: boolean, message: string };
+  message: string;
 }
 
-export const FadeNotification = ({ status: { message } }: Props) => {
+export const FadeNotification = ({ message }: Props) => {
   return message ? <p className={clsx(styles.status)}>{message}</p> : <></>
 }

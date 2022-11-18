@@ -37,7 +37,7 @@ export const ManageAdmission = ({
   return (
     <div className={styles.module}>
       <div className={styles.admitted}>
-        <FadeNotification status={status} />
+        <FadeNotification message={status.message} />
         {admittedMembers.length !== 0 && (
           <>
             <span>入場可能</span>
