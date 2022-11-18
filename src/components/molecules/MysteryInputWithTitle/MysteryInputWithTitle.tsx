@@ -28,7 +28,7 @@ export const MysteryInputWithTitle = forwardRef<HTMLInputElement, Props>(
             -1
           </button>
           <Input
-            type="text"
+            type="number"
             className={styles.value}
             value={value}
             max={999}
