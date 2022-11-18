@@ -125,7 +125,7 @@ export const MysteryForm = ({ mysteryData, setMysteryData }: Props) => {
         onPlusClick={onClickButtonIncreasesNewSolverbyOne}
         ref={InputOfNumOfNewSolverRef}
       />
-      <Button type="submit">決定</Button>
+      <Button type="submit" className={styles.button}>決定</Button>
     </form>
   );
 };
