@@ -7,6 +7,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--white);
+  width: 70%;
 }
 
 .showing {
