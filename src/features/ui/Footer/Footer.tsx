@@ -1,7 +1,6 @@
 import styles from "./styles.module.css";
 import clsx from "clsx";
 import Link from "next/link";
-import { AnchorButton } from "../AnchorButton";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -11,19 +10,22 @@ export const Footer = () => {
   return (
     <nav className={styles.module}>
       <Link href="/">
-        <AnchorButton
-          className={clsx(styles.icon, pathname !== "" && styles.inactive)}
-        >
+        <a className={clsx(styles.icon, pathname !== "" && styles.inactive)}>
           <Image
             src="/images/kofunman_face.png"
             alt="kofunman_face"
             width="30px"
             height="30px"
           />
-        </AnchorButton>
+        </a>
       </Link>
       <Link href="/config">
-        <AnchorButton className={clsx(pathname === "config" && styles.active)}>
+        <a
+          className={clsx(
+            styles.icon,
+            pathname !== "config" && styles.inactive
+          )}
+        >
           <svg
             width="30"
             height="30"
@@ -36,7 +38,7 @@ export const Footer = () => {
               fill="#A0A0A0"
             />
           </svg>
-        </AnchorButton>
+        </a>
       </Link>
     </nav>
   );
