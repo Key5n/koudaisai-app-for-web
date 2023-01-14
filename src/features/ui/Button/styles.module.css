@@ -14,3 +14,7 @@
 .module[disabled] {
   pointer-events: none;
 }
+
+.module:hover {
+  background-color: darkorange;
+}
