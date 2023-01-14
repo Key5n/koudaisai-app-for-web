@@ -4,18 +4,21 @@
 // import Link from "next/link";
 // import { ConfigTemplate } from "components/templates/ConfigTemplate";
 
-const Index = () => {
-  // const { loadingUser } = useUser();
+import { AnchorButton } from "@features/ui/AnchorButton";
+import { Button } from "@features/ui/Button";
+import { Input } from "@features/ui/Input";
+import { NextPageWithLayout } from "@lib/next/types";
+import { createGetLayout } from "@layouts/Layout";
+
+const Index: NextPageWithLayout = () => {
   return (
     <>
-      {/* {loadingUser ? (
-        <p>loading</p>
-      ) : (
-        <ConfigTemplate />
-      )} */}
       <p>indexa</p>
+      <Button>aiueo</Button>
+      <Input />
+      <AnchorButton>aa</AnchorButton>
     </>
   );
 };
-
+Index.getLayout = createGetLayout("第60回工大祭");
 export default Index;
