@@ -72,12 +72,6 @@ select {
   font: inherit;
 }
 
-/* hide default checkbox */
-input[type="checkbox"] {
-  display: none;
-  margin: 0;
-}
-
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
