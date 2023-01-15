@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/features/ui/Button";
 import { InputWithTitle } from "@/features/ui/InputWithTitle";
 import { useSignup } from "./useSignup";
+import { Checkbox } from "@/features/ui/Checkbox";
+import { Agreement } from "../agreement";
 
 type Values = {
   name: string;
@@ -131,6 +133,7 @@ export const SignupForm = () => {
         error={errors.password?.message}
         description="パスワードは6文字以上で数字または英文字で構成される必要があります。このパスワードは予約の削除に必要です。"
       />
+      <Agreement />
       <Button className={styles.button} type="submit">
         次へ
       </Button>

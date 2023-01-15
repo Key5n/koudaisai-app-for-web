@@ -1,6 +1,7 @@
 .module {
-  padding: 15vh 0;
+  padding: 80px 0;
   min-width: 300px;
   max-width: 600px;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
