@@ -9,7 +9,6 @@ const Page: NextPageWithLayout = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
-      {toggle ? <Home /> : <User />}
       <Button
         onClick={() => {
           setToggle(!toggle);
@@ -17,6 +16,7 @@ const Page: NextPageWithLayout = () => {
       >
         切り替え
       </Button>
+      {toggle ? <Home /> : <User />}
     </>
   );
 };
