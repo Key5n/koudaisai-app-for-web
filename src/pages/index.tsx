@@ -3,19 +3,20 @@ import { Home } from "@/features/home";
 import { createGetLayoutWithFooter } from "@/features/layouts/LayoutWithFooter";
 import { User } from "@/features/home/user";
 import { useState } from "react";
+import { Button } from "@/features/ui/Button";
 
 const Page: NextPageWithLayout = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
       {toggle ? <Home /> : <User />}
-      <button
+      <Button
         onClick={() => {
-          setToggle(() => !toggle);
+          setToggle(!toggle);
         }}
       >
         切り替え
-      </button>
+      </Button>
     </>
   );
 };
