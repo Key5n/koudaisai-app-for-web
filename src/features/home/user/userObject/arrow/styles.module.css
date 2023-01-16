@@ -4,6 +4,7 @@
   height: 24px;
   transform-origin: center;
   transition: transform 0.5s;
+  cursor: pointer;
 }
 
 .halfRotate {
