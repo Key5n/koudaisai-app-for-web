@@ -4,8 +4,11 @@ import { KofunmanTalking } from "@/features/ui/KofunmanTalking";
 
 export const Agreement = () => {
   return (
-    <main className={styles.module}>
-      <KofunmanTalking line={{ children: "以下のことをご了承願います" }} />
+    <div className={styles.module}>
+      <KofunmanTalking
+        line={{ children: "以下のことをご了承願います" }}
+        mode={1}
+      />
       <ul>
         <li>マスクを着用すること</li>
         <li>アルコール消毒に協力すること</li>
@@ -15,6 +18,6 @@ export const Agreement = () => {
         <li>ソーシャルディスタンス確保に協力すること</li>
         <li>入場後に体調を崩した場合は速やかにスタッフに申し出ること</li>
       </ul>
-    </main>
+    </div>
   );
 };

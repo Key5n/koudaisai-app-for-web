@@ -9,7 +9,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: clamp(1rem, 0.818rem + 0.91vw, 1.5rem);
 }
 
 body {
@@ -93,11 +93,5 @@ select {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@media screen and (min-width: 520px) {
-  html {
-    font-size: 24px;
   }
 }

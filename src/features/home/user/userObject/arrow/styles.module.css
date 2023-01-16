@@ -1,0 +1,11 @@
+.module {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  transform-origin: center;
+  transition: transform 0.5s;
+}
+
+.halfRotate {
+  transform: rotate(180deg);
+}
