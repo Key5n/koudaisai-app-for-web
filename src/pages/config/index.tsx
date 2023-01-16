@@ -1,11 +1,11 @@
 import { Config } from "@/features/config";
-import { createGetLayout } from "@/features/layouts/Layout";
+import { createGetLayoutWithFooter } from "@/features/layouts/LayoutWithFooter";
 import { NextPageWithLayout } from "@/lib/next/types";
 
 const Page: NextPageWithLayout = () => {
   return <Config />;
 };
 
-Page.getLayout = createGetLayout("設定");
+Page.getLayout = createGetLayoutWithFooter({ title: "設定" });
 
 export default Page;

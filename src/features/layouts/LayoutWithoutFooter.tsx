@@ -1,23 +1,28 @@
-import { Footer } from "@/features/ui/Footer";
-import { Header } from "@/features/ui/Header";
 import Head from "next/head";
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react";
+import { Header } from "../ui/Header";
 import styles from "./styles.module.css";
+
+export const createGetLayoutWithoutFooter = ({
+  title,
+}: {
+  title: string;
+}): ((page: ReactElement) => ReactNode) => {
+  return function getLayout(page: ReactElement) {
+    return (
+      <LayoutWithoutFooter headerProps={{ children: title }}>
+        {page}
+      </LayoutWithoutFooter>
+    );
+  };
+};
 
 type LayoutProps = {
   children: ReactElement;
   headerProps: ComponentPropsWithoutRef<"header">;
 };
 
-export const createGetLayout = (
-  title: string
-): ((page: ReactElement) => ReactNode) => {
-  return function getLayout(page: ReactElement) {
-    return <Layout headerProps={{ children: title }}>{page}</Layout>;
-  };
-};
-
-export const Layout = ({ children, headerProps }: LayoutProps) => {
+export const LayoutWithoutFooter = ({ children, headerProps }: LayoutProps) => {
   return (
     <div className={styles.module}>
       <Head>
@@ -30,7 +35,6 @@ export const Layout = ({ children, headerProps }: LayoutProps) => {
       </Head>
       <Header {...headerProps} />
       <div className={styles.content}>{children}</div>
-      <Footer />
     </div>
   );
 };

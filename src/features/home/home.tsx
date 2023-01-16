@@ -8,6 +8,7 @@ export const Home = () => {
     <main className={styles.module}>
       <KofunmanTalking
         line={{ children: "僕は古墳マン。\n工大祭の案内をするよ！" }}
+        mode={0}
       />
       <Link href="signup">
         <a className={styles.signupButton}>新規予約</a>

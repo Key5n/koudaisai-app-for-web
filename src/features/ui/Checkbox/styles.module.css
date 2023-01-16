@@ -69,3 +69,7 @@ label:hover
 .error {
   color: var(--red);
 }
+
+.checkbox {
+  margin-bottom: 10px;
+}
