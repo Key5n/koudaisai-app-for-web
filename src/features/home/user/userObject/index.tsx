@@ -1,1 +1,1 @@
-export * from "./userObject";
+export * from "./userObject.component";
