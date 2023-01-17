@@ -1,1 +1,2 @@
-export * from "./mystery"
+export * from "./mystery";
+export * from "./doughnutChart";
