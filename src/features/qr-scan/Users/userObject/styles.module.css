@@ -1,0 +1,53 @@
+.module {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 20px; */
+  border-radius: 30px;
+  padding: 15px 20px;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+  background-color: var(--white);
+}
+
+.borderOrange {
+  border: 4px solid var(--orange);
+}
+
+.borderBlue {
+  border: 4px solid var(--blue);
+}
+
+.userHead {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 0;
+}
+
+.userName {
+  display: inline-block;
+  width: 150px;
+  min-width: 150px;
+  font-family: "RocknRoll One", sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}
+
+.property {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.property.open {
+  line-height: 1.5;
+  margin-top: 10px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}

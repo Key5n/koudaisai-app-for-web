@@ -7,3 +7,5 @@ const Page: NextPageWithLayout = () => {
 };
 
 Page.getLayout = createGetLayoutWithFooter({ title: "QR読み取り" });
+
+export default Page;
