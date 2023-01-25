@@ -1,8 +1,8 @@
 import styles from "./styles.module.css";
 import clsx from "clsx";
-import { UserObject } from "./userObject/userObject.component";
 import Image from "next/image";
 import { AddCompanion } from "./addCompanion";
+import { UserObject } from "./userObject";
 
 export const User = () => {
   return (

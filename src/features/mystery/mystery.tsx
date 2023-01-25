@@ -23,7 +23,7 @@ export const Mystery = ({ data }: Props) => {
   });
 
   return (
-    <div className={styles.module}>
+    <main className={styles.module}>
       <DoughnutChart
         value={[
           mysteryData.numOfSolver,
@@ -35,6 +35,6 @@ export const Mystery = ({ data }: Props) => {
         <Field title="完全クリア人数" value={mysteryData.numOfSolver} />
       </div>
       {/* <MysteryForm mysteryData={mysteryData} setMysteryData={setMysteryData} /> */}
-    </div>
+    </main>
   );
 };
