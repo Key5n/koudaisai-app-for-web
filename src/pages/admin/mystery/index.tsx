@@ -1,4 +1,4 @@
-import { createGetLayoutWithFooter } from "@/features/layouts/LayoutWithFooter";
+import { createGetLayoutWithFooter } from "@/features/layouts/BasicLayout";
 import { QRScanner } from "@/features/qr-scanner";
 import { NextPageWithLayout } from "@/lib/next/types";
 

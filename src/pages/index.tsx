@@ -1,9 +1,9 @@
 import { NextPageWithLayout } from "@/lib/next/types";
 import { Home } from "@/features/home";
-import { createGetLayoutWithFooter } from "@/features/layouts/LayoutWithFooter";
 import { User } from "@/features/home/user";
 import { useState } from "react";
 import { Button } from "@/features/ui/Button";
+import { createGetLayoutWithFooter } from "@/features/layouts/BasicLayout";
 
 const Page: NextPageWithLayout = () => {
   const [toggle, setToggle] = useState(false);
