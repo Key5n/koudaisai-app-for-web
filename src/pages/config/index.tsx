@@ -1,5 +1,5 @@
 import { Config } from "@/features/config";
-import { createGetLayoutWithFooter } from "@/features/layouts/LayoutWithFooter";
+import { createGetLayoutWithFooter } from "@/features/layouts/BasicLayout";
 import { NextPageWithLayout } from "@/lib/next/types";
 
 const Page: NextPageWithLayout = () => {

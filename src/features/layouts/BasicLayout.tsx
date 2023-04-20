@@ -1,4 +1,3 @@
-import { Footer } from "@/features/ui/Footer";
 import { Header } from "@/features/ui/Header";
 import Head from "next/head";
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react";
@@ -36,7 +35,6 @@ export const LayoutWithFooter = ({ children, headerProps }: LayoutProps) => {
       </Head>
       <Header {...headerProps} />
       <div className={styles.content}>{children}</div>
-      <Footer />
     </div>
   );
 };
