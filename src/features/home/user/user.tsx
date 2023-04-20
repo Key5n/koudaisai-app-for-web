@@ -12,7 +12,6 @@ export const User = () => {
           src="/images/kofunman_witiout_arms.png"
           alt="kofunman"
           layout="fill"
-          objectFit="contain"
         />
       </div>
       <div className={styles.userObjectWrapper}>
