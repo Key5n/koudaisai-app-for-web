@@ -11,10 +11,14 @@
   content: "";
   background-image: url("/images/kofunman_hand.svg");
   display: inline-block;
-  width: 40px;
-  height: 35px;
+  height: 5%;
+  min-width: 50px;
+  min-height: 45px;
+  width: 5%;
+  background-repeat: no-repeat;
+  background-size: contain;
   position: absolute;
-  left: 25%;
+  left: 20%;
   top: -20px;
   z-index: 1;
 }
@@ -23,11 +27,15 @@
   content: "";
   background-image: url("/images/kofunman_hand.svg");
   display: inline-block;
-  width: 40px;
-  height: 35px;
   position: absolute;
-  right: 25%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 20%;
+  width: 5%;
   top: -20px;
+  height: 5%;
+  min-width: 50px;
+  min-height: 45px;
 }
 
 .kofunman {
