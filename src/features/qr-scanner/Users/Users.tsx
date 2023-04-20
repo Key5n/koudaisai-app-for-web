@@ -1,10 +1,9 @@
 import styles from "./styles.module.css";
-import clsx from "clsx";
 import { User, withStatusUser } from "@/types/types";
 import { statusAssigner } from "@/lib/statusAssigner";
 import { Button } from "@/features/ui/Button";
 import { FadeNotification } from "../FadeNotification";
-import { UserObject } from "@/features/qr-scan/Users/userObject";
+import { UserObject } from "@/features/qr-scanner/Users/userObject";
 
 type Props = {
   users: User[];
