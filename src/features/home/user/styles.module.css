@@ -48,5 +48,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 80px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 800px) {
+  .module {
+    width: calc(100% - 300px);
+  }
 }

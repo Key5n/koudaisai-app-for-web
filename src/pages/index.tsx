@@ -9,13 +9,13 @@ const Page: NextPageWithLayout = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
-      <Button
+      {/* <Button
         onClick={() => {
           setToggle(!toggle);
         }}
       >
         切り替え
-      </Button>
+      </Button> */}
       {toggle ? <Home /> : <User />}
     </>
   );
