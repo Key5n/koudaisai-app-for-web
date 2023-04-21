@@ -2,6 +2,7 @@ import { Header } from "@/features/ui/Header";
 import Head from "next/head";
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react";
 import styles from "./styles.module.css";
+import { NavigationLinks } from "../ui/NavigationLinks/NavigationLinks";
 
 type LayoutProps = {
   children: ReactElement;
@@ -34,7 +35,12 @@ export const LayoutWithFooter = ({ children, headerProps }: LayoutProps) => {
         />
       </Head>
       <Header {...headerProps} />
-      <div className={styles.content}>{children}</div>
+      <div className={styles.layout}>
+        <aside>
+          <NavigationLinks />
+        </aside>
+        {children}
+      </div>
     </div>
   );
 };
