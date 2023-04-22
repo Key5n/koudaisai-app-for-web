@@ -15,6 +15,9 @@ export const NavigationLinks = () => {
       onClick={() => dispatch(toggle())}
     >
       <li>
+        <Link href="/">ホーム</Link>
+      </li>
+      <li>
         <Link href="/privacy">プライバシーポリシー</Link>
       </li>
       <li>
