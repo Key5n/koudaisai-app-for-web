@@ -1,10 +1,19 @@
 import clsx from "clsx";
 import Link from "next/link";
 import styles from "./styles.module.css";
+import { toggle } from "@/features/layouts/NavigationSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
+import { RootState } from "@/lib/store";
 
 export const NavigationLinks = () => {
+  const isOpen = useAppSelector((state: RootState) => state.navigation.isOpen);
+  const dispatch = useAppDispatch();
   return (
-    <ul role="list" className={clsx(styles.navLinks, styles.expanded)}>
+    <ul
+      role="list"
+      className={clsx(styles.navLinks, isOpen && styles.expanded)}
+      onClick={() => dispatch(toggle())}
+    >
       <li>
         <Link href="/privacy">プライバシーポリシー</Link>
       </li>

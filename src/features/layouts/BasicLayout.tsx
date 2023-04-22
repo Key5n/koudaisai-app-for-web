@@ -3,6 +3,8 @@ import Head from "next/head";
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react";
 import styles from "./styles.module.css";
 import { NavigationLinks } from "../ui/NavigationLinks/NavigationLinks";
+import { Provider } from "react-redux";
+import { store } from "@/lib/store";
 
 type LayoutProps = {
   children: ReactElement;
@@ -15,32 +17,30 @@ export const createGetLayoutWithFooter = ({
   title: string;
 }): ((page: ReactElement) => ReactNode) => {
   return function getLayoutWithFooter(page: ReactElement) {
-    return (
-      <LayoutWithFooter headerProps={{ children: title }}>
-        {page}
-      </LayoutWithFooter>
-    );
+    return <BasicLayout headerProps={{ children: title }}>{page}</BasicLayout>;
   };
 };
 
-export const LayoutWithFooter = ({ children, headerProps }: LayoutProps) => {
+export const BasicLayout = ({ children, headerProps }: LayoutProps) => {
   return (
-    <div className={styles.module}>
-      <Head>
-        <title>第60回工大祭</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta
-          name="description"
-          content="第60回工大祭のスマホアプリのweb版です。スマホアプリの使用をお勧めします。"
-        />
-      </Head>
-      <Header {...headerProps} />
-      <div className={styles.layout}>
-        <aside>
-          <NavigationLinks />
-        </aside>
-        {children}
+    <Provider store={store}>
+      <div className={styles.module}>
+        <Head>
+          <title>第60回工大祭</title>
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta
+            name="description"
+            content="第60回工大祭のスマホアプリのweb版です。スマホアプリの使用をお勧めします。"
+          />
+        </Head>
+        <Header {...headerProps} />
+        <div className={styles.layout}>
+          <aside>
+            <NavigationLinks />
+          </aside>
+          {children}
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 };

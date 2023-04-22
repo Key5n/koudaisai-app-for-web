@@ -1,6 +1,6 @@
 import { useQRScan, videoHeight, videoWidth } from "./useQRScan";
 import styles from "./styles.module.css";
-import { Modal } from "../ui/modal";
+import { ModalWindow } from "../ui/ModalWindow/ModalWindow";
 import clsx from "clsx";
 import { Users } from "./Users";
 
@@ -20,17 +20,15 @@ export const QRScanner = () => {
   return (
     <>
       {isModalOpen && (
-        <Modal
-          hideModal={() =>
-            setModalConfig({ title: title, text: text, isModalOpen: false })
-          }
+        <ModalWindow
+          onCancel={() => {}}
           title={title}
           text={text}
           onOK={makeAllEnter}
         />
       )}
       <div className={styles.module}>
-        <button
+        {/* <button
           className={clsx(styles.rightUpperIcon)}
           onClick={toggleCameraOpen}
         >
@@ -60,7 +58,7 @@ export const QRScanner = () => {
               />
             )}
           </svg>
-        </button>
+        </button> */}
         {isCameraOpen && (
           <video
             autoPlay
