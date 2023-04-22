@@ -19,7 +19,7 @@ export const NavigationLinks = () => {
         <Link href="/admin/mystery">管理者用謎解き画面へ</Link>
       </li>
       <li>
-        <Link href="/qr-scan">管理者用QRコードスキャナー</Link>
+        <Link href="/admin/qr-scan">管理者用QRコードスキャナー</Link>
       </li>
     </ul>
   );
