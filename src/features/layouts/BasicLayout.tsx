@@ -2,7 +2,7 @@ import { Header } from "@/features/ui/Header";
 import Head from "next/head";
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react";
 import styles from "./styles.module.css";
-import { NavigationLinks } from "../ui/NavigationLinks/NavigationLinks";
+import { NavigationLinks } from "../ui/NavigationLinks";
 import { Provider } from "react-redux";
 import { store } from "@/lib/store";
 
