@@ -2,7 +2,7 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import userReducer from "@/features/home/homeSlice";
 import navigationReducer from "@/features/ui/NavigationLinks/NavigationSlice";
 import qrScannerReducer from "@/features/qr-scanner/qrScannerSlice";
-import isLoadingReducer from "@/lib/isLoadingSlice";
+import isLoadingReducer from "@/features/ui/Loading/isLoadingSlice";
 import modalWindowReducer from "@/features/ui/ModalWindow/modalWindowSlice";
 
 export const store = configureStore({

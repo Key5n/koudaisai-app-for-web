@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { NavigationLinks } from "../ui/NavigationLinks";
 import { Provider } from "react-redux";
 import { store } from "@/lib/store";
+import { Loading } from "../ui/Loading/Loading";
 
 type LayoutProps = {
   children: ReactElement;
@@ -40,6 +41,7 @@ export const BasicLayout = ({ children, headerProps }: LayoutProps) => {
           </aside>
           {children}
         </div>
+        <Loading />
       </div>
     </Provider>
   );
