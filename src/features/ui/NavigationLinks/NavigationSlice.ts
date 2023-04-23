@@ -1,24 +1,23 @@
-import { RootState } from "@/lib/store";
 import { createSlice } from "@reduxjs/toolkit";
 
 export type NavigationState = {
-  isOpen: boolean;
+  isNavigationOpen: boolean;
 };
 
 const initialState: NavigationState = {
-  isOpen: false,
+  isNavigationOpen: false,
 };
 
 export const navigationSlice = createSlice({
   name: "navigation",
   initialState,
   reducers: {
-    toggle: (state) => {
-      state.isOpen = !state.isOpen;
+    toggleIsNavigatonOpen: (state) => {
+      state.isNavigationOpen = !state.isNavigationOpen;
     },
   },
 });
 
-export const { toggle } = navigationSlice.actions;
+export const { toggleIsNavigatonOpen } = navigationSlice.actions;
 
 export default navigationSlice.reducer;
