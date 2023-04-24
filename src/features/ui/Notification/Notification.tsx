@@ -1,39 +1,23 @@
 import styles from "./styles.module.css";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { Toast } from "./notificationSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
+import { deleteElement } from "./notificationSlice";
 
 type Props = {
   list: Toast[];
-  func: (a: any) => void;
 };
 
-type Toast = {
-  id: number;
-  title: string;
-  description: string;
-  backgroundColor: string;
-  icon: svgObject;
-};
-
-type svgObject = {
-  src: string;
-  height: number;
-  width: number;
-};
-
-export const Notification = ({ list, func }: Props) => {
-  function deleteToast(id: number) {
-    const index = list.findIndex((e) => {
-      return e.id === id;
-    });
-    list.splice(index, 1);
-    func([...list]);
-  }
+export const Notification = () => {
+  const dispatch = useAppDispatch();
+  const list = useAppSelector((state) => state.notification.toastList);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (list.length >= 1) {
-        deleteToast(list[0].id);
+        // deleteToast(list[0].id);
+        dispatch(deleteElement(0));
       }
     }, 2_000);
     return () => {
@@ -41,12 +25,6 @@ export const Notification = ({ list, func }: Props) => {
     };
   }, [list]);
 
-  // useEffect(() => {
-  //   setIsShowing(true);
-  //   setTimeout(() => {
-  //     setIsShowing(false);
-  //   }, 3_000);
-  // }, [message]);
   return (
     <div className={styles.notificationContainer}>
       {list?.map((toast, i) => (
@@ -55,7 +33,7 @@ export const Notification = ({ list, func }: Props) => {
           className={clsx(styles.notification, styles.toast)}
           style={{ backgroundColor: toast.backgroundColor }}
         >
-          <button onClick={() => deleteToast(toast.id)}>X</button>
+          <button onClick={() => dispatch(deleteElement(i))}>X</button>
           <div className={styles.notificationImage}>
             <img src={toast.icon.src} alt="status" width="30px" height="30px" />
           </div>

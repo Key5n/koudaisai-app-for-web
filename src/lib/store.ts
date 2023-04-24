@@ -4,6 +4,7 @@ import navigationReducer from "@/features/ui/NavigationLinks/NavigationSlice";
 import qrScannerReducer from "@/features/qr-scanner/qrScannerSlice";
 import isLoadingReducer from "@/features/ui/Loading/isLoadingSlice";
 import modalWindowReducer from "@/features/ui/ModalWindow/modalWindowSlice";
+import notificationReducer from "@/features/ui/Notification/notificationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     qrScanner: qrScannerReducer,
     isLoading: isLoadingReducer,
     modalWindow: modalWindowReducer,
+    notification: notificationReducer,
   },
 });
 
