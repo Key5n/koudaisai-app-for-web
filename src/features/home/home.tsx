@@ -2,58 +2,35 @@ import styles from "./styles.module.css";
 import clsx from "clsx";
 import { KofunmanTalking } from "../ui/KofunmanTalking";
 import Link from "next/link";
-import checkIcon from "../../assets/check.svg";
-import errorIcon from "../../assets/error.svg";
-import infoIcon from "../../assets/info.svg";
-import warningIcon from "../../assets/warning.svg";
-import { Notification } from "../ui/Notification/Notification";
-import { useState } from "react";
 import { Button } from "../ui/Button";
-
-type Toast = {
-  id: number;
-  title: string;
-  description: string;
-  backgroundColor: string;
-  icon: svgObject;
-};
-
-type svgObject = {
-  src: string;
-  height: number;
-  width: number;
-};
-
+import { useAppDispatch } from "@/lib/reduxHooks";
+import {
+  NotificationAction,
+  addNotification,
+} from "@/features/ui/Notification/notificationSlice";
+import { Notification } from "../ui/Notification";
 export const Home = () => {
-  const [list, setList] = useState<Toast[]>([]);
-  const testList = [
+  const dispatch = useAppDispatch();
+  const testList: NotificationAction[] = [
     {
-      id: 1,
       title: "Success",
       description: "This is a success toast component",
-      backgroundColor: "#5cb85c",
-      icon: checkIcon,
+      type: "success",
     },
     {
-      id: 2,
       title: "Danger",
       description: "This is an error toast component",
-      backgroundColor: "#d9534f",
-      icon: errorIcon,
+      type: "error",
     },
     {
-      id: 3,
       title: "Info",
       description: "This is an info toast component",
-      backgroundColor: "#5bc0de",
-      icon: infoIcon,
+      type: "info",
     },
     {
-      id: 4,
       title: "Warning",
       description: "This is a warning toast component",
-      backgroundColor: "#f0ad4e",
-      icon: warningIcon,
+      type: "warning",
     },
   ];
   return (
@@ -73,12 +50,35 @@ export const Home = () => {
           </Link>
         </div>
       </main>
-      <Button onClick={() => setList([...list, testList[0]])}>ボタン</Button>
-      <Button onClick={() => setList([...list, testList[1]])}>ボタン</Button>
-      <Button onClick={() => setList([...list, testList[2]])}>ボタン</Button>
-      <Button onClick={() => setList([...list, testList[3]])}>ボタン</Button>
-
-      <Notification list={list} func={(a: any) => setList(a)} />
+      <Button
+        onClick={() => {
+          dispatch(addNotification(testList[0]));
+        }}
+      >
+        ボタン
+      </Button>
+      <Button
+        onClick={() => {
+          dispatch(addNotification(testList[1]));
+        }}
+      >
+        ボタン
+      </Button>
+      <Button
+        onClick={() => {
+          dispatch(addNotification(testList[2]));
+        }}
+      >
+        ボタン
+      </Button>
+      <Button
+        onClick={() => {
+          dispatch(addNotification(testList[3]));
+        }}
+      >
+        ボタン
+      </Button>
+      <Notification />
     </>
   );
 };

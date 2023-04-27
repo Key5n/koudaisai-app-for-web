@@ -1,43 +1,40 @@
+import { useAppDispatch } from "@/lib/reduxHooks";
 import { statusAssigner } from "@/lib/statusAssigner";
 import { User, withStatusUser } from "@/types/types";
 import jsQR from "jsqr";
 import { useCallback, useRef, useState } from "react";
+import {
+  NotificationAction,
+  addNotification,
+} from "../ui/Notification/notificationSlice";
 
 export const videoWidth: number = 640;
 export const videoHeight: number = 480;
 const videoFrameRate: number = 10;
-const constraints: MediaStreamConstraints = {
-  audio: false,
-  video: {
-    width: { min: videoWidth },
-    height: { min: videoHeight },
-    frameRate: {
-      max: videoFrameRate,
-    },
-    facingMode: {
-      exact: "environment",
-    },
-  },
-};
 
 export const useQRScan = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [QRCodeData, setQRCodeData] = useState<string[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [status, setStatus] = useState<{ error: boolean; message: string }>({
-    error: false,
-    message: "",
-  });
-  const [ModalConfig, setModalConfig] = useState({
-    title: "",
-    text: "",
-    isModalOpen: false,
-  });
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
+  const dispatch = useAppDispatch();
+
+  const constraints: MediaStreamConstraints = {
+    audio: false,
+    video: {
+      width: { min: videoWidth },
+      height: { min: videoHeight },
+      frameRate: {
+        max: videoFrameRate,
+      },
+      facingMode: {
+        exact: "environment",
+      },
+    },
+  };
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -67,16 +64,11 @@ export const useQRScan = () => {
 
   return {
     isCameraOpen,
-    isLoading,
     setVideoRef,
     canvasRef,
     users,
     toggleCameraOpen,
     makeAllEnter,
-    status,
-    setStatus,
-    ModalConfig,
-    setModalConfig,
     setQRCodeData,
     setUsers,
   };
@@ -85,8 +77,12 @@ export const useQRScan = () => {
     const stream = await navigator.mediaDevices
       .getUserMedia(constraints)
       .catch((error) => {
-        setStatus({ message: "カメラをセットできません。", error: true });
-        alert(error);
+        const NotificationAction: NotificationAction = {
+          title: error,
+          description: "カメラを取得できません",
+          type: "error",
+        };
+        dispatch(addNotification(NotificationAction));
         throw error;
       });
     setLocalStream(stream);
