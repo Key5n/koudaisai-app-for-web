@@ -1,1 +1,1 @@
-export * from "./FadeNotification";
+export * from "./Notification";

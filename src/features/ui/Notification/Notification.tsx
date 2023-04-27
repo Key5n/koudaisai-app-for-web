@@ -1,22 +1,16 @@
 import styles from "./styles.module.css";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { Toast } from "./notificationSlice";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
 import { deleteElement } from "./notificationSlice";
 
-type Props = {
-  list: Toast[];
-};
-
 export const Notification = () => {
   const dispatch = useAppDispatch();
-  const list = useAppSelector((state) => state.notification.toastList);
+  const list = useAppSelector((state) => state.notification.notificationList);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (list.length >= 1) {
-        // deleteToast(list[0].id);
         dispatch(deleteElement(0));
       }
     }, 2_000);
@@ -27,19 +21,26 @@ export const Notification = () => {
 
   return (
     <div className={styles.notificationContainer}>
-      {list?.map((toast, i) => (
+      {list?.map((notification, i) => (
         <div
           key={i}
-          className={clsx(styles.notification, styles.toast)}
-          style={{ backgroundColor: toast.backgroundColor }}
+          className={clsx(styles.notification, styles.notification)}
+          style={{ backgroundColor: notification.color }}
         >
           <button onClick={() => dispatch(deleteElement(i))}>X</button>
           <div className={styles.notificationImage}>
-            <img src={toast.icon.src} alt="status" width="30px" height="30px" />
+            <img
+              src={notification.path}
+              alt="status"
+              width="30px"
+              height="30px"
+            />
           </div>
           <div>
-            <p className={styles.notificationTitle}>{toast.title}</p>
-            <p className={styles.notificationMessage}>{toast.description}</p>
+            <p className={styles.notificationTitle}>{notification.title}</p>
+            <p className={styles.notificationMessage}>
+              {notification.description}
+            </p>
           </div>
         </div>
       ))}
