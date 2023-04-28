@@ -6,6 +6,7 @@ import { NavigationLinks } from "../ui/NavigationLinks";
 import { Provider } from "react-redux";
 import { store } from "@/lib/store";
 import { Loading } from "../ui/Loading/Loading";
+import { Notification } from "../ui/Notification";
 
 type LayoutProps = {
   children: ReactElement;
@@ -42,6 +43,7 @@ export const BasicLayout = ({ children, headerProps }: LayoutProps) => {
           {children}
         </div>
         <Loading />
+        <Notification />
       </div>
     </Provider>
   );

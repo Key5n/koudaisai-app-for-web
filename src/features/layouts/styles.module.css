@@ -9,6 +9,8 @@
     display: flex;
     justify-content: space-between;
     max-width: 1000px;
+    min-height: calc(100vh - 60px);
     margin: 0 auto;
+    align-items: stretch;
   }
 }
