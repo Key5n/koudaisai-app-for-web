@@ -7,15 +7,17 @@ import {
   NotificationAction,
   addNotification,
 } from "../ui/Notification/notificationSlice";
+import { toggleIsLoading } from "../ui/Loading/isLoadingSlice";
+import { closeModal } from "../ui/ModalWindow/modalWindowSlice";
 
-export const videoWidth: number = 640;
-export const videoHeight: number = 480;
+export const videoWidth: number = 1280;
+export const videoHeight: number = 960;
 const videoFrameRate: number = 10;
 
 export const useQRScan = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
-  const [QRCodeData, setQRCodeData] = useState<string[]>([]);
+  const QRCodeData = useRef<string[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,14 +27,10 @@ export const useQRScan = () => {
   const constraints: MediaStreamConstraints = {
     audio: false,
     video: {
-      width: { min: videoWidth },
-      height: { min: videoHeight },
-      frameRate: {
-        max: videoFrameRate,
-      },
-      facingMode: {
-        exact: "environment",
-      },
+      facingMode: "user",
+      width: { ideal: videoWidth },
+      height: { ideal: videoHeight },
+      frameRate: { ideal: videoFrameRate },
     },
   };
 
@@ -69,8 +67,6 @@ export const useQRScan = () => {
     users,
     toggleCameraOpen,
     makeAllEnter,
-    setQRCodeData,
-    setUsers,
   };
 
   async function openCamera() {
@@ -78,8 +74,8 @@ export const useQRScan = () => {
       .getUserMedia(constraints)
       .catch((error) => {
         const NotificationAction: NotificationAction = {
-          title: error,
-          description: "カメラを取得できません",
+          title: "カメラを取得できません",
+          description: JSON.stringify(error),
           type: "error",
         };
         dispatch(addNotification(NotificationAction));
@@ -92,10 +88,12 @@ export const useQRScan = () => {
   function intervalId(): number {
     return window.setInterval(async () => {
       const decodedValue = decodeQRCode();
-      if (!decodedValue || QRCodeData.includes(decodedValue)) {
+
+      if (!decodedValue || QRCodeData.current.includes(decodedValue)) {
+        console.log("qrcode" + JSON.stringify(QRCodeData));
         return;
       }
-      setQRCodeData([...QRCodeData, decodedValue]);
+      QRCodeData.current = [...QRCodeData.current, decodedValue];
 
       const data = {
         content: decodedValue,
@@ -110,20 +108,29 @@ export const useQRScan = () => {
         },
         body: JSONData,
       };
-      setIsLoading(true);
+      dispatch(toggleIsLoading());
       const response = await fetch(endpoint, options);
       const responseJSON = await response.json();
       if (response.status !== 200) {
-        setStatus(responseJSON);
+        dispatch(
+          addNotification({
+            type: "error",
+            title: "エラー",
+            description: responseJSON.message,
+          })
+        );
       } else {
         const user: User = responseJSON;
         setUsers([...users, user]);
-        setStatus({
-          error: false,
-          message: `ユーザー${user.name}をセットしました。`,
-        });
+        dispatch(
+          addNotification({
+            type: "success",
+            title: "Success",
+            description: `${user.name}をセットしました`,
+          })
+        );
       }
-      setIsLoading(false);
+      dispatch(toggleIsLoading());
     }, 1_000 / videoFrameRate);
   }
   function decodeQRCode() {
@@ -143,15 +150,25 @@ export const useQRScan = () => {
 
   async function makeAllEnter() {
     if (users.length === 0) {
-      setStatus({ error: true, message: "読み込んだQRコードがありません。" });
+      dispatch(
+        addNotification({
+          title: "エラー",
+          description: "読み込んだユーザーがいません",
+          type: "error",
+        })
+      );
+      dispatch(closeModal());
       return;
     }
+    dispatch(closeModal());
+    const withStatusUsers: withStatusUser[] = users.map((user) => {
+      return { ...user, status: statusAssigner(user) };
+    });
 
     const admittedMembers = withStatusUsers.filter((user) => {
       return user.status === 0;
     });
 
-    setIsLoading(true);
     const JSONdata = JSON.stringify({
       users: admittedMembers,
       password: process.env.NEXT_PUBLIC_PASS,
@@ -164,9 +181,16 @@ export const useQRScan = () => {
       },
       body: JSONdata,
     };
+    dispatch(toggleIsLoading());
     const response = await fetch(endpoint, options);
     const result = await response.json();
-    setStatus(result);
+    dispatch(
+      addNotification({
+        title: "Success",
+        description: "入場処理に成功しました。",
+        type: "success",
+      })
+    );
     const uidsOfAdmitted = admittedMembers.map((user) => {
       return user.uid;
     });
@@ -175,14 +199,6 @@ export const useQRScan = () => {
         return uidsOfAdmitted.indexOf(user.uid) === -1;
       });
     });
-    setModalConfig({
-      ...ModalConfig,
-      isModalOpen: false,
-    });
-
-    setIsLoading(false);
+    dispatch(toggleIsLoading());
   }
-  const withStatusUsers: withStatusUser[] = users.map((user) => {
-    return { ...user, status: statusAssigner(user) };
-  });
 };
