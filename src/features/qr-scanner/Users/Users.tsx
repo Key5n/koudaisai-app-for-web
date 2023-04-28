@@ -2,19 +2,18 @@ import styles from "./styles.module.css";
 import { User, withStatusUser } from "@/types/types";
 import { statusAssigner } from "@/lib/statusAssigner";
 import { Button } from "@/features/ui/Button";
-import { FadeNotification } from "../FadeNotification";
 import { UserObject } from "@/features/qr-scanner/Users/userObject";
+import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
+import { addNotification } from "@/features/ui/Notification/notificationSlice";
+import { openModal } from "@/features/ui/ModalWindow/modalWindowSlice";
 
 type Props = {
   users: User[];
-  isLoading: boolean;
-  setModalConfig: React.Dispatch<
-    React.SetStateAction<{ title: string; text: string; isModalOpen: boolean }>
-  >;
-  status: { error: boolean; message: string };
 };
 
-export const Users = ({ users, isLoading, setModalConfig, status }: Props) => {
+export const Users = ({ users }: Props) => {
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const withStatusUsers: withStatusUser[] = users.map((user) => {
     return { ...user, status: statusAssigner(user) };
   });
@@ -27,10 +26,10 @@ export const Users = ({ users, isLoading, setModalConfig, status }: Props) => {
   const noReservedMembers = withStatusUsers.filter((user) => {
     return user.status === 2;
   });
+
   return (
     <div className={styles.module}>
       <div className={styles.admitted}>
-        <FadeNotification message={status.message} />
         {admittedMembers.length !== 0 && (
           <>
             <span>入場可能</span>
@@ -41,15 +40,16 @@ export const Users = ({ users, isLoading, setModalConfig, status }: Props) => {
               className={styles.button}
               disabled={isLoading}
               onClick={() => {
-                setModalConfig({
-                  title: "入場確認",
-                  text: `${admittedMembers
-                    .map((user) => {
-                      return user.name;
-                    })
-                    .join("様,")}様を入場させます。`,
-                  isModalOpen: true,
-                });
+                dispatch(
+                  openModal({
+                    title: "入場確認",
+                    description: `${admittedMembers
+                      .map((user) => {
+                        return user.name;
+                      })
+                      .join("様,")}様を入場させます。`,
+                  })
+                );
               }}
             >
               まとめて入場

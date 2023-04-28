@@ -1,20 +1,23 @@
 import { useQRScan, videoHeight, videoWidth } from "./useQRScan";
 import styles from "./styles.module.css";
 import { Button } from "../ui/Button";
-import { useAppDispatch } from "@/lib/reduxHooks";
 import { ModalWindow } from "../ui/ModalWindow/ModalWindow";
-import { openModal } from "../ui/ModalWindow/modalWindowSlice";
-import { toggleIsLoading } from "@/features/ui/Loading/isLoadingSlice";
+import { Users } from "./Users";
 
 export const QRScanner = () => {
-  const dispatch = useAppDispatch();
-  const { isCameraOpen, setVideoRef, canvasRef, users, makeAllEnter, status } =
-    useQRScan();
+  const {
+    isCameraOpen,
+    setVideoRef,
+    canvasRef,
+    users,
+    makeAllEnter,
+    toggleCameraOpen,
+  } = useQRScan();
   return (
     <>
       <ModalWindow onOK={makeAllEnter} />
       <main className={styles.module}>
-        <Button className={styles.cameraButton}>
+        <Button className={styles.cameraButton} onClick={toggleCameraOpen}>
           <svg
             width="35"
             height="35"
@@ -30,28 +33,18 @@ export const QRScanner = () => {
               d="M29.1665 7.29199H25.3952L21.4475 3.34429C21.3123 3.2086 21.1516 3.10099 20.9747 3.02766C20.7977 2.95433 20.608 2.91672 20.4165 2.91699H14.5832C14.3916 2.91672 14.2019 2.95433 14.025 3.02766C13.848 3.10099 13.6873 3.2086 13.5521 3.34429L9.60442 7.29199H5.83317C4.22463 7.29199 2.9165 8.60012 2.9165 10.2087V26.2503C2.9165 27.8589 4.22463 29.167 5.83317 29.167H29.1665C30.775 29.167 32.0832 27.8589 32.0832 26.2503V10.2087C32.0832 8.60012 30.775 7.29199 29.1665 7.29199ZM5.83317 26.2503V10.2087H10.2082C10.5961 10.2087 10.9665 10.0555 11.2392 9.78137L15.1869 5.83366H19.8127L23.7605 9.78137C23.8957 9.91706 24.0563 10.0247 24.2333 10.098C24.4102 10.1713 24.6 10.2089 24.7915 10.2087H29.1665L29.1694 26.2503H5.83317Z"
               fill="#FFFFFF"
             />
-            <line
-              x1="2.70711"
-              y1="1.29289"
-              x2="33.4663"
-              y2="32.052"
-              stroke="#FFA800"
-              strokeWidth="2"
-            />
+            {isCameraOpen && (
+              <line
+                x1="2.70711"
+                y1="1.29289"
+                x2="33.4663"
+                y2="32.052"
+                stroke="#FFA800"
+                strokeWidth="2"
+              />
+            )}
           </svg>
           カメラを起動
-        </Button>
-        <Button>ステータスを表示</Button>
-        <div>あいうえお</div>
-        <Button
-          onClick={() =>
-            dispatch(openModal({ title: "タイトル", description: "説明文" }))
-          }
-        >
-          モーダルウィンドウを表示
-        </Button>
-        <Button onClick={() => dispatch(toggleIsLoading())}>
-          ローディング画面
         </Button>
         {isCameraOpen && (
           <video
@@ -60,10 +53,13 @@ export const QRScanner = () => {
             ref={setVideoRef}
             className={styles.video}
           >
-            <canvas width={videoWidth} height={videoHeight} ref={canvasRef} />
+            <canvas ref={canvasRef} width={videoWidth} height={videoHeight} />
           </video>
         )}
         <div className={styles.annotation}>読み込んだ数: {users.length}</div>
+        <div>
+          <Users users={users} />
+        </div>
       </main>
     </>
   );
