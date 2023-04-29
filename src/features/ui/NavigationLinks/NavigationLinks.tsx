@@ -20,9 +20,6 @@ export const NavigationLinks = () => {
         <Link href="/">ホーム</Link>
       </li>
       <li>
-        <Link href="/notlogin">ログイン前</Link>
-      </li>
-      <li>
         <Link href="/privacy">プライバシーポリシー</Link>
       </li>
       <li>
@@ -31,7 +28,6 @@ export const NavigationLinks = () => {
       <li>
         <Link href="/mystery">アプリ用謎解き画面</Link>
       </li>
-      {/* <li><Link href="/triathlon">アプリ用トライアスロン画面</Link></li> */}
       <li>
         <Link href="/admin/mystery">管理者用謎解き画面へ</Link>
       </li>
