@@ -73,6 +73,8 @@
     width: 300px;
     font-size: 16px;
     margin-left: 16px;
+    border: 2px solid var(--orange);
+    border-radius: 8px;
   }
   .navLinks li {
     padding-left: 16px;
