@@ -2,7 +2,6 @@ import { useQRScan, videoHeight, videoWidth } from "./useQRScan";
 import styles from "./styles.module.css";
 import { Button } from "../ui/Button";
 import { ModalWindow } from "../ui/ModalWindow/ModalWindow";
-import { UserObject } from "../home";
 import { useAppDispatch } from "@/lib/reduxHooks";
 import { openModal } from "../ui/ModalWindow/modalWindowSlice";
 import { ManageAdmission } from "./ManageAdmission/ManageAdmission";

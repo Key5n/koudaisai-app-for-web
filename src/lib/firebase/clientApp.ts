@@ -14,6 +14,7 @@ export const createFirebaseApp = () => {
     const app = initializeApp(clientCredentials);
     return app;
   }
+  return initializeApp(clientCredentials);
 };
 
 export const db = getFirestore(createFirebaseApp());
