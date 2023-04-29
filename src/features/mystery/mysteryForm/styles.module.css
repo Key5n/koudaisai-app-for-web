@@ -1,0 +1,16 @@
+.module {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.button {
+  background-color: var(--orange);
+  color: var(--white);
+  border-radius: 10px;
+  border: 3px solid var(--orange);
+  font-family: "RocknRoll One", sans-serif;
+  padding: 0 10px;
+}

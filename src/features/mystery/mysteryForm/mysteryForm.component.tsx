@@ -1,6 +1,9 @@
 import styles from "./styles.module.css";
 import clsx from "clsx";
 import React, { FormEventHandler, useRef } from "react";
+import { Field } from "../Field";
+import { MysteryInputWithTitle } from "./mysteryInputWithTitle";
+import { Button } from "@/features/ui/Button";
 
 type mysteryData = {
   numOfChallenger: number;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DoughnutChart } from "./doughnutChart";
 import { Field } from "./Field";
 import styles from "./styles.module.css";
+import { MysteryForm } from "./mysteryForm";
 
 type Props = {
   data: { numOfChallenger: number; numOfSolver: number };
@@ -14,7 +15,7 @@ type mysteryData = {
   numOfNewSolver: number;
 };
 
-export const Mystery = ({ data }: Props) => {
+export const AdminMystery = ({ data }: Props) => {
   const [mysteryData, setMysteryData] = useState<mysteryData>({
     numOfChallenger: data.numOfChallenger,
     numOfSolver: data.numOfSolver,
@@ -30,10 +31,7 @@ export const Mystery = ({ data }: Props) => {
           mysteryData.numOfChallenger - mysteryData.numOfSolver,
         ]}
       />
-      <div className={styles.data}>
-        <Field title="挑戦人数" value={mysteryData.numOfChallenger} />
-        <Field title="完全クリア人数" value={mysteryData.numOfSolver} />
-      </div>
+      <MysteryForm mysteryData={mysteryData} setMysteryData={setMysteryData} />
     </main>
   );
 };

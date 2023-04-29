@@ -1,11 +1,25 @@
-import { createGetLayoutWithFooter } from "@/features/layouts/BasicLayout";
-import { QRScanner } from "@/features/qr-scanner";
-import { NextPageWithLayout } from "@/lib/next/types";
+import { AdminMystery } from "@/features/mystery/adminMystery";
+import admin from "@/lib/firebase/nodeApp";
 
-const Page: NextPageWithLayout = () => {
-  return <QRScanner />;
+type Props = {
+  data: { numOfChallenger: number; numOfSolver: number };
+};
+const Page = ({ data }: Props) => {
+  return (
+    <AdminMystery
+      data={{
+        numOfChallenger: data.numOfChallenger,
+        numOfSolver: data.numOfSolver,
+      }}
+    />
+  );
 };
 
-Page.getLayout = createGetLayoutWithFooter({ title: "QR読み取り" });
+export async function getServerSideProps() {
+  const db = admin.firestore();
+  const mysteryDoc = await db.collection("admin").doc("mystery").get();
+
+  return { props: { data: mysteryDoc.data() } };
+}
 
 export default Page;
