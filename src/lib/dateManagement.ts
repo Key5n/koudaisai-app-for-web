@@ -1,4 +1,4 @@
-import { User } from "types/types";
+import { User } from "@/types/types";
 
 export const firstDate: 19 = 19;
 
