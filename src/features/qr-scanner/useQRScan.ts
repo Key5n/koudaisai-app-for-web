@@ -27,7 +27,6 @@ export const useQRScan = () => {
   const constraints: MediaStreamConstraints = {
     audio: false,
     video: {
-      facingMode: "user",
       width: { ideal: videoWidth },
       height: { ideal: videoHeight },
       frameRate: { ideal: videoFrameRate },
@@ -46,7 +45,6 @@ export const useQRScan = () => {
   );
 
   const toggleCameraOpen = useCallback(() => {
-    setIsCameraOpen(!isCameraOpen);
     if (localStream) {
       (videoRef.current?.srcObject as MediaStream)
         .getTracks()
@@ -56,6 +54,7 @@ export const useQRScan = () => {
       setLocalStream(null);
       clearInterval(intervalRef.current);
     } else {
+      setIsCameraOpen(!isCameraOpen);
       openCamera();
     }
   }, [isCameraOpen, localStream]);
@@ -74,14 +73,15 @@ export const useQRScan = () => {
       .getUserMedia(constraints)
       .catch((error) => {
         const NotificationAction: NotificationAction = {
-          title: "カメラを取得できません",
-          description: JSON.stringify(error),
+          title: "カメラが取得できませんでした。",
+          description: "リロードして再試行してください。",
           type: "error",
         };
         dispatch(addNotification(NotificationAction));
-        throw error;
       });
-    setLocalStream(stream);
+    if (stream instanceof MediaStream) {
+      setLocalStream(stream);
+    }
     intervalRef.current = intervalId();
   }
 
@@ -133,6 +133,7 @@ export const useQRScan = () => {
       dispatch(toggleIsLoading());
     }, 1_000 / videoFrameRate);
   }
+
   function decodeQRCode() {
     const context = canvasRef.current?.getContext("2d", {
       willReadFrequently: true,
