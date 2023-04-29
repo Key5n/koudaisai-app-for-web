@@ -3,8 +3,12 @@ import clsx from "clsx";
 import Image from "next/image";
 import { AddCompanion } from "./addCompanion";
 import { UserObject } from "./userObject";
+import { User as UserType } from "@/types/types";
 
-export const User = () => {
+type Props = {
+  users: UserType[];
+};
+export const User = ({ users }: Props) => {
   return (
     <div className={styles.module}>
       <div className={styles.kofunman}>
@@ -15,8 +19,9 @@ export const User = () => {
         />
       </div>
       <div className={styles.userObjectWrapper}>
-        <UserObject />
-        <UserObject />
+        {users.map((user) => {
+          return <UserObject user={user} key={user.uid} />;
+        })}
         <AddCompanion />
       </div>
     </div>
