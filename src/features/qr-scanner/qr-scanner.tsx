@@ -2,8 +2,10 @@ import { useQRScan, videoHeight, videoWidth } from "./useQRScan";
 import styles from "./styles.module.css";
 import { Button } from "../ui/Button";
 import { ModalWindow } from "../ui/ModalWindow/ModalWindow";
-import { Users } from "./Users";
-
+import { UserObject } from "../home";
+import { useAppDispatch } from "@/lib/reduxHooks";
+import { openModal } from "../ui/ModalWindow/modalWindowSlice";
+import { ManageAdmission } from "./ManageAdmission/ManageAdmission";
 export const QRScanner = () => {
   const {
     isCameraOpen,
@@ -13,6 +15,11 @@ export const QRScanner = () => {
     makeAllEnter,
     toggleCameraOpen,
   } = useQRScan();
+  const dispatch = useAppDispatch();
+  const modalConfig = {
+    title: "入場確認",
+    description: ``,
+  };
   return (
     <>
       <ModalWindow onOK={makeAllEnter} />
@@ -57,9 +64,7 @@ export const QRScanner = () => {
           </video>
         )}
         <div className={styles.annotation}>読み込んだ数: {users.length}</div>
-        <div>
-          <Users users={users} />
-        </div>
+        <ManageAdmission users={users} />
       </main>
     </>
   );

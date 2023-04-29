@@ -46,6 +46,7 @@ export const useQRScan = () => {
 
   const toggleCameraOpen = useCallback(() => {
     if (localStream) {
+      setIsCameraOpen(!isCameraOpen);
       (videoRef.current?.srcObject as MediaStream)
         .getTracks()
         .forEach((track) => {
@@ -90,7 +91,6 @@ export const useQRScan = () => {
       const decodedValue = decodeQRCode();
 
       if (!decodedValue || QRCodeData.current.includes(decodedValue)) {
-        console.log("qrcode" + JSON.stringify(QRCodeData));
         return;
       }
       QRCodeData.current = [...QRCodeData.current, decodedValue];
@@ -121,7 +121,8 @@ export const useQRScan = () => {
         );
       } else {
         const user: User = responseJSON;
-        setUsers([...users, user]);
+
+        setUsers((users) => [...users, user]);
         dispatch(
           addNotification({
             type: "success",

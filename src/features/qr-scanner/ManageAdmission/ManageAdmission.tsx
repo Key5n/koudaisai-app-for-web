@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { User, withStatusUser } from "@/types/types";
 import { statusAssigner } from "@/lib/statusAssigner";
-import { UserObject } from "@/features/home";
+import { UserObject } from "@/features/user";
 import { Button } from "@/features/ui/Button";
 import { useAppDispatch, useAppSelector } from "@/lib/reduxHooks";
 import { openModal } from "@/features/ui/ModalWindow/modalWindowSlice";

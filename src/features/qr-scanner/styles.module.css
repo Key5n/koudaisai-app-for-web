@@ -31,3 +31,9 @@
   justify-content: center;
   gap: 8px;
 }
+
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
