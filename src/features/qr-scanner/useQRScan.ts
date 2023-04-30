@@ -2,7 +2,7 @@ import { useAppDispatch } from "@/lib/reduxHooks";
 import { statusAssigner } from "@/lib/statusAssigner";
 import { User, withStatusUser } from "@/types/types";
 import jsQR from "jsqr";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   NotificationAction,
   addNotification,
@@ -15,23 +15,17 @@ export const videoHeight: number = 960;
 const videoFrameRate: number = 10;
 
 export const useQRScan = () => {
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const QRCodeData = useRef<string[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [availableCameras, setAvailableCamera] = useState<MediaDeviceInfo[]>(
+    []
+  );
+  const [selectValue, setSelectValue] = useState<string>("");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef<number>();
   const dispatch = useAppDispatch();
-
-  const constraints: MediaStreamConstraints = {
-    audio: false,
-    video: {
-      width: { ideal: videoWidth },
-      height: { ideal: videoHeight },
-      frameRate: { ideal: videoFrameRate },
-    },
-  };
 
   const setVideoRef = useCallback(
     (element: HTMLVideoElement) => {
@@ -46,7 +40,6 @@ export const useQRScan = () => {
 
   const toggleCameraOpen = useCallback(() => {
     if (localStream) {
-      setIsCameraOpen(!isCameraOpen);
       (videoRef.current?.srcObject as MediaStream)
         .getTracks()
         .forEach((track) => {
@@ -55,21 +48,43 @@ export const useQRScan = () => {
       setLocalStream(null);
       clearInterval(intervalRef.current);
     } else {
-      setIsCameraOpen(!isCameraOpen);
       openCamera();
     }
-  }, [isCameraOpen, localStream]);
+  }, [localStream]);
+
+  useEffect(() => {
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      devices.map((device) => {
+        if (device.kind === "videoinput") {
+          setAvailableCamera([...availableCameras, device]);
+        }
+      });
+    });
+  }, []);
 
   return {
-    isCameraOpen,
+    localStream,
+    availableCameras,
     setVideoRef,
     canvasRef,
     users,
     toggleCameraOpen,
     makeAllEnter,
+    selectValue,
+    setSelectValue,
   };
 
   async function openCamera() {
+    const constraints: MediaStreamConstraints = {
+      audio: false,
+      video: {
+        width: { ideal: videoWidth },
+        height: { ideal: videoHeight },
+        frameRate: { ideal: videoFrameRate },
+        deviceId: selectValue,
+      },
+    };
+
     const stream = await navigator.mediaDevices
       .getUserMedia(constraints)
       .catch((error) => {
@@ -79,10 +94,25 @@ export const useQRScan = () => {
           type: "error",
         };
         dispatch(addNotification(NotificationAction));
+        console.log(error);
       });
     if (stream instanceof MediaStream) {
       setLocalStream(stream);
+      navigator.mediaDevices.enumerateDevices().then((devices) => {
+        devices.map((device) => {
+          if (device.kind === "videoinput") {
+            const hasDuplicateValue = availableCameras.some((item) => {
+              return item.deviceId === device.deviceId;
+            });
+
+            if (!hasDuplicateValue) {
+              setAvailableCamera([...availableCameras, device]);
+            }
+          }
+        });
+      });
     }
+
     intervalRef.current = intervalId();
   }
 
