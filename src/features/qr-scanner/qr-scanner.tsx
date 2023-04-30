@@ -15,23 +15,12 @@ export const QRScanner = () => {
     toggleCameraOpen,
     selectValue,
     setSelectValue,
+    openCamera,
   } = useQRScan();
   return (
     <>
       <ModalWindow onOK={makeAllEnter} />
       <main className={styles.module}>
-        <select
-          value={selectValue}
-          onChange={(e) => setSelectValue(e.target.value)}
-        >
-          {availableCameras?.map((deviceInfo, i) => {
-            return (
-              <option key={deviceInfo.deviceId} value={deviceInfo.deviceId}>
-                {deviceInfo.label || deviceInfo.kind + i}
-              </option>
-            );
-          })}
-        </select>
         <Button className={styles.cameraButton} onClick={toggleCameraOpen}>
           <svg
             width="35"
@@ -59,8 +48,24 @@ export const QRScanner = () => {
               />
             )}
           </svg>
-          カメラを起動
+          カメラを{localStream ? "停止" : "起動"}
         </Button>
+        <select
+          value={selectValue}
+          onChange={(e) => {
+            setSelectValue(e.target.value);
+            openCamera(e.target.value);
+          }}
+          className={styles.selection}
+        >
+          {availableCameras?.map((deviceInfo, i) => {
+            return (
+              <option key={deviceInfo.deviceId} value={deviceInfo.deviceId}>
+                {deviceInfo.label || deviceInfo.kind + i}
+              </option>
+            );
+          })}
+        </select>
         {localStream && (
           <video
             autoPlay

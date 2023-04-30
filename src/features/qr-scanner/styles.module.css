@@ -37,3 +37,11 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.selection {
+  background-color: var(--white);
+  border: 3px solid var(--orange);
+  border-radius: 8px;
+  display: block;
+  margin: 16px 0 0 auto;
+}

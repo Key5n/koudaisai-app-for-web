@@ -54,14 +54,12 @@ export const useQRScan = () => {
 
   useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
-      devices.map((device) => {
-        if (device.kind === "videoinput") {
-          setAvailableCamera([...availableCameras, device]);
-        }
+      const cameras = devices.filter((device) => {
+        return device.kind === "videoinput";
       });
+      setAvailableCamera(cameras);
     });
   }, []);
-
   return {
     localStream,
     availableCameras,
@@ -72,16 +70,17 @@ export const useQRScan = () => {
     makeAllEnter,
     selectValue,
     setSelectValue,
+    openCamera,
   };
 
-  async function openCamera() {
+  async function openCamera(deviceId?: string) {
     const constraints: MediaStreamConstraints = {
       audio: false,
       video: {
         width: { ideal: videoWidth },
         height: { ideal: videoHeight },
         frameRate: { ideal: videoFrameRate },
-        deviceId: selectValue,
+        deviceId: deviceId ?? selectValue,
       },
     };
 
@@ -99,17 +98,13 @@ export const useQRScan = () => {
     if (stream instanceof MediaStream) {
       setLocalStream(stream);
       navigator.mediaDevices.enumerateDevices().then((devices) => {
-        devices.map((device) => {
-          if (device.kind === "videoinput") {
-            const hasDuplicateValue = availableCameras.some((item) => {
-              return item.deviceId === device.deviceId;
-            });
-
-            if (!hasDuplicateValue) {
-              setAvailableCamera([...availableCameras, device]);
-            }
-          }
+        const cameras = devices.filter((device) => {
+          const hasDuplicateValue = availableCameras.some((item) => {
+            return item.deviceId === device.deviceId;
+          });
+          return !hasDuplicateValue && device.kind === "videoinput";
         });
+        setAvailableCamera([...availableCameras, ...cameras]);
       });
     }
 
