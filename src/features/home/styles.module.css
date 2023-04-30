@@ -27,9 +27,9 @@
   pointer-events: none;
 }
 
-.signupButton:hover {
+/* .signupButton:hover {
   background-color: darkorange;
-}
+} */
 
 .loginButton {
   text-decoration: none;
