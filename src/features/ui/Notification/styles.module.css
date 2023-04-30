@@ -21,7 +21,7 @@
   padding: 8px 16px;
   width: 365px;
   transition: transform 0.6s ease-in-out;
-  animation: toast-in-right 0.7s;
+  animation: toast-in-right 4s forwards;
 }
 
 .notification:hover {
@@ -82,19 +82,16 @@
 }
 
 @keyframes toast-in-right {
-  from {
+  0% {
     transform: translateX(100%);
   }
-  to {
+  25% {
     transform: translateX(0);
   }
-}
-
-@keyframes toast-in-left {
-  from {
-    transform: translateX(-100%);
+  75% {
+    opacity: 1;
   }
-  to {
-    transform: translateX(0);
+  100% {
+    opacity: 0;
   }
 }

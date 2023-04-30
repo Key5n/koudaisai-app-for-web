@@ -13,7 +13,7 @@ export const Notification = () => {
       if (list.length >= 1) {
         dispatch(deleteElement(0));
       }
-    }, 2_000);
+    }, 4_000);
     return () => {
       clearInterval(interval);
     };
