@@ -6,7 +6,6 @@ export const config = {
 
 export function middleware(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
-  const url = req.nextUrl;
 
   if (basicAuth) {
     const authValue = basicAuth.split(" ")[1];
@@ -19,7 +18,6 @@ export function middleware(req: NextRequest) {
       return NextResponse.next();
     }
   }
-  url.pathname = "/api/auth";
 
-  return NextResponse.rewrite(url);
+  return NextResponse.rewrite(new URL("/api/auth", req.url));
 }
