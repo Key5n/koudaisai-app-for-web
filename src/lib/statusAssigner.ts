@@ -1,5 +1,5 @@
-import { User } from "types/types";
-import { hasEnteredToday, reservedToday } from "./dateManagement";
+import { User } from "@/types/types";
+import { hasEnteredToday, reservedToday } from "./dataManager";
 
 // 0 => able to enter
 // 1 => already entered

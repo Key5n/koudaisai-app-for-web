@@ -1,0 +1,59 @@
+.userObjectWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 30vh;
+  position: relative;
+}
+
+.userObjectWrapper::before {
+  content: "";
+  background-image: url("/images/kofunman_hand.svg");
+  display: inline-block;
+  height: 5%;
+  min-width: 50px;
+  min-height: 45px;
+  width: 5%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 20%;
+  top: -20px;
+  z-index: 1;
+}
+
+.userObjectWrapper::after {
+  content: "";
+  background-image: url("/images/kofunman_hand.svg");
+  display: inline-block;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 20%;
+  width: 5%;
+  top: -20px;
+  height: 5%;
+  min-width: 50px;
+  min-height: 45px;
+}
+
+.kofunman {
+  position: absolute;
+  height: 70vh;
+  width: 31vh;
+}
+
+.module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 800px) {
+  .module {
+    width: calc(100% - 300px);
+  }
+}

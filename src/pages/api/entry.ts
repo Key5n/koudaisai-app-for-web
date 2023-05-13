@@ -3,10 +3,10 @@ import {
   dayXVisited,
   hasEnteredToday,
   reservedToday,
-} from "lib/dateManagement";
-import admin from "lib/nodeApp";
+} from "@/lib/dataManager";
+import admin from "@/lib/firebase/nodeApp";
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "types/types";
+import { User } from "@/types/types";
 
 export default async function entry(req: NextApiRequest, res: NextApiResponse) {
   const {

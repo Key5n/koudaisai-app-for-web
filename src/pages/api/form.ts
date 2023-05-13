@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import admin from "lib/nodeApp";
+import admin from "@/lib/firebase/nodeApp";
 
 export default async function updateDB(
   req: NextApiRequest,

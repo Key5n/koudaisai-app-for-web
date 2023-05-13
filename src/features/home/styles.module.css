@@ -1,0 +1,57 @@
+.module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20rem;
+  margin: 0 auto;
+  gap: 5rem;
+}
+
+.signupButton {
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--gray);
+  border: 0;
+  width: 100%;
+  max-width: 20rem;
+  color: var(--white);
+  border-radius: 40px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  font-family: "RocknRoll One", sans-serif;
+  font-size: 2rem;
+  line-height: 3rem;
+}
+
+.signupButton[disabled] {
+  pointer-events: none;
+}
+
+/* .signupButton:hover {
+  background-color: darkorange;
+} */
+
+.loginButton {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--gray);
+  color: var(--blue);
+  font-size: 1.25rem;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 40px;
+  border: 1px solid var(--gray);
+  max-width: 20rem;
+  width: 100%;
+  font-family: "RocknRoll One", sans-serif;
+  line-height: 2rem;
+}
+
+.login {
+  display: flex;
+  font-family: "Noto Sans JP", sans-serif;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  width: 100%;
+}

@@ -1,4 +1,4 @@
-import admin from "lib/nodeApp";
+import admin from "@/lib/firebase/nodeApp";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function getUser(
@@ -9,7 +9,7 @@ export default async function getUser(
     body: { content, password },
   }: { body: { content: string; password: string } } = req;
 
-  const uid = content.replace('koudaisai/', '');
+  const uid = content.replace("koudaisai/", "");
 
   if (password !== process.env.NEXT_PUBLIC_PASS) {
     return res.status(401).json({ error: true, message: "セキュリティエラー" });
@@ -22,7 +22,11 @@ export default async function getUser(
     userDocRef = db.collection("KoudaisaiUser").doc(uid);
     documentSnapShot = await userDocRef.get();
   } catch (error) {
-    return res.status(400).json({ error: true, message: `QRコードに不具合があります。\n読み込んだもの: ${content}\n` + error })
+    return res.status(400).json({
+      error: true,
+      message:
+        `QRコードに不具合があります。\n読み込んだもの: ${content}\n` + error,
+    });
   }
 
   if (!documentSnapShot?.exists) {

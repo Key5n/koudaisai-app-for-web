@@ -1,16 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Noto+Sans+JP&family=RocknRoll+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Noto+Sans+JP&family=RocknRoll+One&display=swap");
 :root {
   --red: #ff6b6b;
   --white: #ffffff;
   --orange: #ff9a62;
   --black: #000000;
   --gray: #989898;
-  --blue: #25488A;
+  --blue: #25488a;
+  --yellow: #f8db77;
 }
 
-
 html {
-  font-size: 16px;
+  font-size: clamp(1rem, 0.818rem + 0.91vw, 1.5rem);
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
 }
 
 /* Box sizing rules */
@@ -35,23 +41,24 @@ dd {
   margin: 0;
 }
 
-
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role="list"],
 ol[role="list"] {
   list-style: none;
 }
 
-/* Set core root defaults */
-html:focus-within {
-  /* scroll-behavior: smooth; */
+/* Hide default checkboxes" */
+input[type="checkbox"] {
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
 }
 
-/* Set core body defaults */
-body {
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
 }
 
 /* A elements that don't have a class get default styles */
@@ -74,12 +81,6 @@ select {
   font: inherit;
 }
 
-/* hide default checkbox */
-input[type="checkbox"]{
-  display: none;
-  margin: 0;
-}
-
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -95,8 +96,8 @@ input[type="checkbox"]{
   }
 }
 
-@media screen and (min-width: 520px) {
-  html {
-    font-size: 24px;
+@media screen and (min-width: 899.9px) {
+  main {
+    width: calc(100% - 300px);
   }
 }
