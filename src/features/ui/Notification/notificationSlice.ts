@@ -10,7 +10,7 @@ export interface NotificationAction {
   type: "success" | "error" | "warning" | "info";
 }
 
-interface DetailedNotification extends NotificationAction {
+export interface DetailedNotification extends NotificationAction {
   path: string;
   color: "#5cb85c" | "#d9534f" | "#5bc0de" | "#f0ad4e";
 }
